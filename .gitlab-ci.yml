@@ -8,7 +8,10 @@ build-npm-dev:
   image: node
   before_script:
     - echo "//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">.npmrc
+    - export NAME="\@FelixFranz\/cthulhu"
+    - export TAG="build_$(date +"%Y%m%d-%H%M%S")"
   script:
     - npm run install-dev
     - npm run build
-    - npm publish --tag "build_$(date +"%Y%m%d-%H%M%S")"
+    - sed -i "s/\"name\": \".*\"/\"name\": \"$NAME\"/g" package.json
+    - npm publish --tag $TAG
