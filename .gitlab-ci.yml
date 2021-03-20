@@ -13,5 +13,5 @@ build-npm-dev:
   script:
     - npm run install-dev
     - npm run build
-    - sed -i "s/\"name\": \".*\"/\"name\": \"$NAME\"/g" package.json
+    - 'sed -i "s/\"name\": \".*\"/\"name\": \"$NAME\"/g" package.json'
     - npm publish --tag $TAG
