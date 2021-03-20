@@ -17,3 +17,15 @@ build-npm-dev:
     - echo "registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
     - echo "//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">>.npmrc
     - npm publish
+  
+build-npm:
+  stage: build-npm
+  only:
+    - tags
+  image: node
+  before_script:
+    - export NAME="cthulhu"
+    - export TAG=$CI_COMMIT_TAG
+  script:
+    - !reference [build-npm-dev, script]
+    #ToDo: Add deployment to npmjs.com
