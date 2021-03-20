@@ -8,8 +8,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-dev": "cd backend && npm install && cd ../frontend && npm install",
     "start-dev": "node index-dev",
-    "start": "echo \"Error: no start script specified\" && exit 1",
-    "build": "echo \"Error: no build specified\" && exit 1"
+    "build": "cd backend && npm run build && cd ../frontend && npm run build",
+    "start": "node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://gitlab.com/FelixFranz/cthulhu/issues"
   },
-  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme"
+  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
