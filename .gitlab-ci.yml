@@ -1,0 +1,11 @@
+stages:
+  - build-npm
+
+build-npm-dev:
+  stage: build-npm
+  only:
+    - master
+  image: node
+  script:
+    - npm install
+    - npm run build
