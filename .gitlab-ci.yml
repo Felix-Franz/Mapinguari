@@ -8,7 +8,7 @@ build-npm-dev:
   image: node
   before_script:
     - export NAME="cthulhu-dev"
-    - export TAG="0.$(date +"%Y%m%d.%H%M%S")""
+    - export TAG="0.$(date +"%Y%m%d.%H%M%S")"
   script:
     - npm run install-dev
     - npm run build
