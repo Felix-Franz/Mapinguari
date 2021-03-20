@@ -7,5 +7,5 @@ build-npm-dev:
     - master
   image: node
   script:
-    - npm install
+    - npm run install-dev
     - npm run build
