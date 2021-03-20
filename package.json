@@ -1,0 +1,28 @@
+{
+  "name": "cthulhu",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Cthulhu - A fast paced deduction game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "echo \"Error: no start script specified\" && exit 1",
+    "build": "echo \"Error: no build specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/FelixFranz/cthulhu.git"
+  },
+  "keywords": [
+    "indie game",
+    "game",
+    "online",
+    "multiplayer"
+  ],
+  "author": "Felix Franz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/FelixFranz/cthulhu/issues"
+  },
+  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme"
+}

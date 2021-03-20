@@ -1,0 +1,26 @@
+{
+  "name": "cthulhu.backend",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Cthulhu Backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/FelixFranz/cthulhu.git"
+  },
+  "keywords": [
+    "indie game",
+    "game",
+    "online",
+    "multiplayer"
+  ],
+  "author": "Felix Franz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/FelixFranz/cthulhu/issues"
+  },
+  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme"
+}
