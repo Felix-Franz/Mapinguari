@@ -2,6 +2,7 @@
   "name": "frontend",
   "version": "0.0.0",
   "private": true,
+  "description": "Cthulhu Frontend",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -11,6 +12,21 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/FelixFranz/cthulhu.git"
+  },
+  "keywords": [
+    "indie game",
+    "game",
+    "online",
+    "multiplayer"
+  ],
+  "author": "Felix Franz",
+  "bugs": {
+    "url": "https://gitlab.com/FelixFranz/cthulhu/issues"
+  },
+  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && mv build/ ../dist/public",
