@@ -7,7 +7,7 @@ build-npm-dev:
     - master
   image: node
   before_script:
-    - export NAME="@cthulhu/cthulhu-dev"
+    - export NAME="@cthulhu\/cthulhu-dev"
     - export TAG="0.$(date +"%Y%m%d.%H%M%S")"
   script:
     - npm run install-dev
