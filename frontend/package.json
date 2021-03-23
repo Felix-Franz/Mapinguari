@@ -26,7 +26,6 @@
   "bugs": {
     "url": "https://gitlab.com/FelixFranz/cthulhu/issues"
   },
-  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && mv build/ ../dist/public",
