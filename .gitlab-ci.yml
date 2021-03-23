@@ -7,16 +7,16 @@ build-npm-dev:
     - master
   image: node
   before_script:
-    - export NAME="cthulhu-dev"
+    - export NAME="@cthulhu/cthulhu-dev"
     - export TAG="0.$(date +"%Y%m%d.%H%M%S")"
   script:
     - npm run install-dev
     - npm run build
-#    - 'sed -i "s/\"name\": \".*\"/\"name\": \"$NAME\"/g" package.json'
-#    - 'sed -i "s/\"version\": \".*\"/\"version\": \"$TAG\"/g" package.json'
+    - 'sed -i "s/\"name\": \".*\"/\"name\": \"$NAME\"/g" package.json'
+    - 'sed -i "s/\"version\": \".*\"/\"version\": \"$TAG\"/g" package.json'
     - echo "@cthulhu:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
     - echo "//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">>.npmrc
-    - npm publish @cthulhu/$NAME:$TAG
+    - npm publish
   
 build-npm:
   stage: build-npm
