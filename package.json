@@ -2,7 +2,7 @@
   "name": "cthulhu",
   "version": "0.0.0",
   "description": "Cthulhu - A fast paced deduction game",
-  "main": "dist/index.js",
+  "main": "http://127.0.0.1:8080",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-dev": "cd backend && npm install && cd ../frontend && npm install",
