@@ -2,25 +2,12 @@ import {Suspense} from 'react';
 import './App.css';
 import Loader from "./pages/loader/Loader";
 import Router from "./pages/Router";
-import {createMuiTheme, CssBaseline, MuiThemeProvider} from "@material-ui/core";
-import {cyan, red} from "@material-ui/core/colors";
+import {CssBaseline, MuiThemeProvider} from "@material-ui/core";
+import {Theme} from "./Theme";
 
 export default function App() {
-    const theme = createMuiTheme({
-        palette: {
-            type: "dark",
-            primary: {
-                main: cyan["A400"]
-            },
-            secondary: {
-                main: red[700],
-            },
-        },
-    });
-
     return (
-
-        <MuiThemeProvider theme={theme}>
+        <MuiThemeProvider theme={Theme}>
             <CssBaseline/>
             <Suspense fallback={<Loader/>}>
                 <Router/>
