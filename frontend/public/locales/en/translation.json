@@ -5,7 +5,7 @@
   },
   "Home": {
     "Title": "Welcome to Cthulhu!",
-    "Description": "The Game"
+    "Subtitle": "A fast paced deduction game"
   },
   "StartGame": {
     "Ready": "Ready to rumble?",

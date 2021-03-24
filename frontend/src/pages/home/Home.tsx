@@ -10,7 +10,7 @@ const Home = () => {
         <Container fluid className="text-center mt-3">
             <img className="mt-3" src={logo} alt="logo"/>
             <h1 className="mt-3">{t('Home.Title')}</h1>
-            <h3>{t('Home.Description')}</h3>
+            <h3>{t('Home.Subtitle')}</h3>
             <StartGame/>
             <Instructions className="mt-5 mb-2"/>
         </Container>
