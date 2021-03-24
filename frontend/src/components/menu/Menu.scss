@@ -1,0 +1,63 @@
+@import "../../Theme";
+
+$width: 8em;
+$height: 4em;
+
+.menu-wrapper {
+  right: 0;
+  position: absolute;
+  text-align: right;
+}
+
+.menu-box1 {
+  position: absolute;
+  background-color: get-color("primary");
+  right: 0;
+  width: $width * 0.75;
+  height: $height * 0.75;
+  border-bottom-left-radius: $height / 2;
+}
+
+.menu-box2 {
+  position: absolute;
+  background-color: get-color("primary");
+  right: $width * 0.75;
+  width: $width * 0.25;
+  height: $height * 0.75 / 2;
+}
+
+.menu-box3 {
+  position: absolute;
+  background-color: get-color("dark");
+  right: $width * 0.75;
+  width: $width * 0.25;
+  height: $height  * 0.75 / 2;
+  border-top-right-radius: $height  * 0.75 / 2;
+}
+
+.menu-box4 {
+  position: absolute;
+  background-color: get-color("primary");
+  top: $height * 0.75;
+  right: 0;
+  width: $width * 0.5;
+  height: $height * 0.25;
+}
+
+.menu-box5 {
+  position: absolute;
+  background-color: get-color("dark");
+  top: $height * 0.75;
+  right: 0;
+  width: $width * 0.5;
+  height: $height * 0.25;
+  border-top-right-radius: $width ;
+}
+
+.menu-content{
+  position: absolute;
+  right: 0;
+  width: $width * 0.75;
+  height: $height * 0.75;
+  text-align: center;
+}

@@ -1,0 +1,8 @@
+@import "./Theme";
+@import "~bootstrap";
+
+html, body, html > * > div.full-height {
+    height: 100vh;
+    background-color: get-color("dark");
+    color: get-color("bright");
+}

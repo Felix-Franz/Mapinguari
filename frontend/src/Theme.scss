@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$theme-colors: (
+        "primary": #00E5FF,
+        "primary-shade": #89eafd,
+        "secondary": #d32f2f,
+        "secondary-shade": #d06c6c,
+        "dark": #20232a,
+        "bright": white
+);
+
+
+@function get-color($key: "primary") {
+  @return map-get($theme-colors, $key);
+}
