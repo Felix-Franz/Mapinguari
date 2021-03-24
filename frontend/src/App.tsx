@@ -1,25 +1,42 @@
-import logo from './logo.svg';
+import React, {Suspense} from 'react';
+import {useTranslation} from 'react-i18next';
 import './App.css';
 
-function App() {
+// page uses the hook
+function Page() {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lng : any) => {
+    i18n.changeLanguage(lng);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <div className="App-header">
+          <button type="button" onClick={() => changeLanguage('de')}>
+            de
+          </button>
+          <button type="button" onClick={() => changeLanguage('en')}>
+            en
+          </button>
+        </div>
+        <div>{t('Welcome')}</div>
+      </div>
   );
 }
 
-export default App;
+// loading component for suspense fallback
+const Loader = () => (
+    <div className="App">
+      <div>loading...</div>
+    </div>
+);
+
+// here app catches the suspense from page in case translations are not yet loaded
+export default function App() {
+  return (
+      <Suspense fallback={<Loader />}>
+        <Page />
+      </Suspense>
+  );
+}
