@@ -41,7 +41,7 @@ $height: 4em;
   background-color: get-color("primary");
   top: $height * 0.75;
   right: 0;
-  width: $width * 0.5;
+  width: $width * 0.25;
   height: $height * 0.25;
 }
 
@@ -50,7 +50,7 @@ $height: 4em;
   background-color: get-color("dark");
   top: $height * 0.75;
   right: 0;
-  width: $width * 0.5;
+  width: $width * 0.25;
   height: $height * 0.25;
   border-top-right-radius: $width ;
 }

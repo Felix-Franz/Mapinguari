@@ -12,7 +12,7 @@ const Home = () => {
             <h1 className="mt-3">{t('Home.Title')}</h1>
             <h3>{t('Home.Description')}</h3>
             <StartGame/>
-            <Instructions className="mt-5"/>
+            <Instructions className="mt-5 mb-2"/>
         </Container>
     );
 }
