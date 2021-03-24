@@ -1,3 +1,18 @@
 {
-  "Welcome": "Willkommen bei Cthulhu"
+  "Footer": {
+    "Made": "Mit ❤️ erstellt von",
+    "Legal": "Impressum"
+  },
+  "Home": {
+    "Title": "Willkommen bei Cthulhu!",
+    "Description": "Das Spiel"
+  },
+  "StartGame": {
+    "Ready": "Kann es losgehen??",
+    "Create Table": "Raum erstellen",
+    "Join Table": "Raum beitreten"
+  },
+  "Instructions": {
+    "Title": "Spielanleitung"
+  }
 }

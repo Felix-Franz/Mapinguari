@@ -2,7 +2,26 @@
 @import "~bootstrap";
 
 html, body, html > * > div.full-height {
-    height: 100vh;
-    background-color: get-color("dark");
-    color: get-color("bright");
+  height: 100vh;
+}
+
+body, body > * > *, .form-control, .list-group-item, .dropdown-menu, .dropdown-header, .dropdown-item, .home-news-text, .jumbotron, .toast, .toast-header, .modal-content, .close {
+  background-color: get-color("dark");
+  color: get-color("bright");
+}
+
+a {
+  color: get-color("primary");
+}
+
+ a:hover {
+  color: get-color("primary-shade");
+}
+
+.list-group-item {
+  border-bottom-color: get-color("bright") !important;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+  background-color: get-color("primary") !important;
 }

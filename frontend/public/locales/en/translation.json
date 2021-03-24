@@ -1,3 +1,18 @@
 {
-  "Welcome": "Welcome to Cthulhu"
+  "Footer": {
+    "Made": "Made with ❤️ by",
+    "Legal": "Legal"
+  },
+  "Home": {
+    "Title": "Welcome to Cthulhu!",
+    "Description": "The Game"
+  },
+  "StartGame": {
+    "Ready": "Ready to rumble?",
+    "Create Table": "Create Table",
+    "Join Table": "Join Table"
+  },
+  "Instructions": {
+    "Title": "Instructions"
+  }
 }
