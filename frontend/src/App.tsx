@@ -1,42 +1,31 @@
-import React, {Suspense} from 'react';
-import {useTranslation} from 'react-i18next';
+import {Suspense} from 'react';
 import './App.css';
+import Loader from "./pages/loader/Loader";
+import Router from "./pages/Router";
+import {createMuiTheme, CssBaseline, MuiThemeProvider} from "@material-ui/core";
+import {cyan, red} from "@material-ui/core/colors";
 
-// page uses the hook
-function Page() {
-  const { t, i18n } = useTranslation();
-
-  const changeLanguage = (lng : any) => {
-    i18n.changeLanguage(lng);
-  };
-
-  return (
-      <div className="App">
-        <div className="App-header">
-          <button type="button" onClick={() => changeLanguage('de')}>
-            de
-          </button>
-          <button type="button" onClick={() => changeLanguage('en')}>
-            en
-          </button>
-        </div>
-        <div>{t('Welcome')}</div>
-      </div>
-  );
-}
-
-// loading component for suspense fallback
-const Loader = () => (
-    <div className="App">
-      <div>loading...</div>
-    </div>
-);
-
-// here app catches the suspense from page in case translations are not yet loaded
 export default function App() {
-  return (
-      <Suspense fallback={<Loader />}>
-        <Page />
-      </Suspense>
-  );
+    const theme = createMuiTheme({
+        palette: {
+            type: "dark",
+            primary: {
+                main: cyan["A400"]
+            },
+            secondary: {
+                main: red[700],
+            },
+        },
+    });
+
+    return (
+
+        <MuiThemeProvider theme={theme}>
+            <CssBaseline/>
+            <Suspense fallback={<Loader/>}>
+                <Router/>
+            </Suspense>
+        </MuiThemeProvider>
+    );
 }
+
