@@ -15,14 +15,20 @@ export default class Server {
         this.app = express();
         this.app.use(express.static(`${__dirname}/../public`));
         this.httpServer = http.createServer(this.app);
-        this.io = new IOServer({
-            path: `${__dirname}/public`
+        this.io = new IOServer(this.httpServer,{
+            cors: {
+                origin: process.env.NODE_ENV === "production" ? [] : ["http://localhost:3000"]
+            }
         });
         this.httpServer.listen(config.port);
 
         this.io.on("connection", (socket: Socket) => {
-            console.log("hi");
-            socket.send("Hello World!")
+            console.log(`Successfully connected ${socket.id} to the server!`)
+            socket.send("Successfully connected to the server!");
+
+            socket.on("disconnect", () => {
+                console.log(`Disconnected ${socket.id} from the server!`)
+            })
         });
 
         console.log(`Cthulu startet on http://localhost:${config.port}`)
