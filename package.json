@@ -2,16 +2,16 @@
   "name": "cthulhu",
   "version": "0.0.0",
   "description": "Cthulhu - A fast paced deduction game",
-  "main": "http://127.0.0.1:8080",
+  "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-dev": "cd backend && npm install && cd ../frontend && npm install",
     "start-dev": "node index-dev",
     "build": "cd backend && npm run build && cd ../frontend && npm run build",
-    "start": "node dist/index.js"
+    "start": "node dist/cli.js"
   },
   "bin": {
-    "cthulhu": "dist/index.js"
+    "cthulhu": "dist/cli.js"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
   },
   "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "socket.io": "^4.0.0"
   }
 }

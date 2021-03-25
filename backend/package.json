@@ -4,6 +4,9 @@
   "private": true,
   "description": "Cthulhu Backend",
   "main": "index.js",
+  "bin": {
+    "cthulhu": "dist/cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon",
@@ -27,6 +30,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "nodemon": "^2.0.7",
+    "socket.io": "^4.0.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.3"
   },
