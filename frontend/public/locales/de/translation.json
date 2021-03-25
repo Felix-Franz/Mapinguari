@@ -10,7 +10,8 @@
   "StartGame": {
     "Ready": "Kann es losgehen?",
     "Create Table": "Raum erstellen",
-    "Join Table": "Raum beitreten"
+    "Join Table": "Raum beitreten",
+    "Loading": "Lade Raum..."
   },
   "Instructions": {
     "Title": "Spielanleitung"

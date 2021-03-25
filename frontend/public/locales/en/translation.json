@@ -9,8 +9,9 @@
   },
   "StartGame": {
     "Ready": "Ready to rumble?",
-    "Create Table": "Create Table",
-    "Join Table": "Join Table"
+    "Create Table": "Create Room",
+    "Join Table": "Join Room",
+    "Loading": "Loading Room..."
   },
   "Instructions": {
     "Title": "Instructions"

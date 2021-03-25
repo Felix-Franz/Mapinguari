@@ -1,6 +1,6 @@
 import SocketCallbackInterface from "./SocketCallbackInterface";
 import {Socket} from "socket.io";
-import {LEVEL, Logger} from "../Logger";
+import {LEVEL, Logger} from "../libraries/Logger";
 
 export default class Disconnect implements SocketCallbackInterface{
 

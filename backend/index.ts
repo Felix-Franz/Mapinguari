@@ -1,4 +1,5 @@
-import Server from "./src/Server";
-import {Logger} from "./src/Logger";
+import Server from "./src/libraries/Server";
+import {Logger} from "./src/libraries/Logger";
+import GameManager from "./src/libraries/GameManager";
 
-export {Server, Logger};
+export {Server, Logger, GameManager};

@@ -1,7 +1,7 @@
-import {io as ioClient, Socket} from "socket.io-client";
+import {io as ioClient, Socket as ioSocket} from "socket.io-client";
 
 export default class SocketClient {
-    private static io: Socket;
+    private static io: ioSocket;
 
     public static createConnection() {
         if (!!this.io)

@@ -2,8 +2,7 @@ import http from "http";
 import {Server as IOServer, Socket} from "socket.io";
 import express from "express";
 import {LEVEL, Logger} from "./Logger";
-import SocketCallbackInterface from "./socket-callbacks/SocketCallbackInterface";
-import Disconnect from "./socket-callbacks/Disconnect";
+import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
 
 export default class Server {
     private static app: express.Application;
