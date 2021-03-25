@@ -24,6 +24,7 @@ build-npm-dev:
     - master
   image: node
   script:
+    - ls -l frontend/src
     - !reference [.build, script]
     - export NAME="@cthulhu\/dev"
     - export TAG="0.$(date +"%Y%m%d.%H%M%S")"
