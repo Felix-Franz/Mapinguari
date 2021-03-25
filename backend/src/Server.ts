@@ -1,6 +1,7 @@
 import http from "http";
 import {Server as IOServer, Socket} from "socket.io";
 import express from "express";
+import {LEVEL, Logger} from "./Logger";
 
 export default class Server {
     private static app : express.Application;
@@ -23,11 +24,11 @@ export default class Server {
         this.httpServer.listen(config.port);
 
         this.io.on("connection", (socket: Socket) => {
-            console.log(`Successfully connected ${socket.id} to the server!`)
-            socket.send("Successfully connected to the server!");
+            Logger.log(LEVEL.debug, `Successfully connected to socket!`, {socketId: socket.id})
+            socket.send("Successfully connected socket to the server!");
 
             socket.on("disconnect", () => {
-                console.log(`Disconnected ${socket.id} from the server!`)
+                Logger.log(LEVEL.debug, `Disconnected from socket!`, {socketId: socket.id})
             })
         });
 

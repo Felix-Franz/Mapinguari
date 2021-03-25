@@ -1,3 +1,4 @@
 import Server from "./src/Server";
+import {Logger} from "./src/Logger";
 
-export {Server};
+export {Server, Logger};
