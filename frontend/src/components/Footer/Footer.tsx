@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <footer className="footer box-shadow">
             <span>{t("Footer.Made")} </span>
-           <a className="mx-1" target="_blank" rel="noreferrer" href={`https://www.felix-franz.com`}>Felix Franz</a>
+           <a className="mx-1" target="_blank" rel="noreferrer" href={`https://www.felix-franz.com`}>Felix</a>
             <span>| <a href={`${process.env.PUBLIC_URL}/legal`}>{t("Footer.Legal")}</a></span>
         </footer>
     );
