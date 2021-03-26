@@ -2,6 +2,9 @@
 
 Play online with your friends!
 
+Just open [mapinguari.rocks](https://mapinguari.rocks) to start the game!
+> development has not finished yet!
+
 ## Install dev version
 
 **Install node**
