@@ -3,6 +3,7 @@
 ![version](https://shields.io/badge/version-stable-blue)
 [![pipeline status](https://gitlab.com/FelixFranz/mapinguari/badges/tags/pipeline.svg)](https://gitlab.com/FelixFranz/mapinguari/-/pipelines/tags/latest)
 [![npm version](https://img.shields.io/npm/v/mapinguari)](https://www.npmjs.com/package/mapinguari)
+![license](https://img.shields.io/npm/l/mapinguari)
 ![npm downloads](https://img.shields.io/npm/dw/mapinguari)
 ![npm downloads](https://img.shields.io/npm/dm/mapinguari)
 ![npm downloads](https://img.shields.io/npm/dy/mapinguari)
@@ -15,7 +16,11 @@
 Play online with your friends!
 
 Just open [mapinguari.rocks](https://mapinguari.rocks) to start the game!
+[![Website status](https://img.shields.io/website?label=App&url=https%3A%2F%2Fmapinguari.rocks)](https://mapinguari.rocks)
+
 > development has not finished yet!
+
+If you encounter problems, just open an [issue](https://gitlab.com/FelixFranz/mapinguari/-/issues/new)!
 
 For more information visit the [Gitlab development page](https://gitlab.com/FelixFranz/mapinguari).
 
