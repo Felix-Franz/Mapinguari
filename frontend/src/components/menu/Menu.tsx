@@ -29,7 +29,7 @@ const Menu = () => {
             <div className="menu-content">
                 <UncontrolledDropdown size="sm" className="mt-2">
                     <DropdownToggle caret>
-                        <Flag code={countryMapper(i18n.language)} style={{width: "1.5em"}}/>
+                        <Flag code={countryMapper(i18n.language || "en")} style={{width: "1.5em"}}/>
                     </DropdownToggle>
                     <DropdownMenu style={{minWidth: "auto"}}>
                         {Languages.map((l, i) =>

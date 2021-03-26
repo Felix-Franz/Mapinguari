@@ -1,12 +1,9 @@
 {
-  "name": "cthulhu.backend",
+  "name": "mapinguari.backend",
   "version": "0.0.0",
   "private": true,
-  "description": "Cthulhu Backend",
+  "description": "Mapinguari Backend",
   "main": "index.js",
-  "bin": {
-    "cthulhu": "dist/cli.js"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon",
@@ -14,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/FelixFranz/cthulhu.git"
+    "url": "git+ssh://git@gitlab.com/FelixFranz/mapinguari.git"
   },
   "keywords": [
     "indie game",
@@ -24,9 +21,9 @@
   ],
   "author": "Felix Franz",
   "bugs": {
-    "url": "https://gitlab.com/FelixFranz/cthulhu/issues"
+    "url": "https://gitlab.com/FelixFranz/mapinguari/issues"
   },
-  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme",
+  "homepage": "https://gitlab.com/FelixFranz/mapinguari#readme",
   "dependencies": {
     "express": "^4.17.1",
     "nodemon": "^2.0.7",

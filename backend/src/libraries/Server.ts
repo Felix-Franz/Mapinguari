@@ -11,12 +11,12 @@ export default class Server {
     private static callbacks: SocketCallbackInterface[] = [];
 
     /**
-     * Starts Cthulhu
+     * Starts Mapinguari
      * @param {object} config object
      */
     public static async start(config: { port: number } = {port: 8080}) {
         this.app = express();
-        this.app.use(express.static(`${__dirname}/../public`));
+        this.app.use(express.static(`${__dirname}/../../public`));
         this.httpServer = http.createServer(this.app);
         this.io = new IOServer(this.httpServer, {
             cors: {
@@ -27,7 +27,7 @@ export default class Server {
 
         this.callbacks = (await Promise.all(
             this
-                .findJobs(`${__dirname}/socket-callbacks`)
+                .findJobs(`${__dirname}/../socket-callbacks`)
                 .map(async (c) => (await import(c)).default)
         )).filter(c => !! c);
 
@@ -42,7 +42,7 @@ export default class Server {
             });
         });
 
-        console.log(`Cthulu startet on http://localhost:${config.port}`)
+        console.log(`Mapinguari startet on http://localhost:${config.port}`)
     }
 
     /**

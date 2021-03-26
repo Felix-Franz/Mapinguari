@@ -1,7 +1,6 @@
-# Cthulhu
+# Mapinguari
 
-Indie Game inspired by [Don't Mess with Cthulhu](https://www.kickstarter.com/projects/ibcgames/dont-mess-with-cthulhu).
-
+Play online with your friends!
 
 ## Install dev version
 
@@ -16,13 +15,13 @@ Because the development versions will not be published to the default npm regist
 To add npm registry to current folder only execute:
 
 ```shell
-[user@machine ~]$ echo @cthulhu:registry=https://gitlab.com/api/v4/projects/25292530/packages/npm/ >> .npmrc
+[user@machine ~]$ echo @mapinguari:registry=https://gitlab.com/api/v4/projects/25292530/packages/npm/ >> .npmrc
 ```
 
 To globally add npm registry execute:
 
 ```shell
-[user@machine ~]$ npm config set @cthulhu:registry https://gitlab.com/api/v4/projects/25292530/packages/npm/
+[user@machine ~]$ npm config set @mapinguari:registry https://gitlab.com/api/v4/projects/25292530/packages/npm/
 ```
 
 **Install**
@@ -30,7 +29,7 @@ To globally add npm registry execute:
 Install the dev version:
 
 ```shell
-[user@machine ~]$ npm install -g @cthulhu/dev
+[user@machine ~]$ npm install -g @mapinguari/dev
 ```
 
 **Start**
@@ -38,7 +37,7 @@ Install the dev version:
 Start the dev version:
 
 ```shell
-[user@machine ~]$ cthulhu
+[user@machine ~]$ mapinguari
 ```
 
 ## Starting app for development
@@ -52,8 +51,8 @@ Install [node.js](https://nodejs.org/en/download/) by downloading a setup file o
 Run following command:
 
 ```shell
-[user@machine ~]$ git clone git@gitlab.com:FelixFranz/cthulhu.git
-Cloning into 'cthulhu'...
+[user@machine ~]$ git clone git@gitlab.com:FelixFranz/mapinguari.git
+Cloning into 'mapinguari'...
 Enter passphrase for key '/c/Users/Felix/.ssh/id_rsa':
 Enter passphrase for key '/c/Users/Felix/.ssh/id_rsa':
 remote: Enumerating objects: 11, done.
@@ -67,8 +66,8 @@ Resolving deltas: 100% (175/175), done.
 If you are on Windows you need to run following command to also resolve symbolic links instead:
 
 ```shell
-[user@machine ~]$ git clone -c core.symlinks=true git@gitlab.com:FelixFranz/cthulhu.git
-Cloning into 'cthulhu'...
+[user@machine ~]$ git clone -c core.symlinks=true git@gitlab.com:FelixFranz/mapinguari.git
+Cloning into 'mapinguari'...
 Enter passphrase for key '/c/Users/Felix/.ssh/id_rsa':
 Enter passphrase for key '/c/Users/Felix/.ssh/id_rsa':
 remote: Enumerating objects: 11, done.
@@ -82,7 +81,7 @@ Resolving deltas: 100% (175/175), done.
 From now, we are working in the project directory:
 
 ```shell
-[user@machine ~]$ cd cthulhu
+[user@machine ~]$ cd mapinguari
 ```
 
 **Install Dependencies**
@@ -91,7 +90,7 @@ To install all necessary dependencies type following:
 
 ```shell
 [user@machine ~]$ npm run install-dev
-> cthulhu@0.0.0 install-dev C:\Users\Felix\Documents\repos\cthulhu
+> mapinguari@0.0.0 install-dev C:\Users\Felix\Documents\repos\mapinguari
 > cd backend && npm install && cd ../frontend && npm install
 ```
 

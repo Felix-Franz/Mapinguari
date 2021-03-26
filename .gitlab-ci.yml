@@ -13,7 +13,7 @@ stages:
 
 .upload-gitlab-registry:
   script:
-    - echo "@cthulhu:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
+    - echo "@mapinguari:registry=https://gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/">.npmrc
     - echo "//gitlab.com/api/v4/projects/${CI_PROJECT_ID}/packages/npm/:_authToken=${CI_JOB_TOKEN}">>.npmrc
     - npm publish
 
@@ -25,7 +25,7 @@ build-npm-dev:
   image: node
   script:
     - !reference [.build, script]
-    - export NAME="@cthulhu\/dev"
+    - export NAME="@mapinguari\/dev"
     - export TAG="0.$(date +"%Y%m%d.%H%M%S")"
     - !reference [.set-names, script]
     - !reference [.upload-gitlab-registry, script]
@@ -37,11 +37,11 @@ build-npm:
   image: node
   script:
     - !reference [.build, script]
-    - export NAME="@cthulhu\/stable"
+    - export NAME="@mapinguari\/stable"
     - export TAG=$CI_COMMIT_TAG
     - !reference [.set-names, script]
     - !reference [.upload-gitlab-registry, script]
-    - export NAME="cthulhu"
+    - export NAME="mapinguari"
     - export TAG=$CI_COMMIT_TAG
     - !reference [.set-names, script]
     #ToDo: Add deployment to npmjs.com

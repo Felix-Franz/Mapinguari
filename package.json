@@ -1,7 +1,7 @@
 {
-  "name": "cthulhu",
+  "name": "mapinguari",
   "version": "0.0.0",
-  "description": "Cthulhu - A fast paced deduction game",
+  "description": "Mapinguari - Play online with your friends!",
   "main": "dist/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,11 +11,11 @@
     "start": "node dist/cli.js"
   },
   "bin": {
-    "cthulhu": "dist/cli.js"
+    "mapinguari": "dist/cli.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@gitlab.com/FelixFranz/cthulhu.git"
+    "url": "git+ssh://git@gitlab.com/FelixFranz/mapinguari.git"
   },
   "keywords": [
     "indie game",
@@ -26,9 +26,9 @@
   "author": "Felix Franz",
   "license": "UNLICENSED",
   "bugs": {
-    "url": "https://gitlab.com/FelixFranz/cthulhu/issues"
+    "url": "https://gitlab.com/FelixFranz/mapinguari/issues"
   },
-  "homepage": "https://gitlab.com/FelixFranz/cthulhu#readme",
+  "homepage": "https://gitlab.com/FelixFranz/mapinguari#readme",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^4.0.0",
