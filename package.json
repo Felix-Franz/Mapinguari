@@ -20,7 +20,9 @@
   "keywords": [
     "game",
     "online",
-    "multiplayer"
+    "multiplayer",
+    "cli",
+    "web"
   ],
   "author": "Felix Franz",
   "license": "UNLICENSED",
