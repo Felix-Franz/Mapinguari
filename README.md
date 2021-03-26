@@ -1,9 +1,23 @@
 # Mapinguari
 
+![version](https://shields.io/badge/version-stable-blue)
+[![pipeline status](https://gitlab.com/FelixFranz/mapinguari/badges/tags/pipeline.svg)](https://gitlab.com/FelixFranz/mapinguari/-/pipelines/tags/latest)
+[![npm version](https://img.shields.io/npm/v/mapinguari)](https://www.npmjs.com/package/mapinguari)
+![npm downloads](https://img.shields.io/npm/dw/mapinguari)
+![npm downloads](https://img.shields.io/npm/dm/mapinguari)
+![npm downloads](https://img.shields.io/npm/dy/mapinguari)
+![npm downloads](https://img.shields.io/npm/dt/mapinguari)
+
+![version](https://shields.io/badge/version-development-blue)
+[![pipeline status](https://gitlab.com/FelixFranz/mapinguari/badges/master/pipeline.svg)](https://gitlab.com/FelixFranz/mapinguari/-/pipelines/master/latest)
+[![npm version](https://img.shields.io/npm/v/@mapinguari/dev?registry_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F25292530%2Fpackages%2Fnpm)](https://gitlab.com/FelixFranz/mapinguari/-/packages)
+
 Play online with your friends!
 
 Just open [mapinguari.rocks](https://mapinguari.rocks) to start the game!
 > development has not finished yet!
+
+For more information visit the [Gitlab development page](https://gitlab.com/FelixFranz/mapinguari).
 
 ## Install dev version
 
