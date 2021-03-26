@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://gitlab.com/FelixFranz/mapinguari/issues"
   },
-  "homepage": "https://gitlab.com/FelixFranz/mapinguari#readme",
+  "homepage": "https://mapinguari.rocks",
   "dependencies": {
     "express": "^4.17.1",
     "socket.io": "^4.0.0",
