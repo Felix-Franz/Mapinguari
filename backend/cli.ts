@@ -12,7 +12,4 @@ const serverConfig: ServerConfigType = {
 if (process.env.PORT)
     serverConfig.port = parseInt(process.env.PORT);
 
-//ToDo remove following line
-serverConfig.port = 80;
-
 Server.start(serverConfig);
