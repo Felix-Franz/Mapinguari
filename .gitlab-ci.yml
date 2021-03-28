@@ -24,8 +24,10 @@ stages:
     - npm publish
 
 .docker-build:
+  before_script:
+    - docker buildx create --use
   script:
-    - docker build -t image_tag .
+    - docker buildx build --platform linux/amd64,linux/arm64,linux/armhf -t image_tag .
 
 .upload-gitlab-docker-registry:
   script:
@@ -38,7 +40,7 @@ dev-build-npm:
   stage: build-npm
   only:
     - master
-  image: node
+  image: node:15-slim
   script:
     - !reference [.npm-build, script]
     - export NAME="@mapinguari\/dev"
@@ -51,9 +53,11 @@ dev-build-docker:
   stage: build-docker
   only:
     - master
-  image: docker
+  image: docker:stable
   services:
     - docker:dind
+  before_script:
+    - !reference [.docker-build, before_script]
   script:
     - !reference [.docker-build, script]
     - export IMAGE_TAG="$CI_REGISTRY_IMAGE/dev:$(date +"%Y-%m-%d_%H-%M-%S")"
@@ -66,7 +70,7 @@ stable-build-npm:
   stage: build-npm
   only:
     - tags
-  image: node
+  image: node:15-slim
   script:
     - !reference [.npm-build, script]
     - export NAME="@mapinguari\/stable"
@@ -83,9 +87,11 @@ stable-build-docker:
   stage: build-docker
   only:
     - tags
-  image: docker
+  image: docker:stable
   services:
     - docker:dind
+  before_script:
+    - !reference [.docker-build, before_script]
   script:
     - !reference [.docker-build, script]
     - export IMAGE_TAG=$CI_REGISTRY_IMAGE/stable:$CI_COMMIT_TAG
