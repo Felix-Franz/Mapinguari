@@ -4,6 +4,10 @@ import express from "express";
 import {LEVEL, Logger} from "./Logger";
 import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
 
+export type ServerConfigType = {
+    port: number
+}
+
 export default class Server {
     private static app: express.Application;
     private static httpServer: http.Server;
@@ -14,7 +18,7 @@ export default class Server {
      * Starts Mapinguari
      * @param {object} config object
      */
-    public static async start(config: { port: number } = {port: 8080}) {
+    public static async start(config: ServerConfigType) {
         this.app = express();
         this.app.use(express.static(`${__dirname}/../../public`));
         this.httpServer = http.createServer(this.app);

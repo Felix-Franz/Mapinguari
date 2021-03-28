@@ -1,7 +1,15 @@
 #!/usr/bin/env node
 
-import Server from "./src/libraries/Server";
-import {Logger} from "./index";
+import Server, { ServerConfigType } from "./src/libraries/Server";
+import { Logger } from "./index";
 
 Logger.configure();
-Server.start();
+
+const serverConfig : ServerConfigType = {
+    port: 8080,
+};
+
+if (process.env.port)
+serverConfig.port = parseInt(process.env.port);
+
+Server.start(serverConfig);
