@@ -24,7 +24,26 @@ If you encounter problems, just open an [issue](https://gitlab.com/FelixFranz/ma
 
 For more information visit the [Gitlab development page](https://gitlab.com/FelixFranz/mapinguari).
 
-## Install dev version
+## Run a dev version
+
+To run the a dev verion of the app you can use npx or install the npm package globally.
+
+So choose on of following options:
+
+### Run dev version using npx
+
+```shell
+[user@machine ~]$ npm_config_registry=https://gitlab.com/api/v4/projects/25292530/packages/npm/ npx @mapinguari/dev
+npx: installed 106 in 18.054s
+{
+  level: 'info',
+  message: 'Logger initialized!',
+  timestamp: '2021-03-28T10:26:44.777Z'
+}
+Mapinguari startet on http://localhost:8080
+```
+
+### Install and start dev version
 
 **Install node**
 
