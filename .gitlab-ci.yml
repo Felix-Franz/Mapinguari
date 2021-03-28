@@ -81,7 +81,14 @@ dev-deploy-image:
     - docker tag $CI_REGISTRY_IMAGE/dev registry.heroku.com/mapinguari/web
     - docker login -u $heroku_user -p $heroku_token registry.heroku.com
     - docker push registry.heroku.com/mapinguari/web
-    - curl https://cli-assets.heroku.com/install.sh | sh
+
+dev-deploy-activate:
+  stage: build-docker
+  needs: ["dev-deploy-image"]
+  only:
+    - master
+  image: dickeyxxx/heroku-cli
+  script:
     - echo "
       machine api.heroku.com
         login $heroku_user
