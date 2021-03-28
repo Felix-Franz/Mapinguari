@@ -16,7 +16,7 @@
 Play online with your friends!
 
 Just open [mapinguari.rocks](https://mapinguari.rocks) to start the game!
-[![Website status](https://img.shields.io/website?label=App&url=https%3A%2F%2Fmapinguari.rocks)](https://mapinguari.rocks)
+[![Website status](https://img.shields.io/website?label=Game&url=https%3A%2F%2Fmapinguari.rocks)](https://mapinguari.rocks)
 
 > development has not finished yet!
 
