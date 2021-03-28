@@ -79,7 +79,7 @@ stable-build-npm:
 stable-build-docker:
   stage: build-docker
   only:
-    - master
+    - tags
   image: docker
   services:
     - docker:dind
