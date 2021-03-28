@@ -70,7 +70,8 @@ dev-build-docker:
     - !reference [.upload-gitlab-docker-registry, script]
 
 dev-deploy-image:
-  stage: build-npm
+  stage: deploy-image
+  needs: ["dev-build-docker"]
   only:
     - master
   image: docker:stable
@@ -83,7 +84,7 @@ dev-deploy-image:
     - docker push registry.heroku.com/mapinguari/web
 
 dev-deploy-activate:
-  stage: build-docker
+  stage: deploy-activate
   needs: ["dev-deploy-image"]
   only:
     - master
