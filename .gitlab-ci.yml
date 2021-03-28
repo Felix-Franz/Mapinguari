@@ -71,7 +71,7 @@ dev-deploy:
   stage: build-npm
   only:
     - master
-  image: docker:stable
+  image: heroku/heroku:20
   services:
     - docker:dind
   script:
