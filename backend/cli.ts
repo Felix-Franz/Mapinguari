@@ -9,7 +9,7 @@ const serverConfig : ServerConfigType = {
     port: 8080,
 };
 
-if (process.env.port)
-serverConfig.port = parseInt(process.env.port);
+if (process.env.PORT)
+serverConfig.port = parseInt(process.env.PORT);
 
 Server.start(serverConfig);
