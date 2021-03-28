@@ -25,8 +25,8 @@ stages:
 
 .docker-build:
   variables:
-    DOCKER_HOST: tcp://docker:2375/
-    DOCKER_DRIVER: overlay2
+    # DOCKER_HOST: tcp://docker:2375/
+    # DOCKER_DRIVER: overlay2
   before_script:
     - docker buildx create --use
   script:
@@ -56,7 +56,7 @@ dev-build-docker:
   stage: build-docker
   only:
     - master
-  image: docker:stable
+  image: jdrouet/docker-with-buildx:stable
   services:
     - docker:dind
   variables: !reference [.docker-build, variables]
@@ -91,7 +91,7 @@ stable-build-docker:
   stage: build-docker
   only:
     - tags
-  image: docker:stable
+  image: jdrouet/docker-with-buildx:stable
   services:
     - docker:dind
   variables: !reference [.docker-build, variables]
