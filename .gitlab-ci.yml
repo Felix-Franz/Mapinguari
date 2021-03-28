@@ -89,14 +89,7 @@ dev-deploy-activate:
     - master
   image: dickeyxxx/heroku-cli
   script:
-    - echo "
-      machine api.heroku.com
-        login $heroku_user
-        password $heroku_token
-      machine git.heroku.com
-        login $heroku_user
-        password $heroku_token
-      " > .netrc
+    - echo -e "machine api.heroku.com\n  login $heroku_user\n  password $heroku_token\nmachine git.heroku.com\n  login $heroku_user\n  password $heroku_token" > .netrc
     - heroku container:release --app mapinguari web
 
 stable-build-npm:
