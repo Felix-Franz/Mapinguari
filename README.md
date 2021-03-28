@@ -1,15 +1,15 @@
 # Mapinguari
 
-![version](https://shields.io/badge/version-stable-blue)
+[![version](https://shields.io/badge/version-stable-blue)](https://gitlab.com/FelixFranz/mapinguari/-/releases)
 [![pipeline status](https://gitlab.com/FelixFranz/mapinguari/badges/tags/pipeline.svg)](https://gitlab.com/FelixFranz/mapinguari/-/pipelines/tags/latest)
 [![npm version](https://img.shields.io/npm/v/mapinguari)](https://www.npmjs.com/package/mapinguari)
-![license](https://img.shields.io/npm/l/mapinguari)
-![npm downloads](https://img.shields.io/npm/dw/mapinguari)
-![npm downloads](https://img.shields.io/npm/dm/mapinguari)
-![npm downloads](https://img.shields.io/npm/dy/mapinguari)
-![npm downloads](https://img.shields.io/npm/dt/mapinguari)
+[![license](https://img.shields.io/npm/l/mapinguari)](https://www.npmjs.com/package/mapinguari)
+[![npm downloads](https://img.shields.io/npm/dw/mapinguari)](https://www.npmjs.com/package/mapinguari)
+[![npm downloads](https://img.shields.io/npm/dm/mapinguari)](https://www.npmjs.com/package/mapinguari)
+[![npm downloads](https://img.shields.io/npm/dy/mapinguari)](https://www.npmjs.com/package/mapinguari)
+[![npm downloads](https://img.shields.io/npm/dt/mapinguari)](https://www.npmjs.com/package/mapinguari)
 
-![version](https://shields.io/badge/version-development-blue)
+[![version](https://shields.io/badge/version-development-blue)](https://gitlab.com/FelixFranz/mapinguari/-/packages)
 [![pipeline status](https://gitlab.com/FelixFranz/mapinguari/badges/master/pipeline.svg)](https://gitlab.com/FelixFranz/mapinguari/-/pipelines/master/latest)
 [![npm version](https://img.shields.io/npm/v/@mapinguari/dev?registry_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F25292530%2Fpackages%2Fnpm)](https://gitlab.com/FelixFranz/mapinguari/-/packages)
 
