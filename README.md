@@ -26,9 +26,28 @@ For more information visit the [Gitlab development page](https://gitlab.com/Feli
 
 ## Run a dev version
 
-To run the a dev verion of the app you can use npx or install the npm package globally.
+To run the a dev verion of the app you can use the docker image or npm package.
+For using the npm package you have the options to use npx or install the npm package globally.
 
 So choose on of following options:
+
+### Run dev version using docker
+
+Start the dev docker image using following command:
+
+```shell
+[user@machine ~]$ docker run -ti --rm -p 8080:8080 registry.gitlab.com/felixfranz/mapinguari/dev
+
+> mapinguari@0.0.0 start
+> node dist/cli.js
+
+{
+  level: 'info',
+  message: 'Logger initialized!',
+  timestamp: '2021-03-28T11:19:42.790Z'
+}
+Mapinguari startet on http://localhost:8080
+```
 
 ### Run dev version using npx
 
