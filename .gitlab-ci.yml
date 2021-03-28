@@ -1,6 +1,7 @@
 stages:
   - build-npm
   - build-docker
+  - deploy
 
 .npm-build:
   script:
@@ -66,6 +67,27 @@ dev-build-docker:
     - export IMAGE_TAG=$CI_REGISTRY_IMAGE/dev:latest
     - !reference [.upload-gitlab-docker-registry, script]
 
+dev-deploy:
+  stage: deploy
+  only:
+    - master
+  image: docker:stable
+  services:
+    - docker:dind
+  script:
+    - docker pull $CI_REGISTRY_IMAGE/dev
+    - docker tag $CI_REGISTRY_IMAGE/dev registry.heroku.com/mapinguari/web
+    - docker login -u $heroku_user -p $heroku_token $CI_REGISTRY registry.heroku.com
+    - docker push registry.heroku.com/mapinguari/web
+    - echo "
+      machine api.heroku.com
+        login $heroku_user
+        password $heroku_token
+      machine git.heroku.com
+        login $heroku_user
+        password $heroku_token
+    " > .netrc
+    - heroku container:release --app mapinguari web
   
 stable-build-npm:
   stage: build-npm
