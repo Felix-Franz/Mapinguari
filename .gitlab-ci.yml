@@ -86,7 +86,7 @@ dev-deploy:
       machine git.heroku.com
         login $heroku_user
         password $heroku_token
-    " > .netrc
+      " > .netrc
     - heroku container:release --app mapinguari web
   
 stable-build-npm:
