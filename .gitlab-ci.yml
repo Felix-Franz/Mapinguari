@@ -24,10 +24,13 @@ stages:
     - npm publish
 
 .docker-build:
+  variables:
+    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_DRIVER: overlay2
   before_script:
     - docker buildx create --use
   script:
-    - docker buildx build --platform linux/amd64,linux/arm64,linux/armhf -t image_tag .
+    - docker buildx build --platform linux/amd64 -t image_tag .
 
 .upload-gitlab-docker-registry:
   script:
@@ -56,6 +59,7 @@ dev-build-docker:
   image: docker:stable
   services:
     - docker:dind
+  variables: !reference [.npm-build, variables]
   before_script:
     - !reference [.docker-build, before_script]
   script:
@@ -90,6 +94,7 @@ stable-build-docker:
   image: docker:stable
   services:
     - docker:dind
+  variables: !reference [.npm-build, variables]
   before_script:
     - !reference [.docker-build, before_script]
   script:
