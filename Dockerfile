@@ -3,7 +3,7 @@ MAINTAINER Felix Franz <www.felix-franz.com>
 
 COPY ./ /app
 WORKDIR /app
-RUN bash npm install --production
+RUN npm install --production
 
 EXPOSE 8080
 CMD npm start
