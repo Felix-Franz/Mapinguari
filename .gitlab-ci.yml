@@ -30,7 +30,7 @@ stages:
   before_script:
     - docker buildx create --use
   script:
-    - docker buildx build --platform linux/amd64 -t image_tag .
+    - docker buildx build --platform linux/amd64,linux/arm64 -t image_tag .
 
 .upload-gitlab-docker-registry:
   script:
@@ -59,7 +59,7 @@ dev-build-docker:
   image: docker:stable
   services:
     - docker:dind
-  variables: !reference [.npm-build, variables]
+  variables: !reference [.docker-build, variables]
   before_script:
     - !reference [.docker-build, before_script]
   script:
@@ -94,7 +94,7 @@ stable-build-docker:
   image: docker:stable
   services:
     - docker:dind
-  variables: !reference [.npm-build, variables]
+  variables: !reference [.docker-build, variables]
   before_script:
     - !reference [.docker-build, before_script]
   script:
