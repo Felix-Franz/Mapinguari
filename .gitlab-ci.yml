@@ -27,7 +27,7 @@ stages:
   # before_script:
   #   - docker buildx create --use
   script:
-    - docker buildx build --platform linux/amd64,linux/arm64,linux/arm -t image_tag .
+    # - docker buildx build --platform linux/amd64,linux/arm64,linux/arm -t image_tag .
     - docker build -t image_tag .
 
 .upload-gitlab-docker-registry:
