@@ -1,7 +1,7 @@
 import http from "http";
 import {Server as IOServer, Socket} from "socket.io";
 import express from "express";
-import {LEVEL, Logger} from "./Logger";
+import {LEVELS, Logger} from "./Logger";
 import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
 
 export type ServerConfigType = {
@@ -36,7 +36,7 @@ export default class Server {
         )).filter(c => !! c);
 
         this.io.on("connection", (socket: Socket) => {
-            Logger.log(LEVEL.debug, `Successfully connected to socket!`, {socketId: socket.id})
+            Logger.log(LEVELS.debug, `Successfully connected to socket!`, {socketId: socket.id})
             socket.send("Successfully connected socket to the server!");
 
             this.callbacks.forEach(callback => {
@@ -46,7 +46,7 @@ export default class Server {
             });
         });
 
-        console.log(`Mapinguari startet on http://localhost:${config.port}`)
+        Logger.log(LEVELS.success, `Mapinguari startet on http://localhost:${config.port}`)
     }
 
     /**

@@ -32,7 +32,9 @@
   "homepage": "https://mapinguari.rocks",
   "dependencies": {
     "express": "^4.17.1",
+    "log-symbols": "^4.1.0",
     "socket.io": "^4.0.0",
-    "winston": "^3.3.3"
+    "winston": "^3.3.3",
+    "yargs": "^16.2.0"
   }
 }
