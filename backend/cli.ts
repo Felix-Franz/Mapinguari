@@ -15,7 +15,7 @@ const args = yargs(hideBin(process.argv))
         description: 'Selects the port the the webserver',
         default: 8080
     })
-    .option("level", {
+    .option("loglevel", {
         alias: "l",
         description: "Logging level",
         default: "info",
@@ -27,7 +27,7 @@ const args = yargs(hideBin(process.argv))
     .epilogue("Also checkout the source on https://gitlab.com/FelixFranz/mapinguari")
     .argv
 
-    Logger.configure(args.level);
+    Logger.configure(args.loglevel);
 
 Server.start({
     port: args.port
