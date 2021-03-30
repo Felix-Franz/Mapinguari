@@ -13,10 +13,10 @@ const Home = () => {
             <h3>{t('Home.Subtitle')}</h3>
             <StartGame />
             <Alert className="mt-4 mx-auto w-fit" color="danger" style={{width: "fit-content"}}>
+                {/* reactstrap error https://github.com/reactstrap/reactstrap/issues/1833 */}
                 Game is under development! Therefore, gaming may still encounter problems.
                 <br />
                 <a href="https://gitlab.com/FelixFranz/mapinguari" target="_blank" rel="noreferrer">Click here</a> for more information!
-            <br />
             </Alert>
             <Instructions className="mt-5 mb-2" />
         </Container>
