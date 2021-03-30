@@ -6,12 +6,12 @@ $height: 4em;
 .menu-wrapper {
   right: 0;
   top:0;
-  position: absolute;
+  position: fixed;
   text-align: right;
 }
 
 .menu-box1 {
-  position: absolute;
+  position: fixed;
   background-color: get-color("primary");
   right: 0;
   width: $width * 0.75;
@@ -20,7 +20,7 @@ $height: 4em;
 }
 
 .menu-box2 {
-  position: absolute;
+  position: fixed;
   background-color: get-color("primary");
   right: $width * 0.75;
   width: $width * 0.25;
@@ -28,7 +28,7 @@ $height: 4em;
 }
 
 .menu-box3 {
-  position: absolute;
+  position: fixed;
   background-color: get-color("dark");
   right: $width * 0.75;
   width: $width * 0.25;
@@ -37,7 +37,7 @@ $height: 4em;
 }
 
 .menu-box4 {
-  position: absolute;
+  position: fixed;
   background-color: get-color("primary");
   top: $height * 0.75;
   right: 0;
@@ -46,7 +46,7 @@ $height: 4em;
 }
 
 .menu-box5 {
-  position: absolute;
+  position: fixed;
   background-color: get-color("dark");
   top: $height * 0.75;
   right: 0;
@@ -56,7 +56,7 @@ $height: 4em;
 }
 
 .menu-content{
-  position: absolute;
+  position: fixed;
   right: 0;
   width: $width * 0.75;
   height: $height * 0.75;

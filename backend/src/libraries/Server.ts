@@ -1,9 +1,10 @@
 import http from "http";
-import {Server as IOServer, Socket} from "socket.io";
+import { Server as IOServer, Socket } from "socket.io";
 import express from "express";
-import {LEVELS, Logger} from "./Logger";
+import { LEVELS, Logger } from "./Logger";
 import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
 import path from "path";
+import ServiceInterface from "../services/ServiceInterface";
 
 export type ServerConfigType = {
     port: number
@@ -11,9 +12,10 @@ export type ServerConfigType = {
 
 export default class Server {
     private static app: express.Application;
+    private static services: ServiceInterface[] = [];
     private static httpServer: http.Server;
     private static io: IOServer;
-    private static callbacks: SocketCallbackInterface[] = [];
+    private static socketCallbacks: SocketCallbackInterface[] = [];
 
     /**
      * Starts Mapinguari
@@ -22,6 +24,20 @@ export default class Server {
     public static async start(config: ServerConfigType) {
         this.app = express();
         this.app.use(express.static(`${__dirname}/../../public`));
+
+        this.services = (await Promise.all(
+            this
+                .findJobs(`${__dirname}/../services`)
+                .map(async (c) => (await import(c)).default)
+        )).filter(c => !!c);
+
+        this.services.forEach(service => {
+            //@ts-ignore
+            const s = new service();
+            if (s.handleGet)
+                this.app.get(`/api${s.path}`, s.handleGet);
+        });
+
         this.app.all("*", (req, res) => res.status(404).sendFile(path.resolve(`${__dirname}/../../public/index.html`)));
         this.httpServer = http.createServer(this.app);
         this.io = new IOServer(this.httpServer, {
@@ -31,22 +47,24 @@ export default class Server {
         });
         this.httpServer.listen(config.port);
 
-        this.callbacks = (await Promise.all(
+
+        this.socketCallbacks = (await Promise.all(
             this
                 .findJobs(`${__dirname}/../socket-callbacks`)
                 .map(async (c) => (await import(c)).default)
-        )).filter(c => !! c);
+        )).filter(c => !!c);
 
         this.io.on("connection", (socket: Socket) => {
-            Logger.log(LEVELS.debug, `Successfully connected to socket!`, {socketId: socket.id})
+            Logger.log(LEVELS.debug, `Successfully connected to socket!`, { socketId: socket.id })
             socket.send("Successfully connected socket to the server!");
 
-            this.callbacks.forEach(callback => {
+            this.socketCallbacks.forEach(callback => {
                 //@ts-ignore
                 const c = new callback();
                 socket.on(c.eventName, () => c.handleSocket(socket))
             });
         });
+
 
         Logger.log(LEVELS.success, `Mapinguari startet on http://localhost:${config.port}`)
     }
