@@ -19,8 +19,6 @@ const Menu = () => {
         }
     }
 
-    console.log(i18n.language)
-
     return (
         <div className="menu-wrapper">
             <div className="menu-box1"/>
