@@ -2,6 +2,8 @@ import "./Footer.scss"
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import ServiceClient from "../../libraries/ServiceClient";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGitlab } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
     const { t } = useTranslation();
@@ -16,8 +18,9 @@ const Footer = () => {
     return (
         <footer className="footer box-shadow">
             <span>{t("Footer.Made")} </span>
-            <a className="mx-1" target="_blank" rel="noreferrer" href={`https://www.felix-franz.com`}>Felix</a>
-            <span className={enableLegal ? "" : "d-none"}>| <a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}>{t("Footer.Legal")}</a></span>
+            <a className="ml-1" target="_blank" rel="noreferrer" href={`https://www.felix-franz.com`}>Felix</a>
+            <span className="ml-1">| <a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}><FontAwesomeIcon icon={faGitlab} className="mr-1" />{t("Footer.Source")}</a></span>
+            <span className={"ml-1" + (enableLegal ? "" : "d-none")}>| <a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}>{t("Footer.Legal")}</a></span>
         </footer>
     );
 }
