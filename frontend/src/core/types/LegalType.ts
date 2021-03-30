@@ -3,7 +3,8 @@ type LegalType = {
     name?: string,
     address?: string,
     mail?: string,
-    phone?: string
+    phone?: string,
+    web?: string
 }
 
 export default LegalType;

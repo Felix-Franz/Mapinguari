@@ -43,6 +43,10 @@ const args = yargs(hideBin(process.argv))
         type: 'string',
         description: "Phone number on leagal page",
     })
+    .option("legal-web", {
+        type: 'string',
+        description: "Web site on leagal page",
+    })
     .example("$0", "Starts the mapinguari server")
     .example("$0 -p 80", "Starts server on port 80")
     .epilogue("You can also use environment variables instead of parameters (eg. PORT=80 instead of --port 80)\n")
@@ -58,6 +62,7 @@ if (args.legal)
         address: args["legal-address"],
         mail: args["legal-mail"],
         phone: args["legal-phone"],
+        web: args["legal-web"]
     }
 else
     Config.legal.enabled = args.legal

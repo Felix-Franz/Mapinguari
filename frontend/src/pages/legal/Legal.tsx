@@ -30,13 +30,16 @@ const Legal = () => {
                 <h1 className="mt-3">{t('Legal.About.Title')}</h1>
                 <p className="pre-wrap">{t('Legal.About.PreText')}</p>
                 <p>
-                    <div className={"pre-wrap " + (config.name ? "" : "d-none")}>{config.name}</div>
+                    <div className={config.name ? "" : "d-none"}>{config.name}</div>
                     <div className={"pre-wrap " + (config.address ? "" : "d-none")}>{config.address}</div>
-                    <div className={"pre-wrap " + (config.mail ? "" : "d-none")}>
+                    <div className={config.mail ? "" : "d-none"}>
                         <a href={`mailto:${config.mail}`}>{config.mail}</a>
                     </div>
-                    <div className={"pre-wrap " + (config.phone ? "" : "d-none")}>
+                    <div className={config.phone ? "" : "d-none"}>
                         <a href={`tel:${config.mail}`}>{config.phone}</a>
+                    </div>
+                    <div className={config.web ? "" : "d-none"}>
+                        <a target="_blank" rel="noreferrer" href={`//${config.web}`}>{config.web}</a>
                     </div>
                 </p>
                 <p className="pre-wrap">{t('Legal.About.PostText')}</p>
