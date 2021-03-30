@@ -2,7 +2,7 @@ import {useTranslation} from "react-i18next";
 import {Button, Spinner} from "reactstrap";
 import {useState} from "react";
 import SocketClient from "../../libraries/SocketClient";
-import SocketEvents from "../../core/types/SocketEvents";
+import {SocketClientEvents} from "../../core/types/SocketEventsEnum";
 
 const StartGame  = () => {
     const {t} = useTranslation();
@@ -10,7 +10,7 @@ const StartGame  = () => {
 
     const createTable = () => {
         setState("loading");
-        SocketClient.Socket.emit(SocketEvents.CreateRoom);
+        SocketClient.Socket.emit(SocketClientEvents.CreateRoom);  //ToDo Move to SocketClient
     }
 
     return (

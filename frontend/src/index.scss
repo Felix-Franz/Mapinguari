@@ -25,3 +25,8 @@ a {
 .dropdown-item.active, .dropdown-item:active {
   background-color: get-color("primary") !important;
 }
+
+
+.pre-wrap {
+  white-space: pre-wrap;
+}

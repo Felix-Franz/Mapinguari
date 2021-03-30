@@ -1,16 +1,16 @@
-import {io as ioClient, Socket as ioSocket} from "socket.io-client";
+import { io as ioClient, Socket as ioSocket } from "socket.io-client";
 
 export default class SocketClient {
     private static io: ioSocket;
 
-    public static createConnection() {
+    public static createConnection(host?: string) {
         if (!!this.io)
             throw  new Error("Connection is already established!");
 
-        if (process.env.NODE_ENV === "production")
-            this.io = ioClient(undefined);
+        if (host)
+            this.io = ioClient(host);
         else
-            this.io = ioClient("http://localhost:8080");
+            this.io = ioClient();
 
         this.io.on("message", data => console.log(`[Socket] ${data}`))
     }

@@ -1,6 +1,7 @@
 import http from "http";
 import { Server as IOServer, Socket } from "socket.io";
 import express from "express";
+import cors from "cors";
 import { LEVELS, Logger } from "./Logger";
 import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
 import path from "path";
@@ -23,6 +24,9 @@ export default class Server {
      */
     public static async start(config: ServerConfigType) {
         this.app = express();
+        this.app.use(cors({
+            origin: process.env.NODE_ENV === "production" ? [] : ["http://localhost:3000"]
+        }));
         this.app.use(express.static(`${__dirname}/../../public`));
 
         this.services = (await Promise.all(
@@ -34,8 +38,14 @@ export default class Server {
         this.services.forEach(service => {
             //@ts-ignore
             const s = new service();
-            if (s.handleGet)
-                this.app.get(`/api${s.path}`, s.handleGet);
+            if (s.handleGet) {
+                try {
+                    this.app.get(`/api${s.path}`, s.handleGet);
+                } catch (e) {
+                    Logger.log(LEVELS.error, `Failed to add service GET ${s.path}`, e)
+                }
+            }
+
         });
 
         this.app.all("*", (req, res) => res.status(404).sendFile(path.resolve(`${__dirname}/../../public/index.html`)));

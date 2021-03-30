@@ -2,7 +2,7 @@ import ServiceInterface from "./ServiceInterface";
 import {Request, Response} from "express";
 
 export default class Dispatcher implements ServiceInterface {
-    path: string = "/";
+    path = "/";
 
     handleGet(req: Request, res: Response){
         res.send('<html>'+ 
