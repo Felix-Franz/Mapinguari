@@ -9,7 +9,7 @@ Just open [mapinguari.rocks](https://mapinguari.rocks) to start the game!
 
 If you encounter problems, just open an [issue](https://gitlab.com/FelixFranz/mapinguari/-/issues/new)!
 
-For more information visit the [Gitlab development page](https://gitlab.com/FelixFranz/mapinguari).
+For more information visit the [Gitlab development page](https://gitlab.com/FelixFranz/mapinguari) or the [wiki](https://gitlab.com/FelixFranz/mapinguari/-/wikis).
 
 ## Badges
 
