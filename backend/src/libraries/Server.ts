@@ -3,6 +3,7 @@ import {Server as IOServer, Socket} from "socket.io";
 import express from "express";
 import {LEVELS, Logger} from "./Logger";
 import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
+import path from "path";
 
 export type ServerConfigType = {
     port: number
@@ -21,6 +22,7 @@ export default class Server {
     public static async start(config: ServerConfigType) {
         this.app = express();
         this.app.use(express.static(`${__dirname}/../../public`));
+        this.app.all("*", (req, res) => res.status(404).sendFile(path.resolve(`${__dirname}/../../public/index.html`)));
         this.httpServer = http.createServer(this.app);
         this.io = new IOServer(this.httpServer, {
             cors: {

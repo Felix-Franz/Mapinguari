@@ -1,19 +1,23 @@
 {
-  "Footer": {
-    "Made": "Made with ❤️ by",
-    "Legal": "Legal"
-  },
-  "Home": {
-    "Title": "Welcome to Mapinguari!",
-    "Subtitle": "Play online with your friends!"
-  },
-  "StartGame": {
-    "Ready": "Ready to rumble?",
-    "Create Table": "Create Room",
-    "Join Table": "Join Room",
-    "Loading": "Loading Room..."
-  },
-  "Instructions": {
-    "Title": "Instructions"
-  }
+    "Footer": {
+        "Made": "Made with ❤️ by",
+        "Legal": "Legal"
+    },
+    "Home": {
+        "Title": "Welcome to Mapinguari!",
+        "Subtitle": "Play online with your friends!"
+    },
+    "StartGame": {
+        "Ready": "Ready to rumble?",
+        "Create Table": "Create Room",
+        "Join Table": "Join Room",
+        "Loading": "Loading Room..."
+    },
+    "Instructions": {
+        "Title": "Instructions"
+    },
+    "Error": {
+        "Title": "Error 404",
+        "Text": "If you were looking for a Mapinguari - here it is not!"
+    }
 }

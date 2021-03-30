@@ -7,7 +7,7 @@ import Instructions from "../../components/Instructions";
 const Home = () => {
     const { t } = useTranslation();
     return (
-        <Container fluid className="text-center mt-3">
+        <Container fluid className="text-center my-3">
             <img className="mt-3" src={logo} alt="logo" />
             <h1 className="mt-3">{t('Home.Title')}</h1>
             <h3>{t('Home.Subtitle')}</h3>
@@ -18,7 +18,7 @@ const Home = () => {
                 <br />
                 <a href="https://gitlab.com/FelixFranz/mapinguari" target="_blank" rel="noreferrer">Click here</a> for more information!
             </Alert>
-            <Instructions className="mt-5 mb-2" />
+            <Instructions className="mt-5" />
         </Container>
     );
 }
