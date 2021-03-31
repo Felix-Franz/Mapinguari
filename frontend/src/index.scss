@@ -5,7 +5,7 @@ html, body, html > * > div.full-height {
   height: 100vh;
 }
 
-body, body > * > *, .form-control, .list-group-item, .dropdown-menu, .dropdown-header, .dropdown-item, .home-news-text, .jumbotron, .toast, .toast-header, .modal-content, .close {
+body, body > * > *, .form-control, .form-control:focus, .list-group-item, .dropdown-menu, .dropdown-header, .dropdown-item, .home-news-text, .jumbotron, .toast, .toast-header, .modal-content, .close {
   background-color: get-color("dark");
   color: get-color("bright");
 }
@@ -25,6 +25,11 @@ a {
 .dropdown-item.active, .dropdown-item:active {
   background-color: get-color("primary") !important;
 }
+
+.form-control{
+  border-color: get-color("primary") !important;
+}
+
 
 
 .pre-wrap {

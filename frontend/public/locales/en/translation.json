@@ -6,13 +6,13 @@
     },
     "Home": {
         "Title": "Welcome to Mapinguari!",
-        "Subtitle": "Play online with your friends!"
-    },
-    "StartGame": {
-        "Ready": "Ready to rumble?",
-        "Create Table": "Create Room",
-        "Join Table": "Join Room",
-        "Loading": "Loading Room..."
+        "Subtitle": "Play online with your friends!",
+        "StartGame": {
+            "Ready": "Ready to rumble?",
+            "Create Table": "Create Room",
+            "Join Table": "Join Room",
+            "Loading": "Loading Room..."
+        }
     },
     "Instructions": {
         "Title": "Instructions"
