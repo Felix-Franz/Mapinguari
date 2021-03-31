@@ -1,6 +1,6 @@
 import logSymbols from "log-symbols";
 import * as winston from "winston";
-import {Colorizer} from "logform"
+import { Colorizer } from "logform"
 
 export enum LEVELS {
     success = "success",
@@ -20,29 +20,32 @@ export class Logger {
     public readonly LEVEL = LEVELS;
     public static readonly LEVEL = LEVELS;
 
-    private static colorizer : Colorizer;
+    private static colorizer: Colorizer;
     private static logger: winston.Logger;
 
     public static configure(level: string = LEVELS.debug) {
         if (!!this.logger)
             return;
 
-        this.colorizer = winston.format.colorize({colors: {success: "green", info: "blue"}});
+        this.colorizer = winston.format.colorize({ colors: { success: "green", info: "blue" } });
 
         this.logger = winston.createLogger({
             level: level,
             levels: winstonLevels,
             format: winston.format.combine(
-                // winston.format.colorize({colors: }),
                 winston.format.timestamp(),
-                // winston.format.prettyPrint({colorize: true}),
                 winston.format.printf(
-                    info => {
+                    (info) => {
+                        const metadata = JSON.parse(JSON.stringify(info));
+                        delete metadata.level;
+                        delete metadata.timestamp;
+                        delete metadata.message
                         return info.level.replace(LEVELS.info, logSymbols.info).replace(LEVELS.warn, logSymbols.warning).replace(LEVELS.error, logSymbols.error).replace(LEVELS.success, logSymbols.success)
                             + " "
                             + "[" + info.timestamp.replace('T', ' ').replace('Z', '') + "]"
                             + " "
                             + this.colorizer.colorize(info.level, info.message)
+                            + (Object.keys(metadata).length > 0 ? `\n${JSON.stringify(metadata, undefined, 1)}` : "")
                     }),
             ),
             transports: [

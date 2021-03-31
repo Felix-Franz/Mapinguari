@@ -65,13 +65,21 @@ export default class Server {
         )).filter(c => !!c);
 
         this.io.on("connection", (socket: Socket) => {
-            Logger.log(LEVELS.debug, `Successfully connected to socket!`, { socketId: socket.id })
-            socket.send("Successfully connected socket to the server!");
+            try {
+                Logger.log(LEVELS.debug, `Successfully connected to socket!`, { socketId: socket.id })
+                socket.send("Successfully connected socket to the server!");
+            } catch (e) {
+                Logger.log(LEVELS.error, e.message);
+            }
 
             this.socketCallbacks.forEach(callback => {
-                //@ts-ignore
-                const c = new callback();
-                socket.on(c.eventName, () => c.handleSocket(socket))
+                try {
+                    //@ts-ignore
+                    const c = new callback();
+                    socket.on(c.eventName, () => c.handleSocket(socket))
+                } catch (e) {
+                    Logger.log(LEVELS.error, e.message);
+                }
             });
         });
 

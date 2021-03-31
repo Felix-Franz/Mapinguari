@@ -1,8 +1,13 @@
 const { exec } = require('child_process');
 
-["backend", "frontend"].forEach(cwd => {
+const start = [
+    { cwd: "backend", command: "npm start -- -l silly" },
+    { cwd: "frontend", command: "npm start" }
+];
 
-    const proc = exec("npm start", { cwd }, (error, stdout, stderr) => {
+start.forEach(({cwd, command}) => {
+
+    const proc = exec(command, { cwd }, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
