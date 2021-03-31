@@ -2,6 +2,13 @@
 
 <!-- Remove all ToDos in this template! -->
 
+# Contributor
+<!-- Select who should resolve the issue: You or anyone else. Delete the other line (and the ToDo line) -->
+
+ToDo Choose on of following
+* Fixed by issue creator
+* Awaiting Assignee
+
 # Description
 <!-- Describe your enhancement -->
 
