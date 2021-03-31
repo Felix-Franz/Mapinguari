@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Legal from "./legal/Legal";
 
 const Router = () => (<>
-    <div style={{ minHeight: "calc( 100vh - 3em )", display: "flow-root", marginBottom: "3em", position: "relative"}}>
+    <div style={{ minHeight: "calc( 100vh - 4em )", display: "flow-root", marginBottom: "3em", position: "relative"}}>
 
         <Menu />
 

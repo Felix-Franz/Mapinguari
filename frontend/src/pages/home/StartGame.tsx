@@ -11,6 +11,7 @@ const StartGame  = () => {
     const createTable = () => {
         setState("loading");
         SocketClient.Socket.emit(SocketClientEvents.CreateRoom);  //ToDo Move to SocketClient
+        window.history.pushState(undefined, '', "?room=0815");
     }
 
     return (

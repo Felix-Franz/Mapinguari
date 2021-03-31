@@ -19,8 +19,9 @@ const Footer = () => {
         <footer className="footer box-shadow">
             <span>{t("Footer.Made")} </span>
             <a className="ml-1" target="_blank" rel="noreferrer" href={`https://www.felix-franz.com`}>Felix</a>
-            <span className="ml-1">| <a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}><FontAwesomeIcon icon={faGitlab} className="mr-1" />{t("Footer.Source")}</a></span>
-            <span className={"ml-1" + (enableLegal ? "" : "d-none")}>| <a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}>{t("Footer.Legal")}</a></span>
+            <br />
+            <span><a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}><FontAwesomeIcon icon={faGitlab} className="mr-1" />{t("Footer.Source")}</a></span>
+            <span className={(enableLegal ? "" : "d-none")}> | <a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}>{t("Footer.Legal")}</a></span>
         </footer>
     );
 }

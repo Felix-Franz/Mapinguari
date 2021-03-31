@@ -4,8 +4,7 @@
   color: white;
   background-color: get-color("dark");
   margin-top: -3em;
-  height: 3em;
-  display: flex;
+  height: 4em;
   justify-content: center;
   align-items: center;
   z-index: 1006;
@@ -18,6 +17,8 @@
   margin-left: auto;
   margin-right: auto;
   width: fit-content;
-  padding-left: 2em;
-  padding-right: 2em;
+  padding: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  text-align: center;
 }
