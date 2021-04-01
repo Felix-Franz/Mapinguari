@@ -9,8 +9,8 @@
         "Subtitle": "Spiele online gegen deine Freunde!",
         "StartGame": {
             "Ready": "Kann es losgehen?",
-            "Create Table": "Raum erstellen",
-            "Join Table": "Raum beitreten",
+            "Create": "Raum erstellen",
+            "Join": "Raum beitreten",
             "Loading": "Lade Raum..."
         }
     },

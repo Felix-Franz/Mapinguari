@@ -9,8 +9,8 @@
         "Subtitle": "Play online with your friends!",
         "StartGame": {
             "Ready": "Ready to rumble?",
-            "Create Table": "Create Room",
-            "Join Table": "Join Room",
+            "Create": "Create Room",
+            "Join": "Join Room",
             "Loading": "Loading Room..."
         }
     },

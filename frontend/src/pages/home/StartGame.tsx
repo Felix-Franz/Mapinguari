@@ -9,13 +9,13 @@ const StartGame = () => {
     const [state, setState] = useState<"initial" | "select-room" | "loading">("initial");
     const [joinRoomCode, setJoinRoomCode] = useState<string>("");
 
-    const createTable = () => {
+    const createRoom = () => {
         setState("loading");
         SocketClient.Socket.emit(SocketClientEvents.CreateRoom);  //ToDo Move to SocketClient
         window.history.pushState(undefined, '', "?room=0815");  //ToDo make default redirect (/room/:roomId) for answer from socket server, add name & character on the next page
     }
 
-    const joinTable = () => {
+    const joinRoom = () => {
         setState("loading");
         window.location.assign(`${process.env.PUBLIC_URL}/game/${joinRoomCode}`)
     }
@@ -29,18 +29,18 @@ const StartGame = () => {
         }}>
             <h3>{t("Home.StartGame.Ready")}</h3>
             <div className={state === "initial" ? "" : "d-none"}>
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={createTable}>
-                    <span className="mr-2">🆕</span>{t("Home.StartGame.Create Table")}
+                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={createRoom}>
+                    <span className="mr-2">🆕</span>{t("Home.StartGame.Create")}
                 </Button>
                 <br />
                 <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={() => setState("select-room")}>
-                    <span className="mr-2">🎲</span>{t("Home.StartGame.Join Table")}
+                    <span className="mr-2">🎲</span>{t("Home.StartGame.Join")}
                 </Button>
             </div>
             <div className={state === "select-room" ? "" : "d-none"}>
                 <Input type="number" className="py-2 mx-auto w-75 text-center" style={{ height: 48, marginTop: 12 }}  placeholder="0815" value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)}/>
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={joinTable}>
-                    <span className="mr-2">🚪</span>{t("Home.StartGame.Join Table")}
+                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={joinRoom}>
+                    <span className="mr-2">🚪</span>{t("Home.StartGame.Join")}
                 </Button>
             </div>
             <div className={state === "loading" ? "mt-5" : "d-none"} >
