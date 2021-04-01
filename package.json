@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-dev": "cd backend && npm install && cd ../frontend && npm install",
     "start-dev": "node index-dev",
-    "build": "rm -R dist/ && cd backend && npm run build && cd ../frontend && npm run build",
+    "build": "rm -Rf dist/ && cd backend && npm run build && cd ../frontend && npm run build",
     "start": "node dist/cli.js"
   },
   "bin": {

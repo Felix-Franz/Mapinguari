@@ -6,13 +6,13 @@
     },
     "Home": {
         "Title": "Willkommen bei Mapinguari!",
-        "Subtitle": "Spiele online gegen deine Freunde!"
-    },
-    "StartGame": {
-        "Ready": "Kann es losgehen?",
-        "Create Table": "Raum erstellen",
-        "Join Table": "Raum beitreten",
-        "Loading": "Lade Raum..."
+        "Subtitle": "Spiele online gegen deine Freunde!",
+        "StartGame": {
+            "Ready": "Kann es losgehen?",
+            "Create Table": "Raum erstellen",
+            "Join Table": "Raum beitreten",
+            "Loading": "Lade Raum..."
+        }
     },
     "Instructions": {
         "Title": "Spielanleitung"
