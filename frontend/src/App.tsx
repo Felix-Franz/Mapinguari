@@ -7,8 +7,8 @@ import Router from "./pages/Router";
 // here app catches the suspense from page in case translations are not yet loaded
 export default function App() {
     useEffect(() => {
-        SocketClient.createConnection(process.env.NODE_ENV === "production" ? undefined : "http://localhost:8080");
-        ServiceClient.configure(process.env.NODE_ENV === "production" ? `${process.env.PUBLIC_URL}/api` : "http://localhost:8080/api")
+        SocketClient.createConnection(process.env.NODE_ENV === "production" ? undefined : process.env["REACT_APP_BACKEND_URL"]);
+        ServiceClient.configure(process.env.NODE_ENV === "production" ? `${process.env.PUBLIC_URL}/api` : `${process.env["REACT_APP_BACKEND_URL"]}/api`)
     })
 
   return (

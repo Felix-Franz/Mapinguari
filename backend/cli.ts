@@ -53,20 +53,28 @@ const args = yargs(hideBin(process.argv))
     .epilogue("Also checkout the source on https://gitlab.com/FelixFranz/mapinguari")
     .argv
 
-Logger.configure(args.loglevel);
+try {
+    Logger.configure(args.loglevel);
+} catch (e) {
+    console.error(e)
+}
 
-if (args.legal)
-    Config.legal = {
-        enabled: args.legal,
-        name: args["legal-name"],
-        address: args["legal-address"],
-        mail: args["legal-mail"],
-        phone: args["legal-phone"],
-        web: args["legal-web"]
-    }
-else
-    Config.legal.enabled = args.legal
+try {
+    if (args.legal)
+        Config.legal = {
+            enabled: args.legal,
+            name: args["legal-name"],
+            address: args["legal-address"],
+            mail: args["legal-mail"],
+            phone: args["legal-phone"],
+            web: args["legal-web"]
+        }
+    else
+        Config.legal.enabled = args.legal
 
-Server.start({
-    port: args.port
-});
+    Server.start({
+        port: args.port
+    });
+} catch (e) {
+    Logger.log(LEVELS.error, e.message, e);
+}

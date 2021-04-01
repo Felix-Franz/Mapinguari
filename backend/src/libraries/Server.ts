@@ -25,7 +25,7 @@ export default class Server {
     public static async start(config: ServerConfigType) {
         this.app = express();
         this.app.use(cors({
-            origin: process.env.NODE_ENV === "production" ? [] : ["http://localhost:3000"]
+            origin: process.env.NODE_ENV === "production" ? [] : [process.env["FRONTEND_URL"]!]
         }));
         this.app.use(express.static(`${__dirname}/../../public`));
 
@@ -52,7 +52,7 @@ export default class Server {
         this.httpServer = http.createServer(this.app);
         this.io = new IOServer(this.httpServer, {
             cors: {
-                origin: process.env.NODE_ENV === "production" ? [] : ["http://localhost:3000"]
+                origin: process.env.NODE_ENV === "production" ? [] : [process.env["FRONTEND_URL"]!]
             }
         });
         this.httpServer.listen(config.port);
