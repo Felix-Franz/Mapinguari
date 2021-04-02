@@ -13,10 +13,10 @@ export default class Server {
      */
     public static async start(config: ServerConfigType) {
 
-        Database.start();
+        await Database.start();
         await ClientConnector.start(config.port);
 
-        Logger.log(LEVELS.success, `Mapinguari startet on http://localhost:${config.port}`)
+        Logger.log(LEVELS.success, `Mapinguari startet on http://localhost:${config.port}`);
     }
 
     /**

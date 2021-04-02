@@ -27,7 +27,7 @@ export class Logger {
         if (!!this.logger)
             return;
 
-        this.colorizer = winston.format.colorize({ colors: { success: "green", info: "blue" } });
+        this.colorizer = winston.format.colorize({ colors: { success: "green", info: "blue", debug: "cyan", timestamp: "grey" } });
 
         this.logger = winston.createLogger({
             level: level,
@@ -40,9 +40,9 @@ export class Logger {
                         delete metadata.level;
                         delete metadata.timestamp;
                         delete metadata.message
-                        return info.level.replace(LEVELS.info, logSymbols.info).replace(LEVELS.warn, logSymbols.warning).replace(LEVELS.error, logSymbols.error).replace(LEVELS.success, logSymbols.success)
+                        return this.colorizer.colorize(info.level, info.level.replace(LEVELS.info, logSymbols.info).replace(LEVELS.warn, logSymbols.warning).replace(LEVELS.error, logSymbols.error).replace(LEVELS.success, logSymbols.success))
                             + " "
-                            + "[" + info.timestamp.replace('T', ' ').replace('Z', '') + "]"
+                            + this.colorizer.colorize("timestamp", "[" + info.timestamp.replace('T', ' ').replace('Z', '') + "]")
                             + " "
                             + this.colorizer.colorize(info.level, info.message)
                             + (Object.keys(metadata).length > 0 ? `\n${JSON.stringify(metadata, undefined, 1)}` : "")
