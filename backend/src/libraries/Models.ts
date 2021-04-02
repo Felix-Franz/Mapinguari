@@ -5,7 +5,7 @@ import RoomType from "../core/types/RoomType";
 import { PlayerRoleEnumArray } from "../core/types/PlayerRoleEnum";
 import { PlayerMindEnumArray } from "../core/types/PlayerMindEnum";
 import { ItemEnumArray } from "../core/types/ItemEnum";
-import { RoomStateEnumArray } from "../core/types/RoomStateEnum";
+import RoomStateEnum, { RoomStateEnumArray } from "../core/types/RoomStateEnum";
 
 export default class Models {
     private static initialized: boolean = false;
@@ -54,9 +54,10 @@ export default class Models {
             },
         });
         const roomSchema = new Schema({
-            id: {
+            code: {
                 type: String,
-                required: true
+                required: true,
+                unique: true
             },
             name: {
                 type: String,
@@ -65,7 +66,8 @@ export default class Models {
             state: {
                 type: String,
                 enum: RoomStateEnumArray,
-                required: true
+                required: true,
+                default: RoomStateEnum.LOBBY
             },
             players: [playersSchema],
             places: [placesSchema]

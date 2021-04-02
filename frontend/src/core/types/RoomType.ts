@@ -4,7 +4,7 @@ import PlayerRoleEnum from "./PlayerRoleEnum";
 import RoomStateEnum from "./RoomStateEnum";
 
 type RoomType = {
-    id: string,
+    code: string,
 	name: string,
 	state: RoomStateEnum
 	players: {

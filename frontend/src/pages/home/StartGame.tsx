@@ -1,18 +1,20 @@
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Spinner } from "reactstrap";
-import { useState } from "react";
-import SocketClient from "../../libraries/SocketClient";
-import { SocketClientEvents } from "../../core/types/SocketEventsEnum";
+import { SocketReceiver, SocketSender } from "../../libraries/SocketClient";
 
 const StartGame = () => {
     const { t } = useTranslation();
-    const [state, setState] = useState<"initial" | "select-room" | "loading">("initial");
+    const [state, setState] = useState<"initial" | "create-room" | "join-room" | "loading">("initial");
+    const [createRoomName, setCreateRoomName] = useState<string>("");
     const [joinRoomCode, setJoinRoomCode] = useState<string>("");
 
     const createRoom = () => {
         setState("loading");
-        SocketClient.Socket.emit(SocketClientEvents.CreateRoom);  //ToDo Move to SocketClient
-        window.history.pushState(undefined, '', "?room=0815");  //ToDo make default redirect (/room/:roomId) for answer from socket server, add name & character on the next page
+        SocketReceiver.onRoomCreated(roomCode =>
+            window.location.assign(`${process.env.PUBLIC_URL}/game/${roomCode}`)
+        )
+        SocketSender.createRoom(createRoomName);
     }
 
     const joinRoom = () => {
@@ -29,16 +31,22 @@ const StartGame = () => {
         }}>
             <h3>{t("Home.StartGame.Ready")}</h3>
             <div className={state === "initial" ? "" : "d-none"}>
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={createRoom}>
+                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={() => setState("create-room")}>
                     <span className="mr-2">🆕</span>{t("Home.StartGame.Create")}
                 </Button>
                 <br />
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={() => setState("select-room")}>
+                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={() => setState("join-room")}>
                     <span className="mr-2">🎲</span>{t("Home.StartGame.Join")}
                 </Button>
             </div>
-            <div className={state === "select-room" ? "" : "d-none"}>
-                <Input type="number" className="py-2 mx-auto w-75 text-center" style={{ height: 48, marginTop: 12 }}  placeholder="0815" value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)}/>
+            <div className={state === "create-room" ? "" : "d-none"}>
+                <Input type="text" className="py-2 mx-auto w-75 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Name Room")} value={createRoomName} onChange={e => setCreateRoomName(e.target.value)} />
+                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={createRoom}>
+                    <span className="mr-2">🚪</span>{t("Home.StartGame.Create")}
+                </Button>
+            </div>
+            <div className={state === "join-room" ? "" : "d-none"}>
+                <Input type="number" className="py-2 mx-auto w-75 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Enter Code")} value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)} />
                 <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={joinRoom}>
                     <span className="mr-2">🚪</span>{t("Home.StartGame.Join")}
                 </Button>

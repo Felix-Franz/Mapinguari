@@ -10,9 +10,14 @@
         "StartGame": {
             "Ready": "Kann es losgehen?",
             "Create": "Raum erstellen",
+            "Name Room": "Benennen deinen Raum",
             "Join": "Raum beitreten",
+            "Enter Code": "Raum-Code eingeben",
             "Loading": "Lade Raum..."
         }
+    },
+    "Story": {
+        "Title": "Story"
     },
     "Instructions": {
         "Title": "Spielanleitung"

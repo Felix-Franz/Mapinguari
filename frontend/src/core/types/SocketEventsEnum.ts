@@ -3,4 +3,5 @@ export enum SocketClientEvents {
 };
 
 export enum SocketServerEvents {
+    RoomCreated = "RoomCreated"
 };

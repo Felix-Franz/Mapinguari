@@ -10,9 +10,14 @@
         "StartGame": {
             "Ready": "Ready to rumble?",
             "Create": "Create Room",
+            "Name Room": "Name your room",
             "Join": "Join Room",
+            "Enter Code": "Enter Room Code",
             "Loading": "Loading Room..."
         }
+    },
+    "Story": {
+        "Title": "Story"
     },
     "Instructions": {
         "Title": "Instructions"

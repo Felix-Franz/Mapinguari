@@ -3,6 +3,7 @@ import { Container, Alert } from "reactstrap";
 import logo from "../../resources/logo.svg";
 import StartGame from "./StartGame";
 import Instructions from "../../components/Instructions";
+import Story from "../../components/Story";
 
 const Home = () => {
     const { t } = useTranslation();
@@ -18,6 +19,7 @@ const Home = () => {
                 <br />
                 <a href="https://gitlab.com/FelixFranz/mapinguari" target="_blank" rel="noreferrer">Click here</a> for more information!
             </Alert>
+            <Story className="mt-5" />
             <Instructions className="mt-5" />
         </Container>
     );

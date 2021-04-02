@@ -81,7 +81,7 @@ export default class ClientConnector {
                 try {
                     //@ts-ignore
                     const c = new callback();
-                    socket.on(c.eventName, () => c.handleSocket(socket))
+                    socket.on(c.eventName, (data: any) => c.handleSocket(socket, data))
                 } catch (e) {
                     Logger.log(LEVELS.error, e.message);
                 }
