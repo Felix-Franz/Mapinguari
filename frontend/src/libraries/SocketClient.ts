@@ -37,6 +37,15 @@ export class SocketSender {
     public static checkRoom(code: string){
         SocketClient.Socket.emit(SocketClientEvents.CheckRoom, code);
     }
+
+    /**
+     * Joins a room
+     * @param {string} code of the room
+     * @param {string} name player's name
+     */
+     public static joinRoom(code: string, name: string){
+        SocketClient.Socket.emit(SocketClientEvents.JoinRoom, {code, name});
+    }
 }
 
 
@@ -55,5 +64,13 @@ export class SocketReceiver {
      */
     public static onRoomChecked(callback: (exists: boolean) => void) {
         SocketClient.Socket.on(SocketServerEvents.RoomChecked, callback);
+    }
+
+    /**
+     * Will be called if user has joined the room
+     * @param {callback: (success: boolean) => void} callback with success (name already exists, ...)
+     */
+    public static onRoomJoined(callback: (success: boolean) => void) {
+        SocketClient.Socket.on(SocketServerEvents.RoomJoined, callback);
     }
 }

@@ -21,6 +21,7 @@
             "Header": "Namen eingeben",
             "Subheader": "Gebe deinen Namen ein und lege los",
             "Button": "Jetzt Loslegen",
+            "Error": "Der Name ist bereits vergeben! Bitte verwende einen anderen.",
             "Not Exist": "Raum nicht gefunden!",
             "Not Exist Text": "Der von dir gewünschte Raum existiert nicht mehr",
             "Not Exist Button": "Neuen Raum erstellen"

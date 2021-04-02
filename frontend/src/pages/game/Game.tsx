@@ -11,6 +11,8 @@ const Game : FC<RouteComponentProps<{code: string}>> = (props) => {
         const code = props.match.params.code;
 
         switch (state) {
+            case RoomStateEnum.LOBBY:
+                return <div>LOBBY!</div>
             default:
                 return <Join changeState={setState} code={code}/>;
         }

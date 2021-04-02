@@ -1,5 +1,6 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import Mongoose from 'mongoose';
+import { textChangeRangeIsUnchanged } from 'typescript';
 import { Logger } from '../..';
 import { LEVELS } from './Logger';
 import Models from './Models';
@@ -18,6 +19,8 @@ export default class Database {
         Models.initialize();
         
         Logger.log(LEVELS.debug, "Database initialized!");
+
+        Logger.log(LEVELS.debug, `Use this url to login to the mongodb database: ${ (await this.database.getUri()).toString()}`);
     }
 
     public static get instance(){

@@ -1,12 +1,12 @@
-import http from "http";
-import { Server as IOServer, Socket } from "socket.io";
-import express from "express";
 import cors from "cors";
-import { LEVELS, Logger } from "./Logger";
-import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
+import express from "express";
+import http from "http";
 import path from "path";
+import { Server as IOServer, Socket } from "socket.io";
+import { SocketServerEvents } from "../core/types/SocketEventsEnum";
 import ServiceInterface from "../services/ServiceInterface";
-import Database from "./Database";
+import SocketCallbackInterface from "../socket-callbacks/SocketCallbackInterface";
+import { LEVELS, Logger } from "./Logger";
 
 export type ServerConfigType = {
     port: number
@@ -106,6 +106,16 @@ export default class ClientConnector {
             }
         }
         return [].concat.apply([], result);
+    }
+
+    /**
+     * Emits data to specific room
+     * @param {string} code room cood 
+     * @param {SocketServerEvents} event to be triggered
+     * @param {any} data to be sent
+     */
+    public static emitToRoom(code: string, event: SocketServerEvents, data: any){
+            this.io.to(`game/${code}`).emit(event, data);
     }
 
 }

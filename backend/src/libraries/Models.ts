@@ -1,11 +1,11 @@
-import mongoose, { Model, Schema, Document } from "mongoose";
+import mongoose, { Document, Model, Schema } from "mongoose";
 import { Logger } from "../..";
-import { LEVELS } from "./Logger";
-import RoomType from "../core/types/RoomType";
-import { PlayerRoleEnumArray } from "../core/types/PlayerRoleEnum";
-import { PlayerMindEnumArray } from "../core/types/PlayerMindEnum";
 import { ItemEnumArray } from "../core/types/ItemEnum";
+import { PlayerMindEnumArray } from "../core/types/PlayerMindEnum";
+import { PlayerRoleEnumArray } from "../core/types/PlayerRoleEnum";
 import RoomStateEnum, { RoomStateEnumArray } from "../core/types/RoomStateEnum";
+import RoomType from "../core/types/RoomType";
+import { LEVELS } from "./Logger";
 
 export default class Models {
     private static initialized: boolean = false;
@@ -17,10 +17,6 @@ export default class Models {
         this.initialized = true;
 
         const playersSchema = new Schema({
-            playerId: {
-                type: String,
-                required: true
-            },
             socketId: String,
             name: {
                 type: String,
@@ -37,15 +33,15 @@ export default class Models {
             },
             mind: {
                 type: String,
-                enum: PlayerMindEnumArray,
-                required: true
+                enum: PlayerMindEnumArray
             },
             place: String
         });
         const placesSchema = new Schema({
             name: {
                 type: String,
-                required: true
+                required: true,
+                unique: true
             },
             item: {
                 type: String,
@@ -60,8 +56,7 @@ export default class Models {
                 unique: true
             },
             name: {
-                type: String,
-                required: true
+                type: String
             },
             state: {
                 type: String,
@@ -72,7 +67,7 @@ export default class Models {
             players: [playersSchema],
             places: [placesSchema]
         });
-        this.rooms = mongoose.model<RoomType & Document>("SaveGame", roomSchema)
+        this.rooms = mongoose.model<RoomType & Document>("Rooms", roomSchema)
 
         Logger.log(LEVELS.silly, "Database models created!");
     }
