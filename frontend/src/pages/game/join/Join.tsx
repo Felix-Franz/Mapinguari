@@ -1,8 +1,9 @@
-import RoomStateEnum from "../../../core/types/RoomStateEnum";
 import { FC, useEffect, useState } from "react";
-import { Alert, Button, Container, Input, Spinner } from "reactstrap";
 import { useTranslation } from "react-i18next";
-import { SocketReceiver, SocketSender } from "../../../libraries/SocketClient";
+import { Alert, Button, Container, Input, Spinner } from "reactstrap";
+import RoomStateEnum from "../../../core/types/RoomStateEnum";
+import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
+import SocketClient from "../../../libraries/SocketClient";
 
 const Join: FC<{ changeState: (state: RoomStateEnum) => void, code: string }> = ({ changeState, code }) => {
     const { t } = useTranslation();
@@ -13,21 +14,28 @@ const Join: FC<{ changeState: (state: RoomStateEnum) => void, code: string }> = 
     const [showError, setShowError] = useState<boolean>(false);
 
     useEffect(() => {
-        SocketReceiver.onRoomChecked(exists => setExists(exists));
-        SocketSender.checkRoom(code);
+        SocketClient.on(SocketServerEvents.RoomChecked, exists => setExists(exists));
+        SocketClient.on(SocketServerEvents.RoomJoined, success => {
+            if (success)
+                changeState(RoomStateEnum.LOBBY)
+            else {
+                setShowError(true);
+                setLoadingRoom(false);
+            }
+        })
+        return () => {
+            SocketClient.off(SocketServerEvents.RoomChecked);
+            SocketClient.off(SocketServerEvents.RoomJoined);
+        };
+    });
+
+    useEffect(() => {
+        SocketClient.emit(SocketClientEvents.CheckRoom, code);
     }, [code]);
 
     const join = () => {
         setLoadingRoom(true);
-        SocketReceiver.onRoomJoined((success) => {
-            if (success)
-                changeState(RoomStateEnum.LOBBY)
-            else{
-                setShowError(true);
-                setLoadingRoom(false);
-            }
-        });
-        SocketSender.joinRoom(code, name);
+        SocketClient.emit(SocketClientEvents.JoinRoom, { code, name })
     }
 
     return (<Container className="text-center mt-5 pt-3 mb-3">

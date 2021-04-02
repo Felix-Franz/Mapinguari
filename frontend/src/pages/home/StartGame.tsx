@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Spinner } from "reactstrap";
-import { SocketReceiver, SocketSender } from "../../libraries/SocketClient";
+import { SocketClientEvents, SocketServerEvents } from "../../core/types/SocketEventsEnum";
+import SocketClient from "../../libraries/SocketClient";
 
 const StartGame = () => {
     const { t } = useTranslation();
@@ -9,12 +10,17 @@ const StartGame = () => {
     const [createRoomName, setCreateRoomName] = useState<string>("");
     const [joinRoomCode, setJoinRoomCode] = useState<string>("");
 
+    useEffect(() => {
+        SocketClient.on(SocketServerEvents.RoomCreated, roomCode =>
+            window.location.assign(`${process.env.PUBLIC_URL}/game/${roomCode}`))
+        return () => {
+            SocketClient.off(SocketServerEvents.RoomCreated);
+        }
+    })
+
     const createRoom = () => {
         setState("loading");
-        SocketReceiver.onRoomCreated(roomCode =>
-            window.location.assign(`${process.env.PUBLIC_URL}/game/${roomCode}`)
-        )
-        SocketSender.createRoom(createRoomName);
+        SocketClient.emit(SocketClientEvents.CreateRoom, createRoomName);
     }
 
     const joinRoom = () => {

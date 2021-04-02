@@ -4,6 +4,10 @@ import { SocketClientEvents, SocketServerEvents } from "../core/types/SocketEven
 export default class SocketClient {
     private static io: ioSocket;
 
+    /**
+     * Connects to socket server
+     * @param {string} host url 
+     */
     public static createConnection(host?: string) {
         if (!!this.io)
             throw new Error("Connection is already established!");
@@ -16,61 +20,36 @@ export default class SocketClient {
         this.io.on("message", data => console.log(`[Socket] ${data}`))
     }
 
+    /**
+     * socket.io socket
+     */
     public static get Socket() {
         return this.io;
     }
-}
 
-export class SocketSender {
     /**
-     * Creates a new room
-     * @param {string} name of the new room
+     * Emits an event
+     * @param {SocketClientEvents} event to be emmitted
+     * @param {any} data that will be sent
      */
-    public static createRoom(name: string) {
-        SocketClient.Socket.emit(SocketClientEvents.CreateRoom, name);
+    public static emit(event: SocketClientEvents, data?: any) {
+        this.io.emit(event, data);
     }
 
     /**
-     * Triggers a room check
-     * @param {string} code of the room 
+     * Adds listener for event
+     * @param {SocketServerEvents} event name
+     * @param {(data?: any) => void} callback that will be triggered for event
      */
-    public static checkRoom(code: string){
-        SocketClient.Socket.emit(SocketClientEvents.CheckRoom, code);
+    public static on(event: SocketServerEvents, callback: (data?: any) => void) {
+        this.io.on(event, callback);
     }
 
     /**
-     * Joins a room
-     * @param {string} code of the room
-     * @param {string} name player's name
+     * Removes listener for event
+     * @param {SocketServerEvents} event name
      */
-     public static joinRoom(code: string, name: string){
-        SocketClient.Socket.emit(SocketClientEvents.JoinRoom, {code, name});
-    }
-}
-
-
-export class SocketReceiver {
-    /**
-     * Will be called if room is created
-     * @param {(roomCode: string) => void} callback that returns roomCode 
-     */
-    public static onRoomCreated(callback: (roomCode: string) => void) {
-        SocketClient.Socket.on(SocketServerEvents.RoomCreated, callback);
-    }
-
-    /**
-     * Will be called if room code is checked
-     * @param {callback: (exists: boolean) => void} callback that returns if room exists
-     */
-    public static onRoomChecked(callback: (exists: boolean) => void) {
-        SocketClient.Socket.on(SocketServerEvents.RoomChecked, callback);
-    }
-
-    /**
-     * Will be called if user has joined the room
-     * @param {callback: (success: boolean) => void} callback with success (name already exists, ...)
-     */
-    public static onRoomJoined(callback: (success: boolean) => void) {
-        SocketClient.Socket.on(SocketServerEvents.RoomJoined, callback);
+    public static off(event: SocketServerEvents) {
+        this.io.off(event);
     }
 }
