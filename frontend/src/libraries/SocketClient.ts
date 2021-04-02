@@ -17,7 +17,7 @@ export default class SocketClient {
         else
             this.io = ioClient();
 
-        this.io.on("message", data => console.log(`[Socket] ${data}`))
+        this.io.on("message", data => console.log(`[Socket] ${data}`));
     }
 
     /**

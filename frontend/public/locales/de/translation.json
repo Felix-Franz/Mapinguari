@@ -1,6 +1,6 @@
 {
     "Footer": {
-        "Made": "Mit ❤️ erstellt von",
+        "Made": "Mit {{love}} erstellt von",
         "Source": "Quellcode",
         "Legal": "Impressum"
     },
@@ -17,6 +17,11 @@
         }
     },
     "Game": {
+        "Toast": {
+            "Join" : "{{name}} ist deinem Raum beigetreten!",
+            "Reconnect": "{{name}} hat sich erneut mit deinem Raum verbunden!",
+            "Disconnect": "{{name}} wurde von deinem Raum getrennt!"
+        },
         "Join": {
             "Header": "Namen eingeben",
             "Subheader": "Gebe deinen Namen ein und lege los",

@@ -1,6 +1,6 @@
 {
     "Footer": {
-        "Made": "Made with ❤️ by",
+        "Made": "Made with {{love}} by",
         "Source": "Source",
         "Legal": "Legal"
     },
@@ -17,6 +17,11 @@
         }
     },
     "Game": {
+        "Toast": {
+            "Join" : "{{name}} joined your room!",
+            "Reconnect": "{{name}} reconnected to your room!",
+            "Disconnect": "{{name}} was disconnected from your room!"
+        },
         "Join": {
             "Header": "Insert your name",
             "Subheader": "Insert your name and hit Start now",

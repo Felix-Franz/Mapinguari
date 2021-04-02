@@ -115,7 +115,7 @@ export default class ClientConnector {
      * @param {any} data to be sent
      */
     public static emitToRoom(code: string, event: SocketServerEvents, data: any){
-            this.io.to(`game/${code}`).emit(event, data);
+            this.io.to(code).emit(event, data);
     }
 
 }

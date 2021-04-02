@@ -47,14 +47,6 @@ export default class GameManager {
      * @param name 
      */
     public static async joinRoom(code: string, name: string, socketId: string) {
-        //ToDo
-        // X change disconnected callback (remove from rooms, set in room db player state)
-        // X if name exists & disconnected --> use this player
-        // X if name exists && connected --> throw error
-        // X if first player --> Admin
-        // X else create new player
-        // inform others about new player
-
         const room = await Models.Rooms.findOne({ code: code });
 
         if (!room)

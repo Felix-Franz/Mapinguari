@@ -5,10 +5,12 @@ import Error from "./error/Error";
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import Legal from "./legal/Legal";
 import Game from "./game/Game";
+import Toast from "../components/toast/Toast";
 
 const Router = () => (<>
     <div style={{ minHeight: "calc( 100vh - 4em )", display: "flow-root", marginBottom: "3em", position: "relative"}}>
 
+        <Toast/>
         <Menu />
 
         <BrowserRouter>

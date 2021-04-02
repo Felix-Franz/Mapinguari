@@ -1,0 +1,8 @@
+@import "../../Theme.scss";
+
+// https://github.com/fkhadra/react-toastify/blob/master/scss/_variables.scss
+$rt-color-info: get-color("primary");
+$rt-color-error: get-color("secondary");
+
+
+@import "~react-toastify/scss/main";
