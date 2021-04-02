@@ -47,7 +47,7 @@ const StartGame = () => {
             </div>
             <div className={state === "join-room" ? "" : "d-none"}>
                 <Input type="number" className="py-2 mx-auto w-75 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Enter Code")} value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)} />
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={joinRoom}>
+                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={joinRoom} disabled={!joinRoomCode}>
                     <span className="mr-2">🚪</span>{t("Home.StartGame.Join")}
                 </Button>
             </div>

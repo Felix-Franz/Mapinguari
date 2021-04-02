@@ -1,7 +1,9 @@
 export enum SocketClientEvents {
-    CreateRoom = "CreateRoom"
+    CreateRoom = "CreateRoom",
+    CheckRoom = "CheckRoom"
 };
 
 export enum SocketServerEvents {
-    RoomCreated = "RoomCreated"
+    RoomCreated = "RoomCreated",
+    RoomChecked = "RoomChecked"
 };

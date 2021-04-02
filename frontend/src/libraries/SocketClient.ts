@@ -29,6 +29,14 @@ export class SocketSender {
     public static createRoom(name: string) {
         SocketClient.Socket.emit(SocketClientEvents.CreateRoom, name);
     }
+
+    /**
+     * Triggers a room check
+     * @param {string} code of the room 
+     */
+    public static checkRoom(code: string){
+        SocketClient.Socket.emit(SocketClientEvents.CheckRoom, code);
+    }
 }
 
 
@@ -39,5 +47,13 @@ export class SocketReceiver {
      */
     public static onRoomCreated(callback: (roomCode: string) => void) {
         SocketClient.Socket.on(SocketServerEvents.RoomCreated, callback);
+    }
+
+    /**
+     * Will be called if room code is checked
+     * @param {callback: (exists: boolean) => void} callback that returns if room exists
+     */
+    public static onRoomChecked(callback: (exists: boolean) => void) {
+        SocketClient.Socket.on(SocketServerEvents.RoomChecked, callback);
     }
 }

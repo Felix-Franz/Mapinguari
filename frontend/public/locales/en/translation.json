@@ -16,6 +16,16 @@
             "Loading": "Loading Room..."
         }
     },
+    "Game": {
+        "Join": {
+            "Header": "Insert your name",
+            "Subheader": "Insert your name and hit Start now",
+            "Button": "Start now",
+            "Not Exist": "Room not found!",
+            "Not Exist Text": "The room does not exist anymore",
+            "Not Exist Button": "Create new room"
+        }
+    },
     "Story": {
         "Title": "Story"
     },

@@ -7,7 +7,7 @@ export default class CreateRoom implements SocketCallbackInterface{
     readonly eventName: string = SocketClientEvents.CreateRoom;
 
     async handleSocket(socket: Socket, data: any) {
-        const roomId = await GameManager.createGame(data);
+        const roomId = await GameManager.createRoom(data);
         socket.emit(SocketServerEvents.RoomCreated, roomId);
     }
 
