@@ -1,11 +1,19 @@
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Button, Container, Input, Spinner } from "reactstrap";
+import PlayerType from "../../../core/types/PlayerType";
 import RoomStateEnum from "../../../core/types/RoomStateEnum";
+import RoomType from "../../../core/types/RoomType";
 import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
 import SocketClient from "../../../libraries/SocketClient";
 
-const Join: FC<{ changeState: (state: RoomStateEnum) => void, code: string }> = ({ changeState, code }) => {
+const Join: FC<{
+    setPlayers: (players: PlayerType[]) => void,
+    setRoomName: (name: string) => void,
+    setRoomCode: (code: string) => void,
+    setState: (state: RoomStateEnum) => void,
+    code: string
+}> = ({ setPlayers, setRoomName, setRoomCode, setState, code }) => {
     const { t } = useTranslation();
 
     const [exists, setExists] = useState<boolean>(true);
@@ -15,10 +23,13 @@ const Join: FC<{ changeState: (state: RoomStateEnum) => void, code: string }> = 
 
     useEffect(() => {
         SocketClient.on(SocketServerEvents.RoomChecked, exists => setExists(exists));
-        SocketClient.on(SocketServerEvents.RoomJoined, success => {
-            if (success)
-                changeState(RoomStateEnum.LOBBY)
-            else {
+        SocketClient.on(SocketServerEvents.RoomJoined, (data: RoomType & { success: boolean }) => {
+            if (data.success) {
+                setPlayers(data.players);
+                setRoomName(data.name);
+                setRoomCode(data.code);
+                setState(RoomStateEnum.LOBBY);
+            } else {
                 setShowError(true);
                 setLoadingRoom(false);
             }

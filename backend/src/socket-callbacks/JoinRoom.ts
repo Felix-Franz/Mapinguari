@@ -8,11 +8,11 @@ export default class CheckRoom implements SocketCallbackInterface {
 
     async handleSocket(socket: Socket, data: { code: string, name: string }) {
         try {
-            await GameManager.joinRoom(data.code, data.name, socket.id);
+            const roomData = await GameManager.joinRoom(data.code, data.name, socket.id);
             socket.join(data.code);
-            socket.emit(SocketServerEvents.RoomJoined, true);
+            socket.emit(SocketServerEvents.RoomJoined, Object.assign(roomData, {success: true}));
         } catch (e) {
-            socket.emit(SocketServerEvents.RoomJoined, false);
+            socket.emit(SocketServerEvents.RoomJoined, {success : false});
         }
     }
 

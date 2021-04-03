@@ -4,24 +4,41 @@ import RoomStateEnum from "../../core/types/RoomStateEnum";
 import { SocketServerEvents } from "../../core/types/SocketEventsEnum";
 import SocketClient from "../../libraries/SocketClient";
 import Join from "./join/Join";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import PlayerType from "../../core/types/PlayerType";
+import Lobby from "./lobby/Lobby";
 
-const Game : FC<RouteComponentProps<{code: string}>> = (props) => {
+const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
 
     useEffect(() => {
         SocketClient.on(SocketServerEvents.PlayerJoined, (player: PlayerType) => {
-            toast.info(t('Game.Toast.Join', {name: player.name}));
+            const ps = Object.assign({}, players);
+            ps.push(player);
+            setPlayers(ps);
+            toast.info(t('Game.Toast.Join', { name: player.name }));
         });
-        
+
+        const updatePlayers = (player: PlayerType) => {
+            const ps = Object.assign({}, players);
+            ps.map(p => {
+                if (p.name === player.name)
+                    return player;
+                else
+                    return p;
+            });
+            setPlayers(ps);
+        }
+
         SocketClient.on(SocketServerEvents.PlayerReconnected, (player: PlayerType) => {
-            toast.info(t('Game.Toast.Reconnect', {name: player.name}));
+            updatePlayers(player);
+            toast.info(t('Game.Toast.Reconnect', { name: player.name }));
         });
-        
+
         SocketClient.on(SocketServerEvents.PlayerDisconnected, (player: PlayerType) => {
-            toast.error(t('Game.Toast.Disconnect', {name: player.name}));
+            updatePlayers(player);
+            toast.error(t('Game.Toast.Disconnect', { name: player.name }));
         });
 
         return () => {
@@ -32,19 +49,22 @@ const Game : FC<RouteComponentProps<{code: string}>> = (props) => {
     });
 
     const [state, setState] = useState<RoomStateEnum>();
+    const [players, setPlayers] = useState<PlayerType[]>([]);
+    const [roomName, setRoomName] = useState<string>("");
+    const [roomCode, setRoomCode] = useState<string>("");
 
     const getState = () => {
         const code = props.match.params.code;
 
         switch (state) {
             case RoomStateEnum.LOBBY:
-                return <div>LOBBY!</div>
+                return <Lobby players={players} roomName={roomName} roomCode={roomCode} setState={setState} />
             default:
-                return <Join changeState={setState} code={code}/>;
+                return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setState={setState} code={code} />;
         }
     }
-    
-    
+
+
     return getState();
 }
 

@@ -3,6 +3,7 @@ import { string } from "yargs";
 import { Logger } from "../..";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
 import PlayerType from "../core/types/PlayerType";
+import RoomType from "../core/types/RoomType";
 import { SocketServerEvents } from "../core/types/SocketEventsEnum";
 import ClientConnector from "./ClientConnector";
 import Generator from "./Generator";
@@ -43,10 +44,11 @@ export default class GameManager {
 
     /**
      * Joins a player
-     * @param code 
-     * @param name 
+     * @param {string} code room code
+     * @param {string} name of the player 
+     * @returns {RoomType} room data
      */
-    public static async joinRoom(code: string, name: string, socketId: string) {
+    public static async joinRoom(code: string, name: string, socketId: string): Promise<RoomType> {
         const room = await Models.Rooms.findOne({ code: code });
 
         if (!room)
@@ -78,6 +80,27 @@ export default class GameManager {
             throw new Error("Player with this name is already connected!");
 
         room.save();
+
+        const players = room!.players.map(p => {
+            return {
+                name: p.name,
+                role: p.role,
+                connected: p.connected
+            };
+        });
+        return {
+            code: room!.code,
+            name: room!.name,
+            state: room!.state,
+            players: room!.players.map(p => {
+                return {
+                    name: p.name,
+                    role: p.role,
+                    connected: p.connected
+                };
+            }),
+            places: []
+        };
     }
 
     public static async disconnectRooms(socketId: string) {
