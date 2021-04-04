@@ -11,17 +11,22 @@ import Lobby from "./lobby/Lobby";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
+    
+    const [state, setState] = useState<RoomStateEnum>();
+    const [players, setPlayers] = useState<PlayerType[]>([]);
+    const [roomName, setRoomName] = useState<string>("");
+    const [roomCode, setRoomCode] = useState<string>("");
 
     useEffect(() => {
         SocketClient.on(SocketServerEvents.PlayerJoined, (player: PlayerType) => {
-            const ps = Object.assign({}, players);
+            const ps = Object.assign([], players);
             ps.push(player);
             setPlayers(ps);
             toast.info(t('Game.Toast.Join', { name: player.name }));
         });
 
         const updatePlayers = (player: PlayerType) => {
-            const ps = Object.assign({}, players);
+            const ps = Object.assign([] as PlayerType[], players);
             ps.map(p => {
                 if (p.name === player.name)
                     return player;
@@ -47,11 +52,6 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             SocketClient.off(SocketServerEvents.PlayerDisconnected);
         }
     });
-
-    const [state, setState] = useState<RoomStateEnum>();
-    const [players, setPlayers] = useState<PlayerType[]>([]);
-    const [roomName, setRoomName] = useState<string>("");
-    const [roomCode, setRoomCode] = useState<string>("");
 
     const getState = () => {
         const code = props.match.params.code;

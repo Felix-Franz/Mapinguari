@@ -14,7 +14,7 @@ const Lobby: FC<{
         <p>Link {window.location.toString()}</p>
         <p>Code: {roomCode}</p>
         <ul>
-            {players.map((p, i) => <li key={i}>{p.name}</li>)}
+            {players.map((p, i) => <li key={i}>{p.name} ({p.connected ? "conected" : "not connected"})</li>)}
         </ul>
     </Container>
 }
