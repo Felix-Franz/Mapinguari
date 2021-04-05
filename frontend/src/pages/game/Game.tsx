@@ -26,8 +26,8 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
         });
 
         const updatePlayers = (player: PlayerType) => {
-            const ps = Object.assign([] as PlayerType[], players);
-            ps.map(p => {
+            let ps = Object.assign([] as PlayerType[], players);
+            ps = ps.map(p => {
                 if (p.name === player.name)
                     return player;
                 else
@@ -64,8 +64,9 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
         }
     }
 
-
-    return getState();
-}
+    return <>
+    {getState()}
+    </>
+    }
 
 export default Game;
