@@ -28,7 +28,7 @@ const Menu = () => {
             <div className="menu-box5"/>
             <div className="menu-content">
                 <UncontrolledDropdown size="sm" className="mt-2">
-                    <DropdownToggle caret>
+                    <DropdownToggle caret color="secondary">
                         <Flag code={countryMapper(i18n.language.slice(0, 2) || "en")} style={{width: "1.5em"}}/>
                     </DropdownToggle>
                     <DropdownMenu style={{minWidth: "auto"}}>

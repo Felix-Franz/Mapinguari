@@ -5,7 +5,7 @@ const Instructions = (props: { className?: string }) => {
     return (
         <div className={props.className}>
             <h2>{t("Instructions.Title")}</h2>
-            ToDo!
+            <p className="pre-wrap">{t("Story.Content")}</p>
         </div>
     );
 }

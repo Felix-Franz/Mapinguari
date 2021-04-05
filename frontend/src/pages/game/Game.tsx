@@ -8,10 +8,11 @@ import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 import PlayerType from "../../core/types/PlayerType";
 import Lobby from "./lobby/Lobby";
+import Tabs from "./tabs/Tabs";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
-    
+
     const [state, setState] = useState<RoomStateEnum>();
     const [players, setPlayers] = useState<PlayerType[]>([]);
     const [roomName, setRoomName] = useState<string>("");
@@ -64,9 +65,12 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
         }
     }
 
-    return <>
-    {getState()}
-    </>
-    }
+    const statePage = getState();
+    console.log(state)
+
+    if (state === undefined)
+        return statePage;
+    else return <Tabs>{statePage}</Tabs>
+}
 
 export default Game;
