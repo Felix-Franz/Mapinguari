@@ -1,7 +1,7 @@
 import { faGamepad, faInfo, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useState } from "react";
-import { Collapse, Nav, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from "reactstrap";
+import { Collapse, Nav, Navbar, NavbarToggler, NavItem, NavLink } from "reactstrap";
 import TabInfo from "./TabInfo";
 import TabPlayers from "./TabPlayers";
 
