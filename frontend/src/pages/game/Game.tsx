@@ -14,6 +14,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
 
     const [state, setState] = useState<RoomStateEnum>();
+    const [me, setMe] = useState<string>();
     const [players, setPlayers] = useState<PlayerType[]>([]);
     const [roomName, setRoomName] = useState<string>("");
     const [roomCode, setRoomCode] = useState<string>("");
@@ -61,7 +62,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             case RoomStateEnum.LOBBY:
                 return <Lobby players={players} roomName={roomName} roomCode={roomCode} setState={setState} />
             default:
-                return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setState={setState} code={code} />;
+                return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;
         }
     }
 
@@ -70,7 +71,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
 
     if (state === undefined)
         return statePage;
-    else return <Tabs>{statePage}</Tabs>
+    else return <Tabs players={players} me={me!} roomCode={roomCode}>{statePage}</Tabs>
 }
 
 export default Game;

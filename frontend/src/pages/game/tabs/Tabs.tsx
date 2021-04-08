@@ -2,10 +2,11 @@ import { faGamepad, faInfo, faUserFriends } from "@fortawesome/free-solid-svg-ic
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useState } from "react";
 import { Collapse, Nav, Navbar, NavbarToggler, NavItem, NavLink } from "reactstrap";
+import PlayerType from "../../../core/types/PlayerType";
 import TabInfo from "./TabInfo";
 import TabPlayers from "./TabPlayers";
 
-const Tabs: FC<{ children: JSX.Element }> = ({ children }) => {
+const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomCode: string }> = ({ children, players, me, roomCode }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [tab, setTab] = useState<"game" | "players" | "info">("game");
@@ -16,7 +17,7 @@ const Tabs: FC<{ children: JSX.Element }> = ({ children }) => {
             tabPage = children;
             break;
         case "players":
-            tabPage = <TabPlayers />;
+            tabPage = <TabPlayers players={players} me={me} roomCode={roomCode}/>;
             break;
         case "info":
             tabPage = <TabInfo />;

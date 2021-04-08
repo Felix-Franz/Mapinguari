@@ -11,9 +11,10 @@ const Join: FC<{
     setPlayers: (players: PlayerType[]) => void,
     setRoomName: (name: string) => void,
     setRoomCode: (code: string) => void,
+    setMe: (name: string) => void,
     setState: (state: RoomStateEnum) => void,
     code: string
-}> = ({ setPlayers, setRoomName, setRoomCode, setState, code }) => {
+}> = ({ setPlayers, setRoomName, setRoomCode, setMe, setState, code }) => {
     const { t } = useTranslation();
 
     const [exists, setExists] = useState<boolean>(true);
@@ -28,6 +29,7 @@ const Join: FC<{
                 setPlayers(data.players);
                 setRoomName(data.name);
                 setRoomCode(data.code);
+                setMe(name);
                 setState(RoomStateEnum.LOBBY);
             } else {
                 setShowError(true);

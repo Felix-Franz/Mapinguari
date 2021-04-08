@@ -57,7 +57,7 @@ export default class GameManager {
         const playerIndex = room.players.findIndex(p => p.name === name);
 
         if (playerIndex === -1) { // player name does not exist --> new player
-            const role = room.players.length === 0 ? PlayerRoleEnum.MANAGER : PlayerRoleEnum.USER;
+            const role = room.players.length === 0 ? PlayerRoleEnum.ADMIN : PlayerRoleEnum.USER;
             const connected = true;
             room.players.push({
                 socketId,
