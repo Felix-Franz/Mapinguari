@@ -37,6 +37,18 @@
             "Not Exist": "Room not found!",
             "Not Exist Text": "The room does not exist anymore",
             "Not Exist Button": "Create new room"
+        },
+        "Lobby":{
+            "Waiting": "We are just waiting for new players to join and the admin to start the game!",
+            "Join": "To allow other players to join, provide them with the following link or code:",
+            "Link": "Link:",
+            "Code": "Code:",
+            "Copied": "Copied to clipboard!",
+            "CopyFailed": "We could not copy anything to your clipboard!",
+            "Shared": "Share menu opened!",
+            "ShareFailed": "We could not share anything!",
+            "Welcome Message": "Welcome message",
+            "Welcome Message Text": "Join my Mapinugari game!\nOpen the following link and enter your name!\n{link}}"
         }
     },
     "Story": {

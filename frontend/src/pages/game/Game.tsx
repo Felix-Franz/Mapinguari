@@ -60,14 +60,13 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
 
         switch (state) {
             case RoomStateEnum.LOBBY:
-                return <Lobby players={players} roomName={roomName} roomCode={roomCode} setState={setState} />
+                return <Lobby roomName={roomName} roomCode={roomCode} setState={setState} />
             default:
                 return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;
         }
     }
 
     const statePage = getState();
-    console.log(state)
 
     if (state === undefined)
         return statePage;
