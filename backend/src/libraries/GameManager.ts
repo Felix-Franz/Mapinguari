@@ -123,11 +123,14 @@ export default class GameManager {
      * Completly leave room
      * @param {string} code roomCode
      * @param {string} name personal name
+     * @returns {string} socketId
      */
-    public static async leaveRoom(code: string, name: string) {
+    public static async leaveRoom(code: string, name: string, socketId: string) : Promise<string> {
         const room = await Models.Rooms.findOne({ code });
         if (!room)
             throw new Error("Room with this code does not exist!");
+        if (room.players.filter(p => p.socketId === socketId && (p.role === PlayerRoleEnum.ADMIN || p.name === name)).length === 0)
+            throw new Error("Player is not allowed to leave room for this player name");
         const oldPlayer = room.players.find(p => p.name === name);
         if (!oldPlayer)
             throw new Error("There is no player with this name in this room!");
@@ -137,7 +140,7 @@ export default class GameManager {
         if (room.players.length === 0) {
             Logger.log(LEVELS.silly, `Delete empty room ${name} with code ${code}`);
             room.delete();
-            return;
+            return oldPlayer.socketId!;
         }
         if (room.players.filter(p => p.role === PlayerRoleEnum.ADMIN).length === 0) {
             room.players[0].role = PlayerRoleEnum.ADMIN;
@@ -146,6 +149,7 @@ export default class GameManager {
 
         room.save();
         ClientConnector.emitToRoom(code, SocketServerEvents.PlayerLeft, oldPlayer.name);
+        return oldPlayer.socketId!;
     }
 
 }

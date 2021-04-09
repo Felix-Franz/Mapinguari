@@ -1,5 +1,6 @@
 import { Socket } from "socket.io";
 import { SocketClientEvents, SocketServerEvents } from "../core/types/SocketEventsEnum";
+import ClientConnector from "../libraries/ClientConnector";
 import GameManager from "../libraries/GameManager";
 import SocketCallbackInterface from "./SocketCallbackInterface";
 
@@ -8,11 +9,11 @@ export default class LeaveRoom implements SocketCallbackInterface {
 
     async handleSocket(socket: Socket, data: { code: string, name: string }) {
         try {
-            await GameManager.leaveRoom(data.code, data.name);
+            const socketId = await GameManager.leaveRoom(data.code, data.name, socket.id);
             socket.leave(data.code);
-            socket.emit(SocketServerEvents.RoomLeft, true);
+            ClientConnector.emitToSocket(socketId, SocketServerEvents.RoomLeft, true);
         } catch (e) {
-            socket.emit(SocketServerEvents.RoomLeft, false);
+            ClientConnector.emitToSocket(socket.id, SocketServerEvents.RoomLeft, false);
         }
     }
 

@@ -59,7 +59,17 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
         
         SocketClient.on(SocketServerEvents.PlayerLeft, (name: string) => {
             setPlayers(players.filter(p => p.name !== name));
-            toast.error(t('Game.Toast.Left', { name }));
+            toast.error(t('Game.Toast.PlayerLeft', { name }));
+        });
+
+        SocketClient.on(SocketServerEvents.RoomLeft, (success: boolean) => {
+            if (success){
+                toast.info(t('Game.Toast.Left'), {
+                    onClose: () => window.location.assign(`${process.env.PUBLIC_URL}/`)
+                });
+            }
+            else
+                toast.error(t('Game.Toast.LeftError'));
         });
 
         return () => {
@@ -68,6 +78,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             SocketClient.off(SocketServerEvents.PlayerDisconnected);
             SocketClient.off(SocketServerEvents.PlayerRoleChanged);
             SocketClient.off(SocketServerEvents.PlayerLeft);
+            SocketClient.off(SocketServerEvents.RoomLeft);
         }
     });
 
@@ -86,7 +97,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
 
     if (state === undefined)
         return statePage;
-    else return <Tabs players={players} me={me!} roomCode={roomCode}>{statePage}</Tabs>
+    else return <Tabs players={players} me={me!} roomCode={roomCode} allowKick={players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN && state === RoomStateEnum.LOBBY}>{statePage}</Tabs>
 }
 
 export default Game;

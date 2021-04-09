@@ -1,4 +1,9 @@
 {
+    "General": {
+        "Yes": "Ja",
+        "No": "Nein",
+        "Okay": "Okay"
+    },
     "Footer": {
         "Made": "Mit {{love}} erstellt von",
         "Source": "Quellcode",
@@ -25,14 +30,19 @@
                 "Admin": "{{name}} ist ab sofort Admin!",
                 "User": "{{name}} ist jetzt kein Admin mehr!"
             },
-            "Left": "{{name}} hat den Raum verlassen!"
+            "PlayerLeft": "{{name}} hat den Raum verlassen!",
+            "Left": "Du hast den Raum verlassen!",
+            "LeftError": "Leider konntest du wegen eines Fehlers den Raum nicht verlassen!"
         },
         "PlayerTab": {
             "Title": "Spieler",
             "Me": "Du bist's",
             "Admin": "Admin",
             "Disconnected": "Verbindung getrennt",
-            "RejoinAlert": "Schicke {{names}} den Code {{roomCode}} oder Link {{link}}, damit er wieder beitreten kann."
+            "RejoinAlert": "Schicke {{names}} den Code {{roomCode}} oder Link {{link}}, damit er wieder beitreten kann.",
+            "Kick": "Kicken",
+            "KickHeader": "Kicken",
+            "KickMessage": "Willst du {{name}} wirklick kicken?"
         },
         "Join": {
             "Header": "Namen eingeben",
@@ -54,9 +64,7 @@
             "ShareFailed": "Wir konnten leider nichts teilen!",
             "Welcome Message": "Wilkommensnachricht",
             "Welcome Message Text": "Trete meinem Mapinugari Spiel bei!\nÖffne dafür folgenden Link und geb deinen Namen ein!\n{{link}}",
-            "Leave": "Raum verlassen",
-            "Left": "Du hast den Raum verlassen!",
-            "LeftError": "Leider konntest du wegen eines Fehlers den Raum nicht verlassen!"
+            "Leave": "Raum verlassen"
         }
     },
     "Story": {

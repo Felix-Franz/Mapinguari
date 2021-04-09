@@ -110,12 +110,22 @@ export default class ClientConnector {
 
     /**
      * Emits data to specific room
-     * @param {string} code room cood 
+     * @param {string} code room code 
      * @param {SocketServerEvents} event to be triggered
      * @param {any} data to be sent
      */
-    public static emitToRoom(code: string, event: SocketServerEvents, data: any){
-            this.io.to(code).emit(event, data);
+    public static emitToRoom(code: string, event: SocketServerEvents, data: any) {
+        this.io.to(code).emit(event, data);
+    }
+
+    /**
+     * Emits data to specific socketId
+     * @param {string} socketId 
+     * @param {SocketServerEvents} event to be triggered
+     * @param {any} data to be sent
+     */
+    public static emitToSocket(socketId: string, event: SocketServerEvents, data: any) {
+        this.io.to(socketId).emit(event, data)
     }
 
 }

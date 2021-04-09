@@ -6,8 +6,8 @@ html, body, html > * > div.full-height {
 }
 
 body, body > * > *, .form-control, .form-control:focus, .list-group-item, .dropdown-menu, .dropdown-header, .dropdown-item, .home-news-text, .jumbotron, .toast, .toast-header, .modal-content, .close {
-  background-color: get-color("dark");
-  color: get-color("bright");
+  background-color: get-color("dark") !important;
+  color: get-color("bright") !important;
 }
 
 a {

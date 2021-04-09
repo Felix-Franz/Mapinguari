@@ -6,7 +6,7 @@ import PlayerType from "../../../core/types/PlayerType";
 import TabInfo from "./TabInfo";
 import TabPlayers from "./TabPlayers";
 
-const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomCode: string }> = ({ children, players, me, roomCode }) => {
+const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomCode: string, allowKick: boolean }> = ({ children, players, me, roomCode, allowKick }) => {
 
     const [isOpen, setIsOpen] = useState(false);
     const [tab, setTab] = useState<"game" | "players" | "info">("game");
@@ -17,7 +17,7 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
             tabPage = children;
             break;
         case "players":
-            tabPage = <TabPlayers players={players} me={me} roomCode={roomCode}/>;
+            tabPage = <TabPlayers players={players} me={me} roomCode={roomCode} allowKick={allowKick}/>;
             break;
         case "info":
             tabPage = <TabInfo />;
