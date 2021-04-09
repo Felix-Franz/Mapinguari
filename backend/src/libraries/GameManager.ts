@@ -3,6 +3,7 @@ import { string } from "yargs";
 import { Logger } from "../..";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
 import PlayerType from "../core/types/PlayerType";
+import RoomStateEnum from "../core/types/RoomStateEnum";
 import RoomType from "../core/types/RoomType";
 import { SocketServerEvents } from "../core/types/SocketEventsEnum";
 import ClientConnector from "./ClientConnector";
@@ -81,13 +82,6 @@ export default class GameManager {
 
         room.save();
 
-        const players = room!.players.map(p => {
-            return {
-                name: p.name,
-                role: p.role,
-                connected: p.connected
-            };
-        });
         return {
             code: room!.code,
             name: room!.name,
@@ -103,6 +97,10 @@ export default class GameManager {
         };
     }
 
+    /**
+     * Disconnect socket from room
+     * @param {string} socketId
+     */
     public static async disconnectRooms(socketId: string) {
         const rooms = await Models.Rooms.find({ "players.socketId": socketId });
         for (const r of rooms) {
@@ -119,6 +117,35 @@ export default class GameManager {
                 await r.delete();
             }
         }
+    }
+
+    /**
+     * Completly leave room
+     * @param {string} code roomCode
+     * @param {string} name personal name
+     */
+    public static async leaveRoom(code: string, name: string) {
+        const room = await Models.Rooms.findOne({ code });
+        if (!room)
+            throw new Error("Room with this code does not exist!");
+        const oldPlayer = room.players.find(p => p.name === name);
+        if (!oldPlayer)
+            throw new Error("There is no player with this name in this room!");
+        Logger.log(LEVELS.silly, `Disconnect ${name} from room with name ${room.name} and code ${code}`);
+
+        room.players = room.players.filter(p => p.name !== name);
+        if (room.players.length === 0) {
+            Logger.log(LEVELS.silly, `Delete empty room ${name} with code ${code}`);
+            room.delete();
+            return;
+        }
+        if (room.players.filter(p => p.role === PlayerRoleEnum.ADMIN).length === 0) {
+            room.players[0].role = PlayerRoleEnum.ADMIN;
+            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerRoleChanged, { name: room.players[0].name, role: room.players[0].role, connected: room.players[0].connected });
+        }
+
+        room.save();
+        ClientConnector.emitToRoom(code, SocketServerEvents.PlayerLeft, oldPlayer.name);
     }
 
 }

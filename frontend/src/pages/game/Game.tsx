@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import PlayerType from "../../core/types/PlayerType";
 import Lobby from "./lobby/Lobby";
 import Tabs from "./tabs/Tabs";
+import PlayerRoleEnum from "../../core/types/PlayerRoleEnum";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
@@ -48,10 +49,25 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             toast.error(t('Game.Toast.Disconnect', { name: player.name }));
         });
 
+        SocketClient.on(SocketServerEvents.PlayerRoleChanged, (player: PlayerType) => {
+            updatePlayers(player);
+            if (player.role === PlayerRoleEnum.ADMIN)
+                toast.error(t('Game.Toast.RoleChanged.Admin', { name: player.name }));
+            else
+                toast.error(t('Game.Toast.RoleChanged.User', { name: player.name }));
+        });
+        
+        SocketClient.on(SocketServerEvents.PlayerLeft, (name: string) => {
+            setPlayers(players.filter(p => p.name !== name));
+            toast.error(t('Game.Toast.Left', { name }));
+        });
+
         return () => {
             SocketClient.off(SocketServerEvents.PlayerJoined);
             SocketClient.off(SocketServerEvents.PlayerReconnected);
             SocketClient.off(SocketServerEvents.PlayerDisconnected);
+            SocketClient.off(SocketServerEvents.PlayerRoleChanged);
+            SocketClient.off(SocketServerEvents.PlayerLeft);
         }
     });
 
@@ -60,7 +76,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
 
         switch (state) {
             case RoomStateEnum.LOBBY:
-                return <Lobby roomName={roomName} roomCode={roomCode} setState={setState} />
+                return <Lobby roomName={roomName} roomCode={roomCode} me={me!} setState={setState} />
             default:
                 return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;
         }

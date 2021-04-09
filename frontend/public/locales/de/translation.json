@@ -20,7 +20,12 @@
         "Toast": {
             "Join": "{{name}} ist deinem Raum beigetreten!",
             "Reconnect": "{{name}} hat sich erneut mit deinem Raum verbunden!",
-            "Disconnect": "{{name}} wurde von deinem Raum getrennt!"
+            "Disconnect": "{{name}} wurde von deinem Raum getrennt!",
+            "RoleChanged": {
+                "Admin": "{{name}} ist ab sofort Admin!",
+                "User": "{{name}} ist jetzt kein Admin mehr!"
+            },
+            "Left": "{{name}} hat den Raum verlassen!"
         },
         "PlayerTab": {
             "Title": "Spieler",
@@ -48,7 +53,10 @@
             "Shared": "Teilen-Menü wurde geöffnet!",
             "ShareFailed": "Wir konnten leider nichts teilen!",
             "Welcome Message": "Wilkommensnachricht",
-            "Welcome Message Text": "Trete meinem Mapinugari Spiel bei!\nÖffne dafür folgenden Link und geb deinen Namen ein!\n{{link}}"
+            "Welcome Message Text": "Trete meinem Mapinugari Spiel bei!\nÖffne dafür folgenden Link und geb deinen Namen ein!\n{{link}}",
+            "Leave": "Raum verlassen",
+            "Left": "Du hast den Raum verlassen!",
+            "LeftError": "Leider konntest du wegen eines Fehlers den Raum nicht verlassen!"
         }
     },
     "Story": {

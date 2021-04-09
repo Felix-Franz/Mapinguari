@@ -1,17 +1,36 @@
-import { faClipboard, faPaperPlane } from "@fortawesome/free-solid-svg-icons";
+import { faClipboard, faPaperPlane, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Button, ButtonGroup, Container } from "reactstrap";
 import RoomStateEnum from "../../../core/types/RoomStateEnum";
+import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
+import SocketClient from "../../../libraries/SocketClient";
 
 const Lobby: FC<{
     setState: (state: RoomStateEnum) => void,
     roomName: string,
-    roomCode: string
-}> = ({ setState, roomName, roomCode }) => {
+    roomCode: string,
+    me: string
+}> = ({ setState, roomName, roomCode, me }) => {
     const { t } = useTranslation();
+    const [leaveLoading, setLeaveLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        SocketClient.on(SocketServerEvents.RoomLeft, (success: boolean) => {
+            if (success){
+                toast.info(t('Game.Lobby.Left'));
+                window.location.assign(`${process.env.PUBLIC_URL}/`);
+            }
+            else
+                toast.error(t('Game.Lobby.LeftError'));
+        });
+
+        return () => {
+            SocketClient.off(SocketServerEvents.RoomLeft);
+        };
+    });
 
     const getCopyAndShare = (text: string) => <ButtonGroup className="ml-2">
         <Button color="primary" size="sm"
@@ -26,6 +45,11 @@ const Lobby: FC<{
             <FontAwesomeIcon icon={faPaperPlane} />
         </Button>
     </ButtonGroup>
+
+    const leaveRoom = () => {
+        setLeaveLoading(true);
+        SocketClient.emit(SocketClientEvents.LeaveRoom, { code: roomCode, name: me })
+    }
 
     return <Container fluid className="my-3 text-center">
         <h2>{roomName}</h2>
@@ -48,6 +72,10 @@ const Lobby: FC<{
                 <br />
                 <var className="text-primary pre-wrap">{t("Game.Lobby.Welcome Message Text", { link: window.location.toString() })}</var>
             </div>
+            <Button color="secondary" className="mt-5" onClick={leaveRoom} disabled={leaveLoading}>
+                <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+                {t("Game.Lobby.Leave")}
+            </Button>
         </div>
     </Container>
 }
