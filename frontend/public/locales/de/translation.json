@@ -76,6 +76,7 @@
         "Content": "ToDo!"
     },
     "Legal": {
+        "Button": "Zur Hauptseite",
         "About": {
             "Title": "Impressum",
             "PreText": "Angaben gemäß § 5 TMG",
