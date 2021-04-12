@@ -20,7 +20,7 @@ const Footer = () => {
             <span>{t("Footer.Made", {love: "❤️"})} </span>
             <a target="_blank" rel="noreferrer" href={`https://www.felix-franz.com`}>Felix</a>
             <br />
-            <span><a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}><FontAwesomeIcon icon={faGitlab} className="mr-1" />{t("Footer.Source")}</a></span>
+            <span><a target="_blank" rel="noreferrer" href="https://gitlab.com/FelixFranz/mapinguari"><FontAwesomeIcon icon={faGitlab} className="mr-1" />{t("Footer.Source")}</a></span>
             <span className={(enableLegal ? "" : "d-none")}> | <a target="_blank" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}>{t("Footer.Legal")}</a></span>
         </footer>
     );
