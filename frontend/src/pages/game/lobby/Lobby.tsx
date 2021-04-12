@@ -3,17 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
-import { Button, ButtonGroup, Container } from "reactstrap";
-import RoomStateEnum from "../../../core/types/RoomStateEnum";
+import { Alert, Button, ButtonGroup, Container } from "reactstrap";
+import PlayerRoleEnum from "../../../core/types/PlayerRoleEnum";
+import PlayerType from "../../../core/types/PlayerType";
 import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
 import SocketClient from "../../../libraries/SocketClient";
 
 const Lobby: FC<{
-    setState: (state: RoomStateEnum) => void,
     roomName: string,
     roomCode: string,
-    me: string
-}> = ({ setState, roomName, roomCode, me }) => {
+    me: string,
+    players: PlayerType[]
+}> = ({ roomName, roomCode, me, players }) => {
     const { t } = useTranslation();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -72,13 +73,16 @@ const Lobby: FC<{
                 {getCopyAndShare(t("Game.Lobby.Welcome Message Text", { link: window.location.toString() }))}
                 <br />
                 <var className="text-primary pre-wrap">{t("Game.Lobby.Welcome Message Text", { link: window.location.toString() })}</var>
-                <div className="mt-5">
-                    <Button color="primary" onClick={startGame} disabled={loading}>
-                        <span className="mr-2">🚀</span>
-                        {t("Game.Lobby.Start")}
-                    </Button>
-                </div>
             </div  >
+            <div className={players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN ? "mt-5" : "d-none"}>
+                <Alert color="danger" isOpen={players.filter(p => !p.connected).length > 0}>
+                    {t("Game.Lobby.StartPlayerDisconnected", { names: players.filter(p => !p.connected).map(p => p.name).join(", ") })}
+                </Alert>
+                <Button color="primary" onClick={startGame} disabled={loading || players.filter(p => !p.connected).length > 0 /* ToDo add more conditions for game start */}>
+                    <span className="mr-2">🚀</span>
+                    {t("Game.Lobby.Start")}
+                </Button>
+            </div>
             <div className="mt-5">
                 <Button color="secondary" onClick={leaveRoom} disabled={loading}>
                     <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />

@@ -66,6 +66,7 @@
             "Welcome Message Text": "Trete meinem Mapinugari Spiel bei!\nÖffne dafür folgenden Link und geb deinen Namen ein!\n{{link}}",
             "Start": "Spiel starten",
             "StartFailed": "Spiel konnte nicht gestartet werden!",
+            "StartPlayerDisconnected": "Das Spiel kann erst gestartet werden, wenn alle Spieler verbunden sind. Warte auf {{names}} oder kicke sie, um das Spiel zu starten!",
             "Leave": "Raum verlassen"
         }
     },

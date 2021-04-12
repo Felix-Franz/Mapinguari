@@ -170,7 +170,7 @@ export default class GameManager {
             throw new Error("Game can only be started by admins!");
         const room = (await Models.Rooms.findOne({ code }))!;
         room.state = RoomStateEnum.TABLE;
-        //ToDo more changes depending on game
+        //ToDo more changes depending on game, add validation for number of users, ...
         room.save();
         ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, { state: room.state });
     }

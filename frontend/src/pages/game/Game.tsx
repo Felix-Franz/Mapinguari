@@ -93,7 +93,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
 
         switch (state) {
             case RoomStateEnum.LOBBY:
-                return <Lobby roomName={roomName} roomCode={roomCode} me={me!} setState={setState} />
+                return <Lobby roomName={roomName} roomCode={roomCode} me={me!} players={players} />
             case RoomStateEnum.TABLE:
                 return <Table />
             default:
