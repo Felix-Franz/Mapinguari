@@ -10,6 +10,7 @@ import PlayerType from "../../core/types/PlayerType";
 import Lobby from "./lobby/Lobby";
 import Tabs from "./tabs/Tabs";
 import PlayerRoleEnum from "../../core/types/PlayerRoleEnum";
+import Table from "./table/Table";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
@@ -56,14 +57,14 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             else
                 toast.error(t('Game.Toast.RoleChanged.User', { name: player.name }));
         });
-        
+
         SocketClient.on(SocketServerEvents.PlayerLeft, (name: string) => {
             setPlayers(players.filter(p => p.name !== name));
             toast.error(t('Game.Toast.PlayerLeft', { name }));
         });
 
         SocketClient.on(SocketServerEvents.RoomLeft, (success: boolean) => {
-            if (success){
+            if (success) {
                 toast.info(t('Game.Toast.Left'), {
                     onClose: () => window.location.assign(`${process.env.PUBLIC_URL}/`)
                 });
@@ -72,6 +73,10 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 toast.error(t('Game.Toast.LeftError'));
         });
 
+        SocketClient.on(SocketServerEvents.ChangeGame, (data: { state: RoomStateEnum }) => {
+            setState(data.state);
+        })
+
         return () => {
             SocketClient.off(SocketServerEvents.PlayerJoined);
             SocketClient.off(SocketServerEvents.PlayerReconnected);
@@ -79,6 +84,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             SocketClient.off(SocketServerEvents.PlayerRoleChanged);
             SocketClient.off(SocketServerEvents.PlayerLeft);
             SocketClient.off(SocketServerEvents.RoomLeft);
+            SocketClient.off(SocketServerEvents.ChangeGame);
         }
     });
 
@@ -88,6 +94,8 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
         switch (state) {
             case RoomStateEnum.LOBBY:
                 return <Lobby roomName={roomName} roomCode={roomCode} me={me!} setState={setState} />
+            case RoomStateEnum.TABLE:
+                return <Table />
             default:
                 return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;
         }

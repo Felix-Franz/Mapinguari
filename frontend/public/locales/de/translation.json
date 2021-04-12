@@ -64,6 +64,8 @@
             "ShareFailed": "Wir konnten leider nichts teilen!",
             "Welcome Message": "Wilkommensnachricht",
             "Welcome Message Text": "Trete meinem Mapinugari Spiel bei!\nÖffne dafür folgenden Link und geb deinen Namen ein!\n{{link}}",
+            "Start": "Spiel starten",
+            "StartFailed": "Spiel konnte nicht gestartet werden!",
             "Leave": "Raum verlassen"
         }
     },

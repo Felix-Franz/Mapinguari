@@ -1,5 +1,5 @@
 enum PlayerRoleEnum {
-    ADMIN = "MANAGER",
+    ADMIN = "ADMIN",
     USER = "USER"
 }
 

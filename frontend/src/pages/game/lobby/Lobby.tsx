@@ -1,11 +1,11 @@
 import { faClipboard, faPaperPlane, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Button, ButtonGroup, Container } from "reactstrap";
 import RoomStateEnum from "../../../core/types/RoomStateEnum";
-import { SocketClientEvents } from "../../../core/types/SocketEventsEnum";
+import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
 import SocketClient from "../../../libraries/SocketClient";
 
 const Lobby: FC<{
@@ -15,7 +15,18 @@ const Lobby: FC<{
     me: string
 }> = ({ setState, roomName, roomCode, me }) => {
     const { t } = useTranslation();
-    const [leaveLoading, setLeaveLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState<boolean>(false);
+
+    useEffect(() => {
+        SocketClient.on(SocketServerEvents.StartGameFailed, () => {
+            toast.error(t("Game.Lobby.StartFailed"));
+            setLoading(false);
+        });
+
+        return () => {
+            SocketClient.off(SocketServerEvents.StartGameFailed);
+        };
+    });
 
     const getCopyAndShare = (text: string) => <ButtonGroup className="ml-2">
         <Button color="primary" size="sm"
@@ -31,9 +42,14 @@ const Lobby: FC<{
         </Button>
     </ButtonGroup>
 
+    const startGame = () => {
+        setLoading(true);
+        SocketClient.emit(SocketClientEvents.StartGame);
+    }
+
     const leaveRoom = () => {
-        setLeaveLoading(true);
-        SocketClient.emit(SocketClientEvents.LeaveRoom, { code: roomCode, name: me })
+        setLoading(true);
+        SocketClient.emit(SocketClientEvents.LeaveRoom, me)
     }
 
     return <Container fluid className="my-3 text-center">
@@ -56,13 +72,21 @@ const Lobby: FC<{
                 {getCopyAndShare(t("Game.Lobby.Welcome Message Text", { link: window.location.toString() }))}
                 <br />
                 <var className="text-primary pre-wrap">{t("Game.Lobby.Welcome Message Text", { link: window.location.toString() })}</var>
+                <div className="mt-5">
+                    <Button color="primary" onClick={startGame} disabled={loading}>
+                        <span className="mr-2">🚀</span>
+                        {t("Game.Lobby.Start")}
+                    </Button>
+                </div>
+            </div  >
+            <div className="mt-5">
+                <Button color="secondary" onClick={leaveRoom} disabled={loading}>
+                    <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+                    {t("Game.Lobby.Leave")}
+                </Button>
             </div>
-            <Button color="secondary" className="mt-5" onClick={leaveRoom} disabled={leaveLoading}>
-                <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
-                {t("Game.Lobby.Leave")}
-            </Button>
         </div>
-    </Container>
+    </Container >
 }
 
 export default Lobby;

@@ -1,5 +1,6 @@
 enum RoomStateEnum {
     LOBBY = "LOBBY",
+    TABLE = "TABLE"
 }
 
 export default RoomStateEnum;

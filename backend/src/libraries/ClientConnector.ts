@@ -115,7 +115,7 @@ export default class ClientConnector {
      * @param {any} data to be sent
      */
     public static emitToRoom(code: string, event: SocketServerEvents, data: any) {
-        this.io.to(code).emit(event, data);
+        this.io.to(`room/${code}`).emit(event, data);
     }
 
     /**
@@ -124,8 +124,22 @@ export default class ClientConnector {
      * @param {SocketServerEvents} event to be triggered
      * @param {any} data to be sent
      */
-    public static emitToSocket(socketId: string, event: SocketServerEvents, data: any) {
+    public static emitToSocket(socketId: string, event: SocketServerEvents, data?: any) {
         this.io.to(socketId).emit(event, data)
+    }
+
+    /**
+     * Returns player's room
+     * @param {Socket} socket of client
+     * @returns {string} room code
+     * @throws {Error} if player is no room
+     */
+    public static getRoomFromSocket(socket: Socket): string {
+        const room = Array.from(socket.rooms).find(value => value.startsWith("room/"))?.replace("room/", "");
+        if (room)
+            return room;
+        else
+            throw new Error("Player ist not connected to a room!");
     }
 
 }

@@ -64,7 +64,10 @@
             "Shared": "Share menu opened!",
             "ShareFailed": "We could not share anything!",
             "Welcome Message": "Welcome message",
-            "Welcome Message Text": "Join my Mapinugari game!\nOpen the following link and enter your name!\n{link}}"
+            "Welcome Message Text": "Join my Mapinugari game!\nOpen the following link and enter your name!\n{link}}",
+            "Start": "Start game",
+            "StartFailed": "Could not start game!",
+            "Leave": "Leave Room"
         }
     },
     "Story": {

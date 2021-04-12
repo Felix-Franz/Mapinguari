@@ -1,8 +1,5 @@
-import { Model } from "mongoose";
-import { string } from "yargs";
 import { Logger } from "../..";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
-import PlayerType from "../core/types/PlayerType";
 import RoomStateEnum from "../core/types/RoomStateEnum";
 import RoomType from "../core/types/RoomType";
 import { SocketServerEvents } from "../core/types/SocketEventsEnum";
@@ -12,6 +9,16 @@ import { LEVELS } from "./Logger";
 import Models from "./Models";
 
 export default class GameManager {
+
+    /**
+     * Checks weather user is admin
+     * @param {string} socketId 
+     * @param {string} code for room 
+     * @returns {boolean} admin?
+     */
+    private static async isAdmin(socketId: string, code: string): Promise<boolean> {
+        return Models.Rooms.exists({ players: { $elemMatch: { socketId, role: PlayerRoleEnum.ADMIN } }, "code": code });
+    }
 
     /**
      * Creates a new room
@@ -125,11 +132,11 @@ export default class GameManager {
      * @param {string} name personal name
      * @returns {string} socketId
      */
-    public static async leaveRoom(code: string, name: string, socketId: string) : Promise<string> {
+    public static async leaveRoom(code: string, name: string, socketId: string): Promise<string> {
         const room = await Models.Rooms.findOne({ code });
         if (!room)
             throw new Error("Room with this code does not exist!");
-        if (room.players.filter(p => p.socketId === socketId && (p.role === PlayerRoleEnum.ADMIN || p.name === name)).length === 0)
+        if (room.players.filter(p => p.socketId === socketId && (this.isAdmin(socketId, code) || p.name === name)).length === 0)
             throw new Error("Player is not allowed to leave room for this player name");
         const oldPlayer = room.players.find(p => p.name === name);
         if (!oldPlayer)
@@ -150,6 +157,22 @@ export default class GameManager {
         room.save();
         ClientConnector.emitToRoom(code, SocketServerEvents.PlayerLeft, oldPlayer.name);
         return oldPlayer.socketId!;
+    }
+
+    /**
+     * Starts game for complete room
+     * @param {sting} code of room
+     * @param {string} socketId 
+     */
+    public static async startGame(code: string, socketId: string) {
+        console.log(await this.isAdmin(socketId, code))
+        if (!await this.isAdmin(socketId, code))
+            throw new Error("Game can only be started by admins!");
+        const room = (await Models.Rooms.findOne({ code }))!;
+        room.state = RoomStateEnum.TABLE;
+        //ToDo more changes depending on game
+        room.save();
+        ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, { state: room.state });
     }
 
 }
