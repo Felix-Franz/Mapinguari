@@ -47,7 +47,7 @@ const StartGame = () => {
             </div>
             <div className={state === "create-room" ? "p-1" : "d-none"}>
                 <Input type="text" className="py-2 mx-auto w-100 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Name Room")} value={createRoomName} onChange={e => setCreateRoomName(e.target.value)} />
-                <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={createRoom}>
+                <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={createRoom} disabled={!createRoomName}>
                     <span className="mr-2">🚪</span>{t("Home.StartGame.Create")}
                 </Button>
             </div>
