@@ -36,28 +36,28 @@ const StartGame = () => {
             minHeight: "12em"
         }}>
             <h3>{t("Home.StartGame.Ready")}</h3>
-            <div className={state === "initial" ? "" : "d-none"}>
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={() => setState("create-room")}>
+            <div className={state === "initial" ? "p-1" : "d-none"}>
+                <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={() => setState("create-room")}>
                     <span className="mr-2">🆕</span>{t("Home.StartGame.Create")}
                 </Button>
                 <br />
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={() => setState("join-room")}>
+                <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={() => setState("join-room")}>
                     <span className="mr-2">🎲</span>{t("Home.StartGame.Join")}
                 </Button>
             </div>
-            <div className={state === "create-room" ? "" : "d-none"}>
-                <Input type="text" className="py-2 mx-auto w-75 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Name Room")} value={createRoomName} onChange={e => setCreateRoomName(e.target.value)} />
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={createRoom}>
+            <div className={state === "create-room" ? "p-1" : "d-none"}>
+                <Input type="text" className="py-2 mx-auto w-100 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Name Room")} value={createRoomName} onChange={e => setCreateRoomName(e.target.value)} />
+                <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={createRoom}>
                     <span className="mr-2">🚪</span>{t("Home.StartGame.Create")}
                 </Button>
             </div>
-            <div className={state === "join-room" ? "" : "d-none"}>
-                <Input type="number" className="py-2 mx-auto w-75 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Enter Code")} value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)} />
-                <Button color="primary" outline size="lg" className="mt-1 w-75" onClick={joinRoom} disabled={!joinRoomCode}>
+            <div className={state === "join-room" ? "p-1" : "d-none"}>
+                <Input type="number" className="py-2 mx-auto w-100 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Enter Code")} value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)} />
+                <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={joinRoom} disabled={!joinRoomCode}>
                     <span className="mr-2">🚪</span>{t("Home.StartGame.Join")}
                 </Button>
             </div>
-            <div className={state === "loading" ? "mt-5" : "d-none"} >
+            <div className={state === "loading" ? "mt-5 p-1" : "d-none"} >
                 <Spinner color="primary" className="align-middle" />
                 <span className="ml-2 align-middle">{t("Home.StartGame.Loading")}</span>
             </div>
