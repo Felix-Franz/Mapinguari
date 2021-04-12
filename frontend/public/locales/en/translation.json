@@ -49,7 +49,7 @@
             "Header": "Insert your name",
             "Subheader": "Insert your name and hit Start now",
             "Button": "Start now",
-            "Error": "The name is already taken! Please use another one.",
+            "Error": "The game is already in progress or the name is already taken! Contact the game admin for more information.",
             "Not Exist": "Room not found!",
             "Not Exist Text": "The room does not exist anymore",
             "Not Exist Button": "Create new room"

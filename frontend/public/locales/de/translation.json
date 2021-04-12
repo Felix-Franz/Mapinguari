@@ -27,8 +27,8 @@
             "Reconnect": "{{name}} hat sich erneut mit deinem Raum verbunden!",
             "Disconnect": "{{name}} wurde von deinem Raum getrennt!",
             "RoleChanged": {
-                "Admin": "{{name}} ist ab sofort Admin!",
-                "User": "{{name}} ist jetzt kein Admin mehr!"
+                "Admin": "{{name}} ist ab sofort Spielleiter!",
+                "User": "{{name}} ist jetzt kein Spielleiter mehr!"
             },
             "PlayerLeft": "{{name}} hat den Raum verlassen!",
             "Left": "Du hast den Raum verlassen!",
@@ -37,7 +37,7 @@
         "PlayerTab": {
             "Title": "Spieler",
             "Me": "Du bist's",
-            "Admin": "Admin",
+            "Admin": "Spielleiter",
             "Disconnected": "Verbindung getrennt",
             "RejoinAlert": "Schicke {{names}} den Code {{roomCode}} oder Link {{link}}, damit er wieder beitreten kann.",
             "Kick": "Kicken",
@@ -48,13 +48,13 @@
             "Header": "Namen eingeben",
             "Subheader": "Gebe deinen Namen ein und lege los",
             "Button": "Jetzt Loslegen",
-            "Error": "Der Name ist bereits vergeben! Bitte verwende einen anderen.",
+            "Error": "Das Spiel läuft bereits oder der Name ist bereits vergeben! Bitte kontaktiere den Spielleiter für mehr Informationen.",
             "Not Exist": "Raum nicht gefunden!",
             "Not Exist Text": "Der von dir gewünschte Raum existiert nicht mehr",
             "Not Exist Button": "Neuen Raum erstellen"
         },
         "Lobby": {
-            "Waiting": "Wir warten gerade darauf, dass neue Spieler beitreten und der Admin das Spiel startet!",
+            "Waiting": "Wir warten gerade darauf, dass neue Spieler beitreten und der Spielleiter das Spiel startet!",
             "Join": "Damit andere Mitspieler beitreten können, schicke ihnen folgenden Link oder Code:",
             "Link": "Link:",
             "Code": "Code:",

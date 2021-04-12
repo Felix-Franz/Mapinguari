@@ -65,6 +65,8 @@ export default class GameManager {
         const playerIndex = room.players.findIndex(p => p.name === name);
 
         if (playerIndex === -1) { // player name does not exist --> new player
+            if (room.state !== RoomStateEnum.LOBBY)
+                throw new Error("Game is already in progress");
             const role = room.players.length === 0 ? PlayerRoleEnum.ADMIN : PlayerRoleEnum.USER;
             const connected = true;
             room.players.push({
