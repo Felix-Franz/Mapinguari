@@ -29,27 +29,27 @@ const args = yargs(hideBin(process.argv))
     })
     .option("legal-name", {
         type: 'string',
-        description: "Name on leagal page",
+        description: "Name on legal page",
     })
     .option("legal-address", {
         type: 'string',
-        description: "Address on leagal page",
+        description: "Address on legal page",
     })
     .option("legal-mail", {
         type: 'string',
-        description: "Mail on leagal page",
+        description: "Mail on legal page",
     })
     .option("legal-phone", {
         type: 'string',
-        description: "Phone number on leagal page",
+        description: "Phone number on legal page",
     })
     .option("legal-web", {
         type: 'string',
-        description: "Web site on leagal page",
+        description: "Web site on legal page",
     })
     .example("$0", "Starts the mapinguari server")
     .example("$0 -p 80", "Starts server on port 80")
-    .epilogue("You can also use environment variables instead of parameters (eg. PORT=80 instead of --port 80)\n")
+    .epilogue("You can also use environment variables instead of parameters (eg. PORT=80 instead of --port 80).\nVisit https://gitlab.com/FelixFranz/mapinguari/-/wikis/configuration for more information!\n")
     .epilogue("Also checkout the source on https://gitlab.com/FelixFranz/mapinguari")
     .argv
 
