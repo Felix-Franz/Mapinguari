@@ -23,7 +23,7 @@ const Legal = () => {
         <Container className="text-center my-3">
             <Button outline color="primary" href={`${process.env.PUBLIC_URL}/`}>
                 <FontAwesomeIcon icon={faHome} className="mr-2" />
-                    Go Home
+                    {t('Legal.Button')}
                 </Button>
 
             <div className={config.name || config.address || config.mail || config.phone ? "" : "d-none"}>
@@ -51,7 +51,7 @@ const Legal = () => {
 
             <Button outline color="primary" href={`${process.env.PUBLIC_URL}/`}>
                 <FontAwesomeIcon icon={faHome} className="mr-2" />
-                    Go Home
+                    {t('Legal.Button')}
                 </Button>
         </Container >
     );

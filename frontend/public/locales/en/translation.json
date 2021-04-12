@@ -79,6 +79,7 @@
         "Content": "ToDo!"
     },
     "Legal": {
+        "Button": "Go Home",
         "About": {
             "Title": "Imprint",
             "PreText": "Information according to § 5 TMG",
