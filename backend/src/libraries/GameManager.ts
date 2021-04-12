@@ -162,16 +162,30 @@ export default class GameManager {
     }
 
     /**
-     * Starts game for complete room
+     * Starts game for the complete room
      * @param {sting} code of room
      * @param {string} socketId 
      */
     public static async startGame(code: string, socketId: string) {
-        console.log(await this.isAdmin(socketId, code))
         if (!await this.isAdmin(socketId, code))
             throw new Error("Game can only be started by admins!");
         const room = (await Models.Rooms.findOne({ code }))!;
         room.state = RoomStateEnum.TABLE;
+        //ToDo more changes depending on game, add validation for number of users, ...
+        room.save();
+        ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, { state: room.state });
+    }
+
+    /**
+     * Stops a game for the complete room
+     * @param {sting} code of room
+     * @param {string} socketId 
+     */
+    public static async stopGame(code: string, socketId: string) {
+        if (!await this.isAdmin(socketId, code))
+            throw new Error("Game can only be stopped by admins!");
+        const room = (await Models.Rooms.findOne({ code }))!;
+        room.state = RoomStateEnum.LOBBY;
         //ToDo more changes depending on game, add validation for number of users, ...
         room.save();
         ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, { state: room.state });

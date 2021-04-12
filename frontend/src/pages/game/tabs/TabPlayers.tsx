@@ -14,8 +14,8 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
 
     const kick = (player: PlayerType) => {
         AlertModal.show({
-            header: t("Game.PlayerTab.KickHeader"),
-            message: t("Game.PlayerTab.KickMessage", {name: player.name}),
+            header: t("Game.Tabs.Player.KickHeader"),
+            message: t("Game.Tabs.Player.KickMessage", {name: player.name}),
             buttons: [{
                 text: t("General.Yes"),
                 handler: () => SocketClient.emit(SocketClientEvents.LeaveRoom, { code: roomCode, name: player.name })
@@ -24,21 +24,21 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
     }
 
     return <Container fluid className="text-center my-3">
-        <h2>{t("Game.PlayerTab.Title")}</h2>
+        <h2>{t("Game.Tabs.Player.Title")}</h2>
         <Alert color="secondary" className={players.filter(p => !p.connected).length > 0 ? "" : "d-none"}>
-            {t("Game.PlayerTab.RejoinAlert", { names: players.filter(p => !p.connected).map(p => p.name).join(","), roomCode, link: window.location.toString() })}
+            {t("Game.Tabs.Player.RejoinAlert", { names: players.filter(p => !p.connected).map(p => p.name).join(","), roomCode, link: window.location.toString() })}
         </Alert>
         <ListGroup flush>
             {
                 players.map((p, i) =>
                     <ListGroupItem key={i} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
                         {p.name}
-                        <Badge className={`ml-2 ${p.name === me ? "" : "d-none"}`} color="primary">{t("Game.PlayerTab.Me")}</Badge>
-                        <Badge className={`ml-2 ${p.role === PlayerRoleEnum.ADMIN ? "" : "d-none"}`} color="primary">{t("Game.PlayerTab.Admin")}</Badge>
-                        <Badge className={`ml-2 ${!p.connected ? "" : "d-none"}`} color="secondary">{t("Game.PlayerTab.Disconnected")}</Badge>
+                        <Badge className={`ml-2 ${p.name === me ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Me")}</Badge>
+                        <Badge className={`ml-2 ${p.role === PlayerRoleEnum.ADMIN ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Admin")}</Badge>
+                        <Badge className={`ml-2 ${!p.connected ? "" : "d-none"}`} color="secondary">{t("Game.Tabs.Player.Disconnected")}</Badge>
                         <Button style={{ fontSize: 15 }} className={`ml-2 py-0 px-1 ${allowKick ? "" : "d-none"}`} onClick={() => kick(p)}>
                             <FontAwesomeIcon icon={faTrash} className="mr-1" />
-                            {t("Game.PlayerTab.Kick")}
+                            {t("Game.Tabs.Player.Kick")}
                         </Button>
                     </ListGroupItem>
                 )

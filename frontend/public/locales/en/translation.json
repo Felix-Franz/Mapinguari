@@ -35,15 +35,22 @@
             "Left": "You left the room!",
             "LeftError": "Unfortunately you could not leave the room because of a error!"
         },
-        "PlayerTab": {
-            "Title": "Players",
-            "Me": "It's you",
-            "Admin": "Admin",
-            "Disconnected": "Disconnected",
-            "RejoinAlert": "Send {{names}} the code {{roomCode}} or link {{link}} so he can join again.",
-            "Kick": "Kick",
-            "KickHeader": "Kick",
-            "KickMessage": "Do you really want to kick {{name}}?"
+        "Tabs": {
+            "Player": {
+                "Title": "Players",
+                "Me": "It's you",
+                "Admin": "Admin",
+                "Disconnected": "Disconnected",
+                "RejoinAlert": "Send {{names}} the code {{roomCode}} or link {{link}} so he can join again.",
+                "Kick": "Kick",
+                "KickHeader": "Kick",
+                "KickMessage": "Do you really want to kick {{name}}?"
+            },
+            "Stop": {
+                "Header": "Stop game",
+                "Message": "Do you really want to end the game?",
+                "Error": "Game could not be stopped!"
+            }
         },
         "Join": {
             "Header": "Insert your name",

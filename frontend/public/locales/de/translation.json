@@ -34,15 +34,22 @@
             "Left": "Du hast den Raum verlassen!",
             "LeftError": "Leider konntest du wegen eines Fehlers den Raum nicht verlassen!"
         },
-        "PlayerTab": {
-            "Title": "Spieler",
-            "Me": "Du bist's",
-            "Admin": "Spielleiter",
-            "Disconnected": "Verbindung getrennt",
-            "RejoinAlert": "Schicke {{names}} den Code {{roomCode}} oder Link {{link}}, damit er wieder beitreten kann.",
-            "Kick": "Kicken",
-            "KickHeader": "Kicken",
-            "KickMessage": "Willst du {{name}} wirklick kicken?"
+        "Tabs": {
+            "Player": {
+                "Title": "Spieler",
+                "Me": "Du bist's",
+                "Admin": "Spielleiter",
+                "Disconnected": "Verbindung getrennt",
+                "RejoinAlert": "Schicke {{names}} den Code {{roomCode}} oder Link {{link}}, damit er wieder beitreten kann.",
+                "Kick": "Kicken",
+                "KickHeader": "Kicken",
+                "KickMessage": "Willst du {{name}} wirklick kicken?"
+            },
+            "Stop": {
+                "Header": "Spiel stoppen",
+                "Message": "Willst du das Spiel wirklich beenden?",
+                "Error": "Spiel konnte nicht beendet werden!"
+            }
         },
         "Join": {
             "Header": "Namen eingeben",

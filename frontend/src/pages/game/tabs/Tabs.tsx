@@ -1,15 +1,28 @@
-import { faGamepad, faInfo, faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad, faInfo, faPowerOff, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Collapse, Nav, Navbar, NavbarToggler, NavItem, NavLink } from "reactstrap";
+import AlertModal from "../../../components/AlertModal";
 import PlayerType from "../../../core/types/PlayerType";
+import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
+import SocketClient from "../../../libraries/SocketClient";
 import TabInfo from "./TabInfo";
 import TabPlayers from "./TabPlayers";
+import { toast } from "react-toastify";
 
-const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomCode: string, allowKick: boolean }> = ({ children, players, me, roomCode, allowKick }) => {
-
+const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomCode: string, allowKick: boolean, allowStop: boolean }> = ({ children, players, me, roomCode, allowKick, allowStop }) => {
+    const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const [tab, setTab] = useState<"game" | "players" | "info">("game");
+
+    useEffect(() => {
+        SocketClient.on(SocketServerEvents.StopGameFailed, () => toast.error(t("Game.Tabs.Stop.Error")));
+
+        return () => {
+            SocketClient.off(SocketServerEvents.StopGameFailed);
+        }
+    });
 
     let tabPage;
     switch (tab) {
@@ -17,11 +30,22 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
             tabPage = children;
             break;
         case "players":
-            tabPage = <TabPlayers players={players} me={me} roomCode={roomCode} allowKick={allowKick}/>;
+            tabPage = <TabPlayers players={players} me={me} roomCode={roomCode} allowKick={allowKick} />;
             break;
         case "info":
             tabPage = <TabInfo />;
             break;
+    }
+
+    const onStopClick = () => {
+        AlertModal.show({
+            header: t("Game.Tabs.Stop.Header"),
+            message: t("Game.Tabs.Stop.Message"),
+            buttons: [{
+                text: t("General.Yes"),
+                handler: () => SocketClient.emit(SocketClientEvents.StopGame)
+            }, t("General.No")]
+        });
     }
 
     return (<div>
@@ -42,6 +66,11 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
                     <NavItem className="mx-auto">
                         <NavLink onClick={() => setTab("info")} active={tab === "info"} className="text-center pointer">
                             <FontAwesomeIcon icon={faInfo} size="2x" />
+                        </NavLink>
+                    </NavItem>
+                    <NavItem className={`mx-auto ${allowStop ? "" : "d-none"}`}>
+                        <NavLink onClick={onStopClick} className="text-center pointer">
+                            <FontAwesomeIcon icon={faPowerOff} size="2x" />
                         </NavLink>
                     </NavItem>
                 </Nav>
