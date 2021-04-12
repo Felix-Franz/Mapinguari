@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Input, Spinner } from "reactstrap";
 import { SocketClientEvents, SocketServerEvents } from "../../core/types/SocketEventsEnum";
+import Checker from "../../libraries/Checker";
 import SocketClient from "../../libraries/SocketClient";
 
 const StartGame = () => {
@@ -46,13 +47,13 @@ const StartGame = () => {
                 </Button>
             </div>
             <div className={state === "create-room" ? "p-1" : "d-none"}>
-                <Input type="text" className="py-2 mx-auto w-100 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Name Room")} value={createRoomName} onChange={e => setCreateRoomName(e.target.value)} />
+                <Input type="text" className="py-2 mx-auto w-100 text-center" style={{ height: 48, marginTop: 4 }} placeholder={t("Home.StartGame.Name Room")} value={createRoomName} onChange={e => setCreateRoomName(e.target.value)} onKeyDown={e => Checker.isEnter(e, createRoom)}/>
                 <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={createRoom} disabled={!createRoomName}>
                     <span className="mr-2">🚪</span>{t("Home.StartGame.Create")}
                 </Button>
             </div>
             <div className={state === "join-room" ? "p-1" : "d-none"}>
-                <Input type="number" className="py-2 mx-auto w-100 text-center" style={{ height: 48, marginTop: 12 }} placeholder={t("Home.StartGame.Enter Code")} value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)} />
+                <Input type="number" className="py-2 mx-auto w-100 text-center" style={{ height: 48, marginTop: 4 }} placeholder={t("Home.StartGame.Enter Code")} value={joinRoomCode} onChange={e => setJoinRoomCode(e.target.value)}  onKeyDown={e => Checker.isEnter(e, joinRoom)}/>
                 <Button color="primary" outline size="lg" className="mt-1 w-100" onClick={joinRoom} disabled={!joinRoomCode}>
                     <span className="mr-2">🚪</span>{t("Home.StartGame.Join")}
                 </Button>

@@ -5,6 +5,7 @@ import PlayerType from "../../../core/types/PlayerType";
 import RoomStateEnum from "../../../core/types/RoomStateEnum";
 import RoomType from "../../../core/types/RoomType";
 import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
+import Checker from "../../../libraries/Checker";
 import SocketClient from "../../../libraries/SocketClient";
 
 const Join: FC<{
@@ -55,7 +56,7 @@ const Join: FC<{
         <div className={exists ? "" : "d-none"}>
             <h2>{t("Game.Join.Header")}</h2>
             <p>{t("Game.Join.Subheader")}</p>
-            <Input className="text-center" value={name} onChange={e => setName(e.target.value)} />
+            <Input className="text-center" value={name} onChange={e => setName(e.target.value)} onKeyDown={e => Checker.isEnter(e, join)} />
             <Button outline color="primary" className="mt-1 w-100" disabled={!name || loadingRoom} onClick={join}>
                 <span className="mr-2">{loadingRoom ? <Spinner color="primary" size="sm" style={{ marginBottom: 2 }} /> : "✔️"}</span>
                 {t("Game.Join.Button")}
