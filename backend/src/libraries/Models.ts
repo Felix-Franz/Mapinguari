@@ -41,7 +41,7 @@ export default class Models {
             name: {
                 type: String,
                 required: true,
-                unique: true
+                // unique: true //leads into an error if you want to create 2. game
             },
             item: {
                 type: String,

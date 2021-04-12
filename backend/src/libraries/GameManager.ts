@@ -27,7 +27,7 @@ export default class GameManager {
      */
     public static async createRoom(name: string): Promise<string> {
         const code = await Generator.generateRooomCode();
-        Models.Rooms.create({
+        await Models.Rooms.create({
             code,
             name
         });
