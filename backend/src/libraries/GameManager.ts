@@ -122,7 +122,7 @@ export default class GameManager {
             r.players[playerIndex].socketId = undefined;
             r.players[playerIndex].connected = false;
             if (r.players.filter(p => p.connected).length > 0) {
-                ClientConnector.emitToRoom(r.code, SocketServerEvents.PlayerDisconnected, { name: r.players[playerIndex].name, role: r.players[playerIndex].role, connnected: false });
+                ClientConnector.emitToRoom(r.code, SocketServerEvents.PlayerDisconnected, { name: r.players[playerIndex].name, avatar: r.players[playerIndex].avatar, role: r.players[playerIndex].role, connnected: false });
                 Logger.log(LEVELS.silly, `Dissconnect ${r.players[playerIndex].name} from room ${r.name} with code ${r.code}`);
                 await r.save();
             }
@@ -158,11 +158,11 @@ export default class GameManager {
         }
         if (room.players.filter(p => p.role === PlayerRoleEnum.ADMIN).length === 0) {
             room.players[0].role = PlayerRoleEnum.ADMIN;
-            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerRoleChanged, { name: room.players[0].name, role: room.players[0].role, connected: room.players[0].connected });
+            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerRoleChanged, { name: room.players[0].name, avatar: room.players[0].avatar, role: room.players[0].role, connected: room.players[0].connected });
         }
 
         room.save();
-        ClientConnector.emitToRoom(code, SocketServerEvents.PlayerLeft, oldPlayer.name);
+        ClientConnector.emitToRoom(code, SocketServerEvents.PlayerLeft, {name: oldPlayer.name, avatar: oldPlayer.avatar});
         return oldPlayer.socketId!;
     }
 

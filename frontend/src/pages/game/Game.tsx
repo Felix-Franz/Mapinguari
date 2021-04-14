@@ -11,6 +11,8 @@ import Lobby from "./lobby/Lobby";
 import Tabs from "./tabs/Tabs";
 import PlayerRoleEnum from "../../core/types/PlayerRoleEnum";
 import Table from "./table/Table";
+import Avatar from "../../components/avatar/Avatar";
+import AvatarConfigurationType from "../../core/types/AvatarConfigurationType";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
@@ -26,7 +28,10 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             const ps = Object.assign([], players);
             ps.push(player);
             setPlayers(ps);
-            toast.info(t('Game.Toast.Join', { name: player.name }));
+            toast.info(<>
+                <Avatar configuration={player.avatar} style={{ maxWidth: "4em" }} className="float-left mr-2" />
+                <div style={{ display: "flex", alignItems: "center" }}>{t('Game.Toast.Join', { name: player.name })}</div>
+            </>, { bodyStyle: { display: "flex" } });
         });
 
         const updatePlayers = (player: PlayerType) => {
@@ -42,25 +47,34 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
 
         SocketClient.on(SocketServerEvents.PlayerReconnected, (player: PlayerType) => {
             updatePlayers(player);
-            toast.info(t('Game.Toast.Reconnect', { name: player.name }));
+            toast.info(<>
+                <Avatar configuration={player.avatar} style={{ maxWidth: "4em" }} className="float-left mr-2" />
+                <div style={{ display: "flex", alignItems: "center" }}>{t('Game.Toast.Reconnect', { name: player.name })}</div>
+            </>, { bodyStyle: { display: "flex" } })
         });
 
         SocketClient.on(SocketServerEvents.PlayerDisconnected, (player: PlayerType) => {
             updatePlayers(player);
-            toast.error(t('Game.Toast.Disconnect', { name: player.name }));
+            toast.error(<>
+                <Avatar configuration={player.avatar} style={{ maxWidth: "4em" }} className="float-left mr-2" />
+                <div style={{ display: "flex", alignItems: "center" }}>{t('Game.Toast.Disconnect', { name: player.name })}</div>
+            </>, { bodyStyle: { display: "flex" } });
         });
 
         SocketClient.on(SocketServerEvents.PlayerRoleChanged, (player: PlayerType) => {
             updatePlayers(player);
-            if (player.role === PlayerRoleEnum.ADMIN)
-                toast.error(t('Game.Toast.RoleChanged.Admin', { name: player.name }));
-            else
-                toast.error(t('Game.Toast.RoleChanged.User', { name: player.name }));
+            toast.info(<>
+                <Avatar configuration={player.avatar} style={{ maxWidth: "4em" }} className="float-left mr-2" />
+                <div style={{ display: "flex", alignItems: "center" }}>{t(player.role === PlayerRoleEnum.ADMIN ? 'Game.Toast.RoleChanged.Admin' : 'Game.Toast.RoleChanged.AdminUser', { name: player.name })}</div>
+            </>, { bodyStyle: { display: "flex" } });
         });
 
-        SocketClient.on(SocketServerEvents.PlayerLeft, (name: string) => {
-            setPlayers(players.filter(p => p.name !== name));
-            toast.error(t('Game.Toast.PlayerLeft', { name }));
+        SocketClient.on(SocketServerEvents.PlayerLeft, (player: { name: string, avatar: AvatarConfigurationType }) => {
+            setPlayers(players.filter(p => p.name !== player.name));
+            toast.error(<>
+                <Avatar configuration={player.avatar} style={{ maxWidth: "4em" }} className="float-left mr-2" />
+                <div style={{ display: "flex", alignItems: "center" }}>{t('Game.Toast.PlayerLeft', { name: player.name })}</div>
+            </>, { bodyStyle: { display: "flex" } });
         });
 
         SocketClient.on(SocketServerEvents.RoomLeft, (success: boolean) => {
@@ -103,7 +117,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
 
 
     const statePage = getState();
-    const userIsAdmin  = players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN;
+    const userIsAdmin = players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN;
 
     if (state === undefined)
         return statePage;
