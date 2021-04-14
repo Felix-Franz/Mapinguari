@@ -2,7 +2,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Badge, Button, Container, ListGroup, ListGroupItem } from "reactstrap";
+import { Alert, Badge, Button, Col, Container, ListGroup, ListGroupItem, Row } from "reactstrap";
 import AlertModal from "../../../components/AlertModal";
 import Avatar from "../../../components/avatar/Avatar";
 import PlayerRoleEnum from "../../../core/types/PlayerRoleEnum";
@@ -33,15 +33,25 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
             {
                 players.map((p, i) =>
                     <ListGroupItem key={i} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                        <Avatar configuration={p.avatar} className="mr-2" style={{ width: "5em" }} />
-                        {p.name}
-                        <Badge className={`ml-2 ${p.name === me ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Me")}</Badge>
-                        <Badge className={`ml-2 ${p.role === PlayerRoleEnum.ADMIN ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Admin")}</Badge>
-                        <Badge className={`ml-2 ${!p.connected ? "" : "d-none"}`} color="secondary">{t("Game.Tabs.Player.Disconnected")}</Badge>
-                        <Button style={{ fontSize: 15 }} className={`ml-2 py-0 px-1 ${allowKick ? "" : "d-none"}`} onClick={() => kick(p)}>
-                            <FontAwesomeIcon icon={faTrash} className="mr-1" />
-                            {t("Game.Tabs.Player.Kick")}
-                        </Button>
+                        <Row className="w-100 align-items-center">
+                            <Col xs="12" sm="4" className="mb-1 mb-sm-0">
+                                <Avatar configuration={p.avatar} className="m-auto m-sm-0 mr-sm-2" style={{ width: "5em" }} />
+                            </Col>
+                            <Col xs="12" sm="5">
+                                {p.name}
+                                <Badge className={`ml-2 ${p.name === me ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Me")}</Badge>
+                                <Badge className={`ml-2 ${p.role === PlayerRoleEnum.ADMIN ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Admin")}</Badge>
+                                <Badge className={`ml-2 ${!p.connected ? "" : "d-none"}`} color="secondary">{t("Game.Tabs.Player.Disconnected")}</Badge>
+                            </Col>
+                            <Col xs="12" sm="3">
+                                                                <Button style={{ fontSize: 15 }} className={`ml-2 py-0 px-1 ${allowKick ? "" : "d-none"}`} onClick={() => kick(p)}>
+                                    <FontAwesomeIcon icon={faTrash} className="mr-1" />
+                                    {t("Game.Tabs.Player.Kick")}
+                                </Button>
+                            </Col>
+                        </Row>
+
+
                     </ListGroupItem>
                 )
             }
