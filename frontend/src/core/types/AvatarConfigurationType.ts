@@ -2,6 +2,7 @@ type AvatarConfigurationType = {
     topType?: string;
     accessoriesType?: string;
     hairColor?: string;
+    hatColor?: string;
     facialHairType?: string;
     facialHairColor?: string;
     clotheType?: string;

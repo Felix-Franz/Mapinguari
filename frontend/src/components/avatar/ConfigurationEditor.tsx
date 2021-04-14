@@ -15,7 +15,7 @@ const ConfigurationEditor: FC<{ configuration: AvatarConfigurationType, onChange
     }
 
     const generateSelect = (key: string, hide: boolean = false) => {
-        return <FormGroup className="mb-1">
+        return <FormGroup className={`mb-1 ${hide ? "d-none" : ""}`}>
             <Label for={key} className="mb-0">{t(`AvatarEditor.${key.replace(/^(.)(.*)$/, (a, b, c) => `${b.toUpperCase()}${c}`)}`)}</Label>
             {/* @ts-ignore */}
             <Input type="select" name={key} value={configuration[key]} onChange={e => change(key, e.target.value)}>
@@ -27,14 +27,14 @@ const ConfigurationEditor: FC<{ configuration: AvatarConfigurationType, onChange
 
     return <Form>
         {generateSelect("topType")}
-        {generateSelect("accessoriesType")}
-        {generateSelect("hatColor")}
-        {generateSelect("hairColor")}
-        {generateSelect("facialHairType")}
-        {generateSelect("facialHairColor")}
+        {generateSelect("accessoriesType", configuration.topType === "Eyepatch")}
+        {generateSelect("hatColor", !["Hijab", "Turban", "WinterHat1", "WinterHat2", "WinterHat3", "WinterHat4"].includes(configuration.topType!))}
+        {generateSelect("hairColor", ["NoHair", "Eyepatch", "Hat", "Hijab", "Turban", "WinterHat1", "WinterHat2", "WinterHat3", "WinterHat4", "LongHairFrida", "LongHairShavedSides"].includes(configuration.topType!))}
+        {generateSelect("facialHairType", configuration.topType === "Hijab")}
+        {generateSelect("facialHairColor", configuration.facialHairType === "Blank")}
         {generateSelect("clotheType")}
-        {generateSelect("clotheColor")}
-        {generateSelect("graphicType")}
+        {generateSelect("clotheColor", ["BlazerShirt", "BlazerSweater"].includes(configuration.clotheType!))}
+        {generateSelect("graphicType", configuration.clotheType !== "GraphicShirt")}
         {generateSelect("eyeType")}
         {generateSelect("eyebrowType")}
         {generateSelect("mouthType")}
