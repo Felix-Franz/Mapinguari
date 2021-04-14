@@ -9,6 +9,7 @@ import RoomType from "../../../core/types/RoomType";
 import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
 import Checker from "../../../libraries/Checker";
 import SocketClient from "../../../libraries/SocketClient";
+import PlayerStorage from "../../../storage/PlayerStorage";
 
 const Join: FC<{
     setPlayers: (players: PlayerType[]) => void,
@@ -53,6 +54,7 @@ const Join: FC<{
                 setRoomCode(data.code);
                 setMe(name);
                 setState(RoomStateEnum.LOBBY);
+                PlayerStorage.setPlayer({name, avatar});
             } else {
                 setShowError(true);
                 setLoadingRoom(false);
@@ -65,7 +67,14 @@ const Join: FC<{
         }
     });
 
-    useEffect(generateRandomAvatar, []);
+    useEffect(() => {
+        const player = PlayerStorage.getPlayer();
+        if (player) {
+            setName(player.name);
+            setAvatar(player.avatar);
+        } else
+            generateRandomAvatar();
+    }, []);
 
     useEffect(() => {
         SocketClient.emit(SocketClientEvents.CheckRoom, code);
