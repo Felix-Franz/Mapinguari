@@ -53,8 +53,12 @@
             }
         },
         "Join": {
-            "Header": "Insert your name",
-            "Subheader": "Insert your name and hit Start now",
+            "Header": "Join game",
+            "Subheader": "Select avatar, insert your name and hit Start now",
+            "AvatarRandom": "Random",
+            "AvatarEdit": "Edit",
+            "AvatarSave": "Save",
+            "Name": "Insert name",
             "Button": "Start now",
             "Error": "The game is already in progress or the name is already taken! Contact the game admin for more information.",
             "Not Exist": "Room not found!",
@@ -85,6 +89,21 @@
     "Instructions": {
         "Title": "Instructions",
         "Content": "ToDo!"
+    },
+    "AvatarEditor": {
+        "TopType": "Top type",
+        "AccessoriesType": "Top accessoires",
+        "HatColor": "Hat color",
+        "HairColor": "Hair color",
+        "FacialHairType": "Facial hair",
+        "FacialHairColor": "Facial hair color",
+        "ClotheType": "Clothing",
+        "ClotheColor": "Clothing color",
+        "GraphicType": "Graphic on the clothing",
+        "EyeType": "Eyes",
+        "EyebrowType": "Eyebrows",
+        "MouthType": "Mouth",
+        "SkinColor": "Skin color"
     },
     "Legal": {
         "Button": "Go Home",

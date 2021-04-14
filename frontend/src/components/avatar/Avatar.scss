@@ -1,0 +1,13 @@
+@import "../../Theme.scss";
+
+#Color\/Palette\/Blue-01 {
+    fill: get-color("tertiary");
+}
+
+.avatar-good  #Color\/Palette\/Blue-01 {
+    fill: get-color("primary");
+}
+
+.avatar-bad  #Color\/Palette\/Blue-01 {
+    fill: get-color("secondary");
+}

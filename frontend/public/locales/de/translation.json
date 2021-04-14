@@ -52,8 +52,12 @@
             }
         },
         "Join": {
-            "Header": "Namen eingeben",
-            "Subheader": "Gebe deinen Namen ein und lege los",
+            "Header": "Spiel beitreten",
+            "Subheader": "Wähle einen Avatar, gebe deinen Namen ein und lege los",
+            "AvatarRandom": "Zufällig",
+            "AvatarEdit": "Editieren",
+            "AvatarSave": "Speichern",
+            "Name": "Name eingeben",
             "Button": "Jetzt Loslegen",
             "Error": "Das Spiel läuft bereits oder der Name ist bereits vergeben! Bitte kontaktiere den Spielleiter für mehr Informationen.",
             "Not Exist": "Raum nicht gefunden!",
@@ -84,6 +88,21 @@
     "Instructions": {
         "Title": "Spielanleitung",
         "Content": "ToDo!"
+    },
+    "AvatarEditor": {
+        "TopType": "Kopf",
+        "AccessoriesType": "Kopf Accessoires",
+        "HatColor": "Hutfarbe",
+        "HairColor": "Haarfarbe",
+        "FacialHairType": "Gesichtsbehaarung",
+        "FacialHairColor": "Haarfarbe der Gesichtsbehaarung",
+        "ClotheType": "Kleindung",
+        "ClotheColor": "Kleindungsfarbe",
+        "GraphicType": "Grafik auf der Kleidung",
+        "EyeType": "Augen",
+        "EyebrowType": "Augenbraun",
+        "MouthType": "Mund",
+        "SkinColor": "Hautfarbe"
     },
     "Legal": {
         "Button": "Zur Hauptseite",
