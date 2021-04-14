@@ -1,8 +1,8 @@
-import { allOptions, OptionContext } from "avataaars";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Button, ButtonGroup, Collapse, Container, FormGroup, Input, Spinner } from "reactstrap";
-import Avatar, { AvatarConfiguration, AvatarConfigurationEditor, AvatarConfigurationOptions } from "../../../components/avatar/Avatar";
+import Avatar, { AvatarConfigurationEditor, AvatarConfigurationOptions } from "../../../components/avatar/Avatar";
+import AvatarConfigurationType from "../../../core/types/AvatarConfigurationType";
 import PlayerType from "../../../core/types/PlayerType";
 import RoomStateEnum from "../../../core/types/RoomStateEnum";
 import RoomType from "../../../core/types/RoomType";
@@ -22,7 +22,7 @@ const Join: FC<{
 
     const [exists, setExists] = useState<boolean>(true);
     const [name, setName] = useState<string>("");
-    const [avatar, setAvatar] = useState<AvatarConfiguration>({});
+    const [avatar, setAvatar] = useState<AvatarConfigurationType>({});
     const [showAvatarEditor, setShowAvatarEditor] = useState<boolean>(false);
     const [loadingRoom, setLoadingRoom] = useState<boolean>(false);
     const [showError, setShowError] = useState<boolean>(false);
@@ -30,7 +30,7 @@ const Join: FC<{
 
     const join = () => {
         setLoadingRoom(true);
-        SocketClient.emit(SocketClientEvents.JoinRoom, { code, name })
+        SocketClient.emit(SocketClientEvents.JoinRoom, { code, name, avatar })
     }
 
     const generateRandomAvatar = () => {

@@ -1,4 +1,5 @@
 import { Logger } from "../..";
+import AvatarConfigurationType from "../core/types/AvatarConfigurationType";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
 import RoomStateEnum from "../core/types/RoomStateEnum";
 import RoomType from "../core/types/RoomType";
@@ -54,9 +55,10 @@ export default class GameManager {
      * Joins a player
      * @param {string} code room code
      * @param {string} name of the player 
+     * @param {AvatarConfigurationType} avatar configuration
      * @returns {RoomType} room data
      */
-    public static async joinRoom(code: string, name: string, socketId: string): Promise<RoomType> {
+    public static async joinRoom(code: string, name: string, avatar: AvatarConfigurationType, socketId: string): Promise<RoomType> {
         const room = await Models.Rooms.findOne({ code: code });
 
         if (!room)
@@ -72,20 +74,22 @@ export default class GameManager {
             room.players.push({
                 socketId,
                 name,
+                avatar,
                 role,
                 connected
             });
-            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerJoined, { name, role, connected });
+            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerJoined, { name, avatar, role, connected });
         } else if (!room.players[playerIndex]?.connected) { //player name exists but is disconnected
             const role = room!.players[playerIndex].role;
             const connected = true;
             room!.players[playerIndex] = {
                 socketId,
                 name,
+                avatar,
                 role,
                 connected
             }
-            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerReconnected, { name, role, connected });
+            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerReconnected, { name, avatar, role, connected });
         } else    //player name exists but is still connected
             throw new Error("Player with this name is already connected!");
 
@@ -98,6 +102,7 @@ export default class GameManager {
             players: room!.players.map(p => {
                 return {
                     name: p.name,
+                    avatar: p.avatar,
                     role: p.role,
                     connected: p.connected
                 };

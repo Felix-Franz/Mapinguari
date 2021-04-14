@@ -1,28 +1,14 @@
 import Avataaar, { AvatarStyle } from "avataaars";
 import { CSSProperties, FC } from "react";
+import AvatarConfigurationType from "../../core/types/AvatarConfigurationType";
 import PlayerMindEnum from "../../core/types/PlayerMindEnum";
 import "./Avatar.scss";
 import ConfigurationEditor from "./ConfigurationEditor";
 import Options from "./Options";
 
-export type AvatarConfiguration = {
-    topType?: string;
-    accessoriesType?: string;
-    hairColor?: string;
-    facialHairType?: string;
-    facialHairColor?: string;
-    clotheType?: string;
-    clotheColor?: string;
-    graphicType?: string;
-    eyeType?: string;
-    eyebrowType?: string;
-    mouthType?: string;
-    skinColor?: string;
-}
-
 const Avatar: FC<{
     mind?: PlayerMindEnum,
-    configuration: AvatarConfiguration,
+    configuration: AvatarConfigurationType,
     className?: string,
     style?: CSSProperties
 }> = ({ mind, configuration, className, style }) => {

@@ -4,6 +4,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, Badge, Button, Container, ListGroup, ListGroupItem } from "reactstrap";
 import AlertModal from "../../../components/AlertModal";
+import Avatar from "../../../components/avatar/Avatar";
 import PlayerRoleEnum from "../../../core/types/PlayerRoleEnum";
 import PlayerType from "../../../core/types/PlayerType";
 import { SocketClientEvents } from "../../../core/types/SocketEventsEnum";
@@ -15,7 +16,7 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
     const kick = (player: PlayerType) => {
         AlertModal.show({
             header: t("Game.Tabs.Player.KickHeader"),
-            message: t("Game.Tabs.Player.KickMessage", {name: player.name}),
+            message: t("Game.Tabs.Player.KickMessage", { name: player.name }),
             buttons: [{
                 text: t("General.Yes"),
                 handler: () => SocketClient.emit(SocketClientEvents.LeaveRoom, { code: roomCode, name: player.name })
@@ -32,6 +33,7 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
             {
                 players.map((p, i) =>
                     <ListGroupItem key={i} style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                        <Avatar configuration={p.avatar} className="mr-2" style={{ width: "5em" }} />
                         {p.name}
                         <Badge className={`ml-2 ${p.name === me ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Me")}</Badge>
                         <Badge className={`ml-2 ${p.role === PlayerRoleEnum.ADMIN ? "" : "d-none"}`} color="primary">{t("Game.Tabs.Player.Admin")}</Badge>

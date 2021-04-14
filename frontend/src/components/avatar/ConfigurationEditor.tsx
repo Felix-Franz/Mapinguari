@@ -1,9 +1,10 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Form, FormGroup, Input, Label } from "reactstrap";
-import { AvatarConfiguration, AvatarConfigurationOptions } from "./Avatar";
+import AvatarConfigurationType from "../../core/types/AvatarConfigurationType";
+import { AvatarConfigurationOptions } from "./Avatar";
 
-const ConfigurationEditor: FC<{ configuration: AvatarConfiguration, onChange: (configuration: AvatarConfiguration) => void }> = ({ configuration, onChange }) => {
+const ConfigurationEditor: FC<{ configuration: AvatarConfigurationType, onChange: (configuration: AvatarConfigurationType) => void }> = ({ configuration, onChange }) => {
     const { t } = useTranslation();
 
     const change = (key: string, value: string) => {

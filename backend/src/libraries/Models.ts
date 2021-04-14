@@ -22,6 +22,10 @@ export default class Models {
                 type: String,
                 required: true
             },
+            avatar: {
+                type: Object,
+                required: true
+            },
             role: {
                 type: String,
                 enum: PlayerRoleEnumArray,
