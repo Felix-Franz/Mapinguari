@@ -33,7 +33,7 @@
             "PlayerLeft": "{{name}} left the room!",
             "Leave": "Leave Room",
             "Left": "You left the room!",
-            "LeftError": "Unfortunately you could not leave the room because of a error!"
+            "LeftError": "Unfortunately {{name}} could not leave the room because of a error!"
         },
         "Tabs": {
             "Player": {

@@ -32,7 +32,7 @@
             },
             "PlayerLeft": "{{name}} hat den Raum verlassen!",
             "Left": "Du hast den Raum verlassen!",
-            "LeftError": "Leider konntest du wegen eines Fehlers den Raum nicht verlassen!"
+            "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!"
         },
         "Tabs": {
             "Player": {

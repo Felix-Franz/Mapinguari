@@ -77,14 +77,14 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             </>, { bodyStyle: { display: "flex" } });
         });
 
-        SocketClient.on(SocketServerEvents.RoomLeft, (success: boolean) => {
-            if (success) {
+        SocketClient.on(SocketServerEvents.RoomLeft, (data: {success: boolean, name: string}) => {
+            if (data.success) {
                 toast.info(t('Game.Toast.Left'), {
                     onClose: () => window.location.assign(`${process.env.PUBLIC_URL}/`)
                 });
             }
             else
-                toast.error(t('Game.Toast.LeftError'));
+                toast.error(t('Game.Toast.LeftError', {name: data.name}));
         });
 
         SocketClient.on(SocketServerEvents.ChangeGame, (data: { state: RoomStateEnum }) => {

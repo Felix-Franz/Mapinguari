@@ -19,7 +19,7 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
             message: t("Game.Tabs.Player.KickMessage", { name: player.name }),
             buttons: [{
                 text: t("General.Yes"),
-                handler: () => SocketClient.emit(SocketClientEvents.LeaveRoom, { code: roomCode, name: player.name })
+                handler: () => SocketClient.emit(SocketClientEvents.LeaveRoom, player.name)
             }, t("General.No")]
         })
     }
