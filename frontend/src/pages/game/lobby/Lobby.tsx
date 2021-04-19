@@ -30,11 +30,11 @@ const Lobby: FC<{
     });
 
     const getCopyAndShare = (text: string) => <ButtonGroup className="ml-2">
-        <Button color="primary" size="sm"
+        <Button color="primary" size="sm" outline
             onClick={() => navigator.clipboard.writeText(text).then(() => toast.info(t("Game.Lobby.Copied"))).catch(() => toast.error(t("Game.Lobby.CopyFailed")))}>
             <FontAwesomeIcon icon={faClipboard} />
         </Button>
-        <Button color="primary" size="sm"
+        <Button color="primary" size="sm" outline
             onClick={() => navigator.share({
                 title: "Mapinguari",
                 text
@@ -78,13 +78,13 @@ const Lobby: FC<{
                 <Alert color="danger" isOpen={players.filter(p => !p.connected).length > 0}>
                     {t("Game.Lobby.StartPlayerDisconnected", { names: players.filter(p => !p.connected).map(p => p.name).join(", ") })}
                 </Alert>
-                <Button color="primary" onClick={startGame} disabled={loading || players.filter(p => !p.connected).length > 0 /* ToDo add more conditions for game start */}>
+                <Button color="primary" onClick={startGame} outline disabled={loading || players.filter(p => !p.connected).length > 0 /* ToDo add more conditions for game start */}>
                     <span className="mr-2">🚀</span>
                     {t("Game.Lobby.Start")}
                 </Button>
             </div>
             <div className="mt-5">
-                <Button color="secondary" onClick={leaveRoom} disabled={loading}>
+                <Button color="secondary" onClick={leaveRoom} disabled={loading} outline>
                     <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                     {t("Game.Lobby.Leave")}
                 </Button>
