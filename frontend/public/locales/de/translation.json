@@ -2,7 +2,8 @@
     "General": {
         "Yes": "Ja",
         "No": "Nein",
-        "Okay": "Okay"
+        "Okay": "Okay",
+        "Back": "Zurück"
     },
     "Footer": {
         "Made": "Mit {{love}} erstellt von",
