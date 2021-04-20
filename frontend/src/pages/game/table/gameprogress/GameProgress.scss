@@ -1,0 +1,17 @@
+.gameprogress-step {
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 100%;
+    width: 2em;
+    height: 2em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gameprogress-step > * {
+    display: flex;
+}

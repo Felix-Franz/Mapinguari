@@ -77,14 +77,14 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             </>, { bodyStyle: { display: "flex" } });
         });
 
-        SocketClient.on(SocketServerEvents.RoomLeft, (data: {success: boolean, name: string}) => {
+        SocketClient.on(SocketServerEvents.RoomLeft, (data: { success: boolean, name: string }) => {
             if (data.success) {
                 toast.info(t('Game.Toast.Left'), {
                     onClose: () => window.location.assign(`${process.env.PUBLIC_URL}/`)
                 });
             }
             else
-                toast.error(t('Game.Toast.LeftError', {name: data.name}));
+                toast.error(t('Game.Toast.LeftError', { name: data.name }));
         });
 
         SocketClient.on(SocketServerEvents.ChangeGame, (data: { state: RoomStateEnum }) => {
@@ -109,7 +109,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             case RoomStateEnum.LOBBY:
                 return <Lobby roomName={roomName} roomCode={roomCode} me={me!} players={players} />
             case RoomStateEnum.TABLE:
-                return <Table />
+                return <Table roomName={roomName} />
             default:
                 return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;
         }
