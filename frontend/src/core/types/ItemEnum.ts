@@ -1,5 +1,6 @@
 enum ItemEnum {
     GOOD = "GOOD",
+    BAD = "BAD",
     NEUTRAL = "NEUTRAL",
     EMPTY = "EMPTY"
 }

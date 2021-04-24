@@ -1,0 +1,12 @@
+@import "../../../../Theme.scss";
+
+.card {
+    height: 20em;
+    width: 15em;
+    background-color: get-color("dark");
+    border-radius: 2em;
+    color: white;
+    border: 5px solid get-color("tertiary");
+    padding: 11px;
+    margin: auto;
+}
