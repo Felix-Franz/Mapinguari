@@ -1,13 +1,12 @@
 import { FC } from "react";
 import ReactCardFlip from 'react-card-flip';
-import { useTranslation } from "react-i18next";
 import ItemEnum from "../../../../core/types/ItemEnum";
-import "./GameCard.scss";
-import logo from "../../../../resources/logo.svg";
-import good from "../../../../resources/good.svg";
 import bad from "../../../../resources/bad.svg";
-import neutral from "../../../../resources/neutral.svg";
 import empty from "../../../../resources/empty.svg";
+import good from "../../../../resources/good.svg";
+import logo from "../../../../resources/logo.svg";
+import neutral from "../../../../resources/neutral.svg";
+import "./GameCard.scss";
 
 const GameCard: FC<{
     className?: string,
