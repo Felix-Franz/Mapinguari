@@ -1,12 +1,29 @@
 @import "../../../../Theme.scss";
 
+$height: 20em;
+$width: 15em;
+
 .card {
-    height: 20em;
-    width: 15em;
     background-color: get-color("dark");
     border-radius: 2em;
     color: white;
     border: 5px solid get-color("tertiary");
     padding: 11px;
-    margin: auto;
+}
+
+.card.card-md {
+    height: 0.7*$height;
+    width: 0.7*$width;
+}
+p.card-md {
+    font-size: 1.5rem;
+}
+
+.card.card-sm {
+    height: 0.3*$height;
+    width: 0.3*$width;
+}
+
+p.card-sm {
+    font-size: 0.45rem;
 }

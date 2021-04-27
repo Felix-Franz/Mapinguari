@@ -10,12 +10,12 @@ import "./GameCard.scss";
 
 const GameCard: FC<{
     className?: string,
+    size: "md" | "sm"
     itemMind?: ItemEnum,
     flipped: boolean,
     onClick?: (flipped: boolean) => void
-}> = ({ className, itemMind, flipped, onClick }) => {
+}> = ({ className, size, itemMind, flipped, onClick }) => {
 
-    console.log(itemMind)
     let image, color;
     switch (itemMind) {
         case ItemEnum.GOOD:
@@ -37,15 +37,19 @@ const GameCard: FC<{
             break;
     }
 
-    return (<div className={`text-center ${className}`}>
+    let sizeClass = "";
+    if (size)
+        sizeClass = `card-${size}`
+
+    return (<div className={`text-center ${className || ""}`} style={{ display: "inline-block" }}>
         <ReactCardFlip isFlipped={flipped}>
-            <div className="card" style={{ cursor: onClick ? "pointer" : undefined }} onClick={onClick ? () => onClick(flipped) : undefined}>
-                <img src={logo} alt="logo" className="mt-3 mx-auto" style={{ width: "90%" }} />
-                <h2 className="mt-3">Mapinguari</h2>
+            <div className={`card ${sizeClass}`} style={{ cursor: onClick ? "pointer" : undefined }} onClick={onClick ? () => onClick(flipped) : undefined}>
+                <img src={logo} alt="logo" className="mx-auto" style={{ width: "90%", marginTop: "5%" }} />
+                <p className={sizeClass}  style={{ marginTop: "10%" }}>Mapinguari</p>
             </div>
-            <div className="card" style={{ cursor: onClick ? "pointer" : undefined, borderColor: `var(--${color})` }} onClick={onClick ? () => onClick(flipped) : undefined}>
-                <img src={image} alt="logo" className="mt-3 mx-auto" style={{ width: "90%" }} />
-                <h2 className="mt-3">Mapinguari</h2>
+            <div className={`card ${sizeClass}`} style={{ cursor: onClick ? "pointer" : undefined, borderColor: `var(--${color})` }} onClick={onClick ? () => onClick(flipped) : undefined}>
+                <img src={image} alt="logo" className="mx-auto" style={{ width: "90%", marginTop: "5%" }} />
+                <p className={sizeClass} style={{ marginTop: "10%" }}>Mapinguari</p>
             </div>
         </ReactCardFlip>
     </div>);
