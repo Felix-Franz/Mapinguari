@@ -2,15 +2,16 @@ import { FC } from "react";
 import { Container } from "reactstrap";
 import GameProgress from "./gameprogress/GameProgress";
 import GamePlayer from "./GamePlayer";
+import ItemEnum from "../../../core/types/ItemEnum";
 
-const Table : FC<{
+const Table: FC<{
     roomName: string
-}> = ({roomName}) => {
+}> = ({ roomName }) => {
 
     return <Container fluid className="my-3 text-center">
         <h2>{roomName}</h2>
         <GameProgress round={2} card={3} />
-        <GamePlayer />
+        <GamePlayer playerName="TestPlayer" cards={[ItemEnum.EMPTY, ItemEnum.GOOD, ItemEnum.NEUTRAL, ItemEnum.BAD, ItemEnum.EMPTY]} onCardClick={(playerName, cardIndex) => console.log(playerName + " " + cardIndex)} />
         ToDo!
     </Container>
 }

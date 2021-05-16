@@ -7,10 +7,7 @@ type RoomType = {
 	name: string,
 	state: RoomStateEnum
 	players: PlayerType[],
-	places: {
-		name: string,
-		item: ItemEnum
-	}[],
+	cards: ItemEnum[],
 }
 
 export default RoomType;

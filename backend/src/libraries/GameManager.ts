@@ -107,7 +107,7 @@ export default class GameManager {
                     connected: p.connected
                 };
             }),
-            places: []
+            cards: []
         };
     }
 
