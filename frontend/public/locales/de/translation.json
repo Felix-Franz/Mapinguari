@@ -85,6 +85,9 @@
             "GameProgress": {
                 "Rounds": "Runden",
                 "Cards": "Karten"
+            },
+            "GamePlayer": {
+                "Player'sTurn": "Der Spieler ist an der Reihe!"
             }
         }
     },

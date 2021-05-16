@@ -8,6 +8,11 @@ $width: 15em;
     color: white;
     border: 5px solid get-color("tertiary");
     padding: 11px;
+    transition: all .5s ease;
+}
+
+.card > p {
+    transition: all .5s ease;
 }
 
 .card.card-md {
