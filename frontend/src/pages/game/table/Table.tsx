@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Container } from "reactstrap";
 import GameProgress from "./gameprogress/GameProgress";
-import GamePlayer from "./GamePlayer";
+import GamePlayer from "./gameplayer/GamePlayer";
 import ItemEnum from "../../../core/types/ItemEnum";
 
 const Table: FC<{

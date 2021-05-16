@@ -1,8 +1,8 @@
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useState } from "react";
-import ItemEnum from "../../../core/types/ItemEnum";
-import GameCard from "./gamecard/GameCard";
+import ItemEnum from "../../../../core/types/ItemEnum";
+import GameCard from "../gamecard/GameCard";
 import "./GamePlayer.scss";
 
 const CLOSE_EVENT = "game-player-close";
