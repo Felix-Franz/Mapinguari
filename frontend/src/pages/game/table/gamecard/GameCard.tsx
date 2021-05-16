@@ -1,6 +1,6 @@
 import { FC } from "react";
 import ReactCardFlip from 'react-card-flip';
-import ItemEnum from "../../../../core/types/ItemEnum";
+import CardEnum from "../../../../core/types/CardEnum";
 import bad from "../../../../resources/bad.svg";
 import empty from "../../../../resources/empty.svg";
 import good from "../../../../resources/good.svg";
@@ -11,26 +11,26 @@ import "./GameCard.scss";
 const GameCard: FC<{
     className?: string,
     size: "md" | "sm"
-    itemMind?: ItemEnum,
+    itemMind?: CardEnum,
     flipped: boolean,
     onClick?: (flipped: boolean) => void
 }> = ({ className, size, itemMind, flipped, onClick }) => {
 
     let image, color;
     switch (itemMind) {
-        case ItemEnum.GOOD:
+        case CardEnum.GOOD:
             image = good;
             color = "primary";
             break;
-        case ItemEnum.BAD:
+        case CardEnum.BAD:
             image = bad;
             color = "secondary";
             break;
-        case ItemEnum.NEUTRAL:
+        case CardEnum.NEUTRAL:
             image = neutral;
             color = "tertiary";
             break;
-        case ItemEnum.EMPTY:
+        case CardEnum.EMPTY:
         default:
             image = empty;
             color = "tertiary";

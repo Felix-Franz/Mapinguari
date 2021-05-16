@@ -1,6 +1,7 @@
 import PlayerMindEnum from "./PlayerMindEnum";
 import PlayerRoleEnum from "./PlayerRoleEnum";
 import AvatarConfigurationType from "./AvatarConfigurationType";
+import CardEnum from "./CardEnum";
 
 type PlayerType = {
 
@@ -10,7 +11,7 @@ type PlayerType = {
 	role: PlayerRoleEnum,
 	connected: boolean,
 	mind?: PlayerMindEnum,
-	place?: string
+	cards?: CardEnum[]
 }
 
 export default PlayerType;

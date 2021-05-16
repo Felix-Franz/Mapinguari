@@ -1,6 +1,6 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import { Logger } from "../..";
-import { ItemEnumArray } from "../core/types/ItemEnum";
+import { CardEnumArray } from "../core/types/CardEnum";
 import { PlayerMindEnumArray } from "../core/types/PlayerMindEnum";
 import { PlayerRoleEnumArray } from "../core/types/PlayerRoleEnum";
 import RoomStateEnum, { RoomStateEnumArray } from "../core/types/RoomStateEnum";
@@ -49,7 +49,7 @@ export default class Models {
             },
             item: {
                 type: String,
-                enum: ItemEnumArray,
+                enum: CardEnumArray,
                 required: true
             },
         });
