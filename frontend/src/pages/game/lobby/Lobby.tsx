@@ -31,7 +31,7 @@ const Lobby: FC<{
 
     const getCopyAndShare = (text: string) => <ButtonGroup className="ml-2">
         <Button color="primary" size="sm" outline
-            onClick={() => navigator.clipboard.writeText(text).then(() => `✅ ${toast.info(t("Game.Lobby.Copied"))}`).catch(() => toast.error(t("Game.Lobby.CopyFailed")))}>
+            onClick={() => navigator.clipboard.writeText(text).then(() => toast.info(`✔️ ${t("Game.Lobby.Copied")}`)).catch(() => toast.error(t("Game.Lobby.CopyFailed")))}>
             <FontAwesomeIcon icon={faClipboard} />
         </Button>
         <Button color="primary" size="sm" outline
