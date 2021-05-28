@@ -32,6 +32,7 @@
                 "User": "{{name}} ist jetzt kein Spielleiter mehr!"
             },
             "PlayerLeft": "{{name}} hat den Raum verlassen!",
+            "Leave": "Raum verlassen",
             "Left": "Du hast den Raum verlassen!",
             "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!"
         },
@@ -70,7 +71,7 @@
             "Join": "Damit andere Mitspieler beitreten können, schicke ihnen folgenden Link oder Code:",
             "Link": "Link:",
             "Code": "Code:",
-            "Copied": "Es wurde in die Zwischenablage kopiert!",
+            "Copied": "In die Zwischenablage kopiert!",
             "CopyFailed": "Wir könnten leider nichts in die Zwischenablage kopieren!",
             "Shared": "Teilen-Menü wurde geöffnet!",
             "ShareFailed": "Wir konnten leider nichts teilen!",
