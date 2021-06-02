@@ -18,7 +18,7 @@ const Avatar: FC<{
     if (mind === PlayerMindEnum.BAD)
         mindClass = "avatar-bad"
 
-    return <div className={mindClass + (className || "")} style={style}>
+    return <div className={mindClass + " " + (className || "")} style={style}>
         <Avataaar avatarStyle={AvatarStyle.Circle} style={{ width: "100%", height: "100%" }} {...configuration as any} />
     </div>
 }

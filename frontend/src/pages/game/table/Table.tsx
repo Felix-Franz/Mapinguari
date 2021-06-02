@@ -7,15 +7,16 @@ import PlayerType from "../../../core/types/PlayerType";
 
 const Table: FC<{
     roomName: string,
-    players: PlayerType[]
-}> = ({ roomName, players }) => {
+    players: PlayerType[],
+    me: string
+}> = ({ roomName, players, me}) => {
 
     return <Container fluid className="my-3 text-center">
         <h2>{roomName}</h2>
         <GameProgress round={2} card={3} />
 
         {players.map((p, i) => 
-            <GamePlayer player={p} cards={[CardEnum.EMPTY, CardEnum.GOOD, CardEnum.NEUTRAL, CardEnum.BAD, CardEnum.EMPTY]} onCardClick={(player, cardIndex) => console.log(player.name + " " + cardIndex)} />
+            <GamePlayer me={me} className="mt-1" player={p} cards={[CardEnum.EMPTY, CardEnum.GOOD, CardEnum.NEUTRAL, CardEnum.BAD, CardEnum.EMPTY]} onCardClick={(player, cardIndex) => console.log(player.name + " " + cardIndex)} />
         )}
         ToDo!
     </Container>
