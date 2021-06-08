@@ -2,7 +2,7 @@ enum CardEnum {
     GOOD = "GOOD",
     BAD = "BAD",
     NEUTRAL = "NEUTRAL",
-    EMPTY = "EMPTY"
+    UNKNOWN = "UNKNOWN"
 }
 
 export default CardEnum;

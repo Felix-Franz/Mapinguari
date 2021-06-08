@@ -1,6 +1,6 @@
 import mongoose, { Document, Model, Schema } from "mongoose";
 import { Logger } from "../..";
-import { CardEnumArray } from "../core/types/CardEnum";
+import CardEnum, { CardEnumArray } from "../core/types/CardEnum";
 import { PlayerMindEnumArray } from "../core/types/PlayerMindEnum";
 import { PlayerRoleEnumArray } from "../core/types/PlayerRoleEnum";
 import RoomStateEnum, { RoomStateEnumArray } from "../core/types/RoomStateEnum";
@@ -39,19 +39,12 @@ export default class Models {
                 type: String,
                 enum: PlayerMindEnumArray
             },
-            place: String
-        });
-        const placesSchema = new Schema({
-            name: {
-                type: String,
-                required: true,
-                // unique: true //leads into an error if you want to create 2. game
-            },
-            item: {
+            cards: [{
                 type: String,
                 enum: CardEnumArray,
-                required: true
-            },
+                required: true,
+                default: CardEnum.UNKNOWN
+            }]
         });
         const roomSchema = new Schema({
             code: {
@@ -69,7 +62,12 @@ export default class Models {
                 default: RoomStateEnum.LOBBY
             },
             players: [playersSchema],
-            places: [placesSchema]
+            cards: [{
+                type: String,
+                enum: CardEnumArray,
+                required: true,
+                default: CardEnum.UNKNOWN
+            }]
         });
         this.rooms = mongoose.model<RoomType & Document>("Rooms", roomSchema)
 

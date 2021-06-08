@@ -30,7 +30,7 @@ const GameCard: FC<{
             image = neutral;
             color = "tertiary";
             break;
-        case CardEnum.EMPTY:
+        case CardEnum.UNKNOWN:
         default:
             image = empty;
             color = "tertiary";

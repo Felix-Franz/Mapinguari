@@ -1,5 +1,7 @@
 import { Logger } from "../..";
 import AvatarConfigurationType from "../core/types/AvatarConfigurationType";
+import CardEnum, { CardEnumArray } from "../core/types/CardEnum";
+import PlayerMindEnum from "../core/types/PlayerMindEnum";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
 import RoomStateEnum from "../core/types/RoomStateEnum";
 import RoomType from "../core/types/RoomType";
@@ -27,7 +29,7 @@ export default class GameManager {
      * @returns {string} roomId of the new room
      */
     public static async createRoom(name: string): Promise<string> {
-        const code = await Generator.generateRooomCode();
+        const code = await Generator.generateRoomCode();
         await Models.Rooms.create({
             code,
             name
@@ -162,7 +164,7 @@ export default class GameManager {
         }
 
         room.save();
-        ClientConnector.emitToRoom(code, SocketServerEvents.PlayerLeft, {name: oldPlayer.name, avatar: oldPlayer.avatar});
+        ClientConnector.emitToRoom(code, SocketServerEvents.PlayerLeft, { name: oldPlayer.name, avatar: oldPlayer.avatar });
         return oldPlayer.socketId!;
     }
 
@@ -176,9 +178,22 @@ export default class GameManager {
             throw new Error("Game can only be started by admins!");
         const room = (await Models.Rooms.findOne({ code }))!;
         room.state = RoomStateEnum.TABLE;
-        //ToDo more changes depending on game, add validation for number of users, ...
+        Generator.generateMinds(room.players.length).forEach((m, i) => room.players[i].mind = m);
+        Generator.shuffleCards(room.players.length).forEach((c, i) => room.players[i].cards = c);
+        room.players.forEach(p => ClientConnector.emitToSocket(p.socketId!, SocketServerEvents.ChangeGame, {
+            state: room.state,
+            players: room.players.map(b => {
+                return {
+                    name: b.name,
+                    avatar: b.avatar,
+                    role: b.role,
+                    connected: b.connected,
+                    cards: p.name === b.name ? b.cards : b.cards?.map(c => CardEnum.UNKNOWN),
+                    mind: p.name === b.name ? b.mind : undefined
+                }
+            })
+        }))
         room.save();
-        ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, { state: room.state });
     }
 
     /**

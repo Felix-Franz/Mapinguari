@@ -12,7 +12,7 @@ const GameProgress: FC<{
 }> = ({ round, card }) => {
     const { t } = useTranslation();
 
-    const percent = (GameConfig.cards * (round - 1) + card) / (GameConfig.rounds * GameConfig.cards) * 100;
+    const percent = (GameConfig.initalCardsPerPlayer * (round - 1) + card) / (GameConfig.rounds * GameConfig.initalCardsPerPlayer) * 100;
 
     return <Row className="mx-1">
         <Col xs="12" md="10" className="mt-3">
@@ -56,7 +56,7 @@ const GameProgress: FC<{
         </Col>
         <Col xs="12" md="2" className="mt-2 mt-md-0 text-center">
             <div>{t("Game.Table.GameProgress.Rounds")}: {round}/{GameConfig.rounds}</div>
-            <div>{t("Game.Table.GameProgress.Cards")}: {card}/{GameConfig.cards}</div>
+            <div>{t("Game.Table.GameProgress.Cards")}: {card}/{GameConfig.initalCardsPerPlayer}</div>
         </Col>
     </Row>
 }

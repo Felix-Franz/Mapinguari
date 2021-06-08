@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { Container } from "reactstrap";
-import GameProgress from "./gameprogress/GameProgress";
-import GamePlayer from "./gameplayer/GamePlayer";
-import CardEnum from "../../../core/types/CardEnum";
 import PlayerType from "../../../core/types/PlayerType";
+import GamePlayer from "./gameplayer/GamePlayer";
+import GameProgress from "./gameprogress/GameProgress";
 
 const Table: FC<{
     roomName: string,
@@ -16,7 +15,7 @@ const Table: FC<{
         <GameProgress round={2} card={3} />
 
         {players.map((p, i) => 
-            <GamePlayer me={me} className="mt-1" player={p} cards={[CardEnum.EMPTY, CardEnum.GOOD, CardEnum.NEUTRAL, CardEnum.BAD, CardEnum.EMPTY]} onCardClick={(player, cardIndex) => console.log(player.name + " " + cardIndex)} />
+            <GamePlayer me={me} className="mt-1" player={p} onCardClick={(player, cardIndex) => console.log(player.name + " " + cardIndex)} key={i} />
         )}
         ToDo!
     </Container>

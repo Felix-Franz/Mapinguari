@@ -1,9 +1,9 @@
 import { useTranslation } from "react-i18next";
-import { Container, Alert } from "reactstrap";
-import logo from "../../resources/logo.svg";
-import StartGame from "./StartGame";
+import { Alert, Container } from "reactstrap";
 import Instructions from "../../components/Instructions";
 import Story from "../../components/Story";
+import logo from "../../resources/logo.svg";
+import StartGame from "./StartGame";
 
 const Home = () => {
     const { t } = useTranslation();
@@ -13,7 +13,7 @@ const Home = () => {
             <h1 className="mt-3">{t('Home.Title')}</h1>
             <h3>{t('Home.Subtitle')}</h3>
             <StartGame />
-            <Alert className="mt-4 mx-auto w-fit" color="danger" style={{width: "fit-content"}}>
+            <Alert className="mt-4 mx-auto w-fit" color="danger" style={{ width: "fit-content" }}>
                 {/* reactstrap error https://github.com/reactstrap/reactstrap/issues/1833 */}
                 Game is under development! Therefore, gaming may still encounter problems.
                 <br />

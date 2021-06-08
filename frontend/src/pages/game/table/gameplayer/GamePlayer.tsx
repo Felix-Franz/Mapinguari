@@ -17,9 +17,8 @@ const GamePlayer: FC<{
     player: PlayerType,
     me: string,
     playerSTurn?: boolean,
-    cards: CardEnum[],
     onCardClick?: (player: PlayerType, cardIndex: number) => void
-}> = ({ className, me, player, playerSTurn, cards, onCardClick }) => {
+}> = ({ className, me, player, playerSTurn, onCardClick }) => {
     const { t } = useTranslation();
     const [expanded, setRawExpanded] = useState<boolean>(false);
 
@@ -55,8 +54,8 @@ const GamePlayer: FC<{
             </div>
         </div>
         <p className={`mb-2 game-player-turn ${playerSTurn ? "" : "d-none"}`}>{t("Game.Table.GamePlayer.Player'sTurn")}</p>
-        {cards.map((c, i) =>
-            <GameCard flipped={c !== CardEnum.EMPTY} onClick={onCardClick && expanded ? () => onCardClick(player, i) : undefined} itemMind={c} size={expanded ? "md" : "sm"} />
+        {player.cards!.map((c, i) =>
+            <GameCard flipped={c !== CardEnum.UNKNOWN} onClick={onCardClick && expanded ? () => onCardClick(player, i) : undefined} itemMind={c} size={expanded ? "md" : "sm"} key={i} />
         )}
     </div>
 }

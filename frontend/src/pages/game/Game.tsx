@@ -87,7 +87,8 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 toast.error(t('Game.Toast.LeftError', { name: data.name }));
         });
 
-        SocketClient.on(SocketServerEvents.ChangeGame, (data: { state: RoomStateEnum }) => {
+        SocketClient.on(SocketServerEvents.ChangeGame, (data: { state: RoomStateEnum, players: PlayerType[]}) => {
+            setPlayers(data.players);
             setState(data.state);
         })
 
@@ -103,7 +104,6 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     });
 
     const getState = () => {
-        const code = props.match.params.code;
 
         switch (state) {
             case RoomStateEnum.LOBBY:
@@ -111,6 +111,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             case RoomStateEnum.TABLE:
                 return <Table me={me!} roomName={roomName} players={players} />
             default:
+                const code = props.match.params.code;
                 return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;
         }
     }

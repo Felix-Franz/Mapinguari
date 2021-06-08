@@ -7,7 +7,7 @@ type RoomType = {
 	name: string,
 	state: RoomStateEnum
 	players: PlayerType[],
-	cards: CardEnum[],
+	cards: CardEnum[],	//Cards that where selected in a previouse round
 }
 
 export default RoomType;
