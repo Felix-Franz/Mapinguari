@@ -1,7 +1,7 @@
 import { Logger } from "../..";
 import AvatarConfigurationType from "../core/types/AvatarConfigurationType";
 import CardEnum, { CardEnumArray } from "../core/types/CardEnum";
-import PlayerMindEnum from "../core/types/PlayerMindEnum";
+import GameMessageEnum from "../core/types/GameMessageEnum";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
 import RoomStateEnum from "../core/types/RoomStateEnum";
 import RoomType from "../core/types/RoomType";
@@ -73,25 +73,29 @@ export default class GameManager {
                 throw new Error("Game is already in progress");
             const role = room.players.length === 0 ? PlayerRoleEnum.ADMIN : PlayerRoleEnum.USER;
             const connected = true;
+            const inTurn = false;
             room.players.push({
                 socketId,
                 name,
                 avatar,
                 role,
-                connected
+                connected,
+                inTurn
             });
-            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerJoined, { name, avatar, role, connected });
+            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerJoined, { name, avatar, role, connected, inTurn });
         } else if (!room.players[playerIndex]?.connected) { //player name exists but is disconnected
             const role = room!.players[playerIndex].role;
             const connected = true;
+            const inTurn = false;
             room!.players[playerIndex] = {
                 socketId,
                 name,
                 avatar,
                 role,
-                connected
+                connected,
+                inTurn
             }
-            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerReconnected, { name, avatar, role, connected });
+            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerReconnected, { name, avatar, role, connected, inTurn });
         } else    //player name exists but is still connected
             throw new Error("Player with this name is already connected!");
 
@@ -106,7 +110,8 @@ export default class GameManager {
                     name: p.name,
                     avatar: p.avatar,
                     role: p.role,
-                    connected: p.connected
+                    connected: p.connected,
+                    inTurn: p.inTurn
                 };
             }),
             cards: []
@@ -180,7 +185,11 @@ export default class GameManager {
         room.state = RoomStateEnum.TABLE;
         Generator.generateMinds(room.players.length).forEach((m, i) => room.players[i].mind = m);
         Generator.shuffleCards(room.players.length).forEach((c, i) => room.players[i].cards = c);
+        const playerInTurn = Generator.selectRandomStartPlayer(room.players);
+        room.players.forEach(p => p.inTurn = p.name === playerInTurn.name);
+
         room.players.forEach(p => ClientConnector.emitToSocket(p.socketId!, SocketServerEvents.ChangeGame, {
+            message: GameMessageEnum.START,
             state: room.state,
             players: room.players.map(b => {
                 return {
@@ -189,7 +198,8 @@ export default class GameManager {
                     role: b.role,
                     connected: b.connected,
                     cards: p.name === b.name ? b.cards : b.cards?.map(c => CardEnum.UNKNOWN),
-                    mind: p.name === b.name ? b.mind : undefined
+                    mind: p.name === b.name ? b.mind : undefined,
+                    inTurn: b.inTurn
                 }
             })
         }))

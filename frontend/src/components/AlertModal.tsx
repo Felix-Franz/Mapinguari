@@ -64,7 +64,7 @@ export default class AlertModal extends React.Component<{}, StateType> {
 								   onClick={() => this.onClickButton(r.handler)}>{r.text}</Button>
 			});
 			return (
-				<Modal isOpen={this.state.open}>
+				<Modal isOpen={this.state.open} style={{marginTop: 55}}>
 					<ModalHeader toggle={() => this.onClickButton()}>
 						{this.state.alert.header}
 						<p className="mt-1 font-italic"

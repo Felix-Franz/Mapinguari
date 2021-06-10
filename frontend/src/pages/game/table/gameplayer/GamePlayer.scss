@@ -6,24 +6,38 @@
     padding: 10px
 }
 
-.game-player-turn {
-    animation-name: game-player-turn;
+@mixin game-player-turn($color) {
+    $animation-name: game-player-turn- + unique-id();
+
     animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: ease;
+    animation-name: $animation-name;
+
+    @keyframes #{$animation-name} {
+        0% {
+            color: white !important;
+            border-color: white !important;
+        }
+        50% {
+            color: get-color($color);
+            border-color: get-color($color);
+        }
+        100% {
+            color: white !important;
+            border-color: white !important;
+        }
+    }
+ }
+
+.game-player-turn-primary {
+    @include game-player-turn("primary");
 }
 
-@keyframes game-player-turn {
-    0% {
-        color: white;
-        border-color: white;
-    }
-    50% {
-        color: get-color("tertiary");
-        border-color: get-color("tertiary");
-    }
-    100% {
-        color: white;
-        border-color: white;
-    }
+.game-player-turn-secondary {
+    @include game-player-turn("secondary");
+}
+
+.game-player-turn-tertiary {
+    @include game-player-turn("tertiary");
 }

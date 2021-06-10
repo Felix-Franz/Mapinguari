@@ -36,6 +36,13 @@
             "Left": "Du hast den Raum verlassen!",
             "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!"
         },
+        "Message": {
+            "GameStarted": {
+                "Header": "Spiel gestartet",
+                "MessageGood": "Das Spiel wurde gestartet. Als verfechter des Guten ist dein Ziel alle blauen Karten aufzudecken! Happy Hunting!",
+                "MessageBad": "Das Spiel wurde gestartet. Als verfechter des Bösen ist dein Ziel alle roten Karten aufzudecken! Happy Hunting!"
+            }
+        },
         "Tabs": {
             "Player": {
                 "Title": "Spieler",
@@ -89,7 +96,9 @@
             },
             "GamePlayer": {
                 "Player'sTurn": "Der Spieler ist an der Reihe!"
-            }
+            },
+            "NotYourTurn": "Du bist noch nicht dran. Warte bis du an der Reihe bist!",
+            "DontClickOnYourself": "Du kannst nicht deine eigene Karte auswählen! Wähle stattdessen einfach eine Karte deiner Mitspieler!"
         }
     },
     "Story": {

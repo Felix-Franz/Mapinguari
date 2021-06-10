@@ -13,6 +13,9 @@ import PlayerRoleEnum from "../../core/types/PlayerRoleEnum";
 import Table from "./table/Table";
 import Avatar from "../../components/avatar/Avatar";
 import AvatarConfigurationType from "../../core/types/AvatarConfigurationType";
+import GameMessageEnum from "../../core/types/GameMessageEnum";
+import AlertModal from "../../components/AlertModal";
+import PlayerMindEnum from "../../core/types/PlayerMindEnum";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
@@ -87,9 +90,25 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 toast.error(t('Game.Toast.LeftError', { name: data.name }));
         });
 
-        SocketClient.on(SocketServerEvents.ChangeGame, (data: { state: RoomStateEnum, players: PlayerType[]}) => {
-            setPlayers(data.players);
-            setState(data.state);
+        SocketClient.on(SocketServerEvents.ChangeGame, (data: { message?: GameMessageEnum, state?: RoomStateEnum, players?: PlayerType[] }) => {
+            if (data.players)
+                setPlayers(data.players);
+            if (data.state)
+                setState(data.state);
+            if (data.message !== undefined)
+                switch (data.message) {
+                    case GameMessageEnum.START:
+                        const good = data.players!.find(p => p.name === me)?.mind === PlayerMindEnum.GOOD;
+                        AlertModal.show({
+                            header: t("Game.Message.GameStarted.Header"),
+                            message: good ? t("Game.Message.GameStarted.MessageGood"):  t("Game.Message.GameStarted.MessageBad"),
+                            buttons: [{
+                                text: t("General.Okay"),
+                                color: good ? "primary" : "secondary"
+                            }]
+                        })
+                        break;
+                }
         })
 
         return () => {

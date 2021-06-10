@@ -2,6 +2,7 @@ import { GameManager } from "../..";
 import GameConfig from "../core/GameConfig";
 import CardEnum from "../core/types/CardEnum";
 import PlayerMindEnum from "../core/types/PlayerMindEnum";
+import PlayerType from "../core/types/PlayerType";
 import Models from "./Models";
 
 export default class Generator {
@@ -69,10 +70,14 @@ export default class Generator {
 
         const playerCards: CardEnum[][] = [];
         const playerCardCount = cards.length / playerCount;
-        console.log(playerCardCount)
         for (let j = 0; j < playerCount; ++j)
-            playerCards.push(cards.slice(j * playerCardCount, (j + 1)* playerCardCount));
-            
+            playerCards.push(cards.slice(j * playerCardCount, (j + 1) * playerCardCount));
+
         return playerCards;
+    }
+
+    public static selectRandomStartPlayer(players: PlayerType[]): PlayerType {
+        const inTurn = Math.floor(players.length * Math.random());
+        return players[inTurn];
     }
 }

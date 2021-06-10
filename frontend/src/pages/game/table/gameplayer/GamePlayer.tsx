@@ -16,9 +16,8 @@ const GamePlayer: FC<{
     className?: string,
     player: PlayerType,
     me: string,
-    playerSTurn?: boolean,
     onCardClick?: (player: PlayerType, cardIndex: number) => void
-}> = ({ className, me, player, playerSTurn, onCardClick }) => {
+}> = ({ className, me, player, onCardClick }) => {
     const { t } = useTranslation();
     const [expanded, setRawExpanded] = useState<boolean>(false);
 
@@ -44,16 +43,16 @@ const GamePlayer: FC<{
             break;
     }
 
-    return <div className={`${className || ""} game-player ${expanded ? "" : "pointer"} ${playerSTurn ? "game-player-turn" : ""}`} onClick={() => setExpand(true)} style={{ borderColor: `var(--${color})` }}>
-        <FontAwesomeIcon icon={expanded ? faChevronUp : faChevronDown} className="pointer m-1 float-right" onClick={() => setExpand(!expanded)} />
+    return <div className={`${className || ""} game-player ${expanded ? "" : "pointer"} ${player.inTurn ? "game-player-turn-" : "border-"}${color}`} onClick={() => setExpand(true)}>       
+     <FontAwesomeIcon icon={expanded ? faChevronUp : faChevronDown} className="pointer m-1 float-right" onClick={() => setExpand(!expanded)} />
         <div className="mb-2">
             <Avatar configuration={player.avatar} mind={player.mind} style={{ maxWidth: "4em" }} className="d-inline-block" />
             <div className="d-inline-block ml-1 align-middle">
-                <h2 className="mb-0">{player.name}</h2>
+                <h2 className={`mb-0 ${player.inTurn ? "game-player-turn-" : "text-"}${color}`}>{player.name}</h2>
                 <Badge className={`ml-2 ${player.name === me ? "" : "d-none"}`} color={color}>{t("Game.Tabs.Player.Me")}</Badge>
             </div>
         </div>
-        <p className={`mb-2 game-player-turn ${playerSTurn ? "" : "d-none"}`}>{t("Game.Table.GamePlayer.Player'sTurn")}</p>
+        <p className={`mb-2 ${player.inTurn ? "game-player-turn-" : "text-"}${color} ${player.inTurn ? "" : "d-none"}`}>{t("Game.Table.GamePlayer.Player'sTurn")}</p>
         {player.cards!.map((c, i) =>
             <GameCard flipped={c !== CardEnum.UNKNOWN} onClick={onCardClick && expanded ? () => onCardClick(player, i) : undefined} itemMind={c} size={expanded ? "md" : "sm"} key={i} />
         )}

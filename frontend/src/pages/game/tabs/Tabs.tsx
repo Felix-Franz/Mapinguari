@@ -43,8 +43,12 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
             message: t("Game.Tabs.Stop.Message"),
             buttons: [{
                 text: t("General.Yes"),
+                color: "secondary",
                 handler: () => SocketClient.emit(SocketClientEvents.StopGame)
-            }, t("General.No")]
+            }, {
+                text: t("General.No"),
+                color: "primary"
+            }]
         });
     }
 

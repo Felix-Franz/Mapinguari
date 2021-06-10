@@ -11,7 +11,8 @@ type PlayerType = {
 	role: PlayerRoleEnum,
 	connected: boolean,
 	mind?: PlayerMindEnum,
-	cards?: CardEnum[]
+	cards?: CardEnum[],
+	inTurn: boolean
 }
 
 export default PlayerType;

@@ -36,6 +36,13 @@
             "Left": "You left the room!",
             "LeftError": "Unfortunately {{name}} could not leave the room because of a error!"
         },
+        "Message": {
+            "GameStarted": {
+                "Header": "Game started",
+                "MessageGood": "The game has been started. As a defender of good, your goal is to uncover all the blue cards! Happy Hunting!",
+                "MessageBad": "The game has been started. As a defender of evil, your goal is to uncover all the blue cards! Happy Hunting!"
+            }
+        },
         "Tabs": {
             "Player": {
                 "Title": "Players",
@@ -89,7 +96,9 @@
             },
             "GamePlayer": {
                 "Player'sTurn": "It's the player's turn!"
-            }
+            },
+            "NotYourTurn": "It's not your turn yet. Wait until it' s your time!",
+            "DontClickOnYourself": "You can't choose your own card! Instead, simply choose a card from your fellow players!"
         }
     },
     "Story": {
