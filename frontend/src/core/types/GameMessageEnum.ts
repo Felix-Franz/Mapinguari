@@ -1,5 +1,7 @@
 enum GameMessageEnum {
-    START
+    START = "START",
+    SELECTCARDFAILED = "SELECTCARDFAILED",
+    NEXTROUND = "NEXTROUND"
 }
 
 export default GameMessageEnum;

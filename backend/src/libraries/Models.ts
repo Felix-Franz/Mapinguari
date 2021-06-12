@@ -16,7 +16,19 @@ export default class Models {
             return;
         this.initialized = true;
 
-        const playersSchema = new Schema({
+        const cardSchema = new Schema({
+            type: {
+                type: String,
+                enum: CardEnumArray,
+                required: true,
+                default: CardEnum.UNKNOWN
+            },
+            visible: {
+                type: Boolean,
+                required: true
+            }
+        });
+        const playerSchema = new Schema({
             socketId: String,
             name: {
                 type: String,
@@ -39,12 +51,8 @@ export default class Models {
                 type: String,
                 enum: PlayerMindEnumArray
             },
-            cards: [{
-                type: String,
-                enum: CardEnumArray,
-                required: true,
-                default: CardEnum.UNKNOWN
-            }]
+            cards: [cardSchema],
+            inTurn: Boolean
         });
         const roomSchema = new Schema({
             code: {
@@ -61,13 +69,8 @@ export default class Models {
                 required: true,
                 default: RoomStateEnum.LOBBY
             },
-            players: [playersSchema],
-            cards: [{
-                type: String,
-                enum: CardEnumArray,
-                required: true,
-                default: CardEnum.UNKNOWN
-            }]
+            players: [playerSchema],
+            cards: [cardSchema]
         });
         this.rooms = mongoose.model<RoomType & Document>("Rooms", roomSchema)
 

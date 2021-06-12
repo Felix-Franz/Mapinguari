@@ -1,12 +1,15 @@
 import { Logger } from "../..";
+import GameConfig from "../core/GameConfig";
 import AvatarConfigurationType from "../core/types/AvatarConfigurationType";
 import CardEnum, { CardEnumArray } from "../core/types/CardEnum";
 import GameMessageEnum from "../core/types/GameMessageEnum";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
+import PlayerType from "../core/types/PlayerType";
 import RoomStateEnum from "../core/types/RoomStateEnum";
 import RoomType from "../core/types/RoomType";
 import { SocketServerEvents } from "../core/types/SocketEventsEnum";
 import ClientConnector from "./ClientConnector";
+import GameManagerUtil from "./GameManagerUtil";
 import Generator from "./Generator";
 import { LEVELS } from "./Logger";
 import Models from "./Models";
@@ -111,7 +114,7 @@ export default class GameManager {
                     avatar: p.avatar,
                     role: p.role,
                     connected: p.connected,
-                    inTurn: p.inTurn
+                    inTurn: p.inTurn,
                 };
             }),
             cards: []
@@ -182,7 +185,8 @@ export default class GameManager {
         if (!await this.isAdmin(socketId, code))
             throw new Error("Game can only be started by admins!");
         const room = (await Models.Rooms.findOne({ code }))!;
-        room.state = RoomStateEnum.TABLE;
+        room.state = RoomStateEnum.PROGRESS;
+        room.cards = [];
         Generator.generateMinds(room.players.length).forEach((m, i) => room.players[i].mind = m);
         Generator.shuffleCards(room.players.length).forEach((c, i) => room.players[i].cards = c);
         const playerInTurn = Generator.selectRandomStartPlayer(room.players);
@@ -191,18 +195,64 @@ export default class GameManager {
         room.players.forEach(p => ClientConnector.emitToSocket(p.socketId!, SocketServerEvents.ChangeGame, {
             message: GameMessageEnum.START,
             state: room.state,
-            players: room.players.map(b => {
-                return {
-                    name: b.name,
-                    avatar: b.avatar,
-                    role: b.role,
-                    connected: b.connected,
-                    cards: p.name === b.name ? b.cards : b.cards?.map(c => CardEnum.UNKNOWN),
-                    mind: p.name === b.name ? b.mind : undefined,
-                    inTurn: b.inTurn
-                }
-            })
-        }))
+            players: GameManagerUtil.hidePlayerData(room.players, p),
+            cards: room.cards
+        }));
+        room.save();
+    }
+
+    /**
+     * Lets user select a card
+     * @param {string} code of room
+     * @param {string} socketId of player that selects the card
+     * @param {PlayerType} player player that has selected card
+     * @param {number} cardIndex index of selected card
+     */
+    public static async selectCard(code: string, socketId: string, player: PlayerType, cardIndex: number) {
+        const room = (await Models.Rooms.findOne({ code }))!;
+        const selectingPlayerIndex = room.players.findIndex(p => p.socketId === socketId && p.inTurn === true);
+        if (selectingPlayerIndex === -1)
+            throw new Error("User is not in turn!");
+
+        const playerIndex = room.players.findIndex(p => p.name === player.name);
+        if (room.players[playerIndex].cards![cardIndex].visible)
+            throw new Error("Card already selected");
+        room.players[playerIndex].cards![cardIndex].visible = true;
+        room.players[selectingPlayerIndex].inTurn = false;
+        room.players[playerIndex].inTurn = true;
+
+        // shuffle cards if round is over
+        const playerCards = room.players
+            .map(p => p.cards)
+            .reduce((prev, c) => prev!.concat(c!), [])!;
+        const roundFinished = playerCards
+            .filter(c => c.visible === true)
+            .length >= room.players.length;
+        if (roundFinished) {
+            room.cards = room.cards.concat(playerCards.filter(c => c.visible === true));
+            Generator.shuffleCards(room.players.length, playerCards.filter(c => c.visible === false).map(c => c.type)).forEach((c, i) => room.players[i].cards = c);
+        }
+
+        // check if bad won because of time
+        if (room.cards.length >= room.players.length * GameConfig.rounds)
+            room.state = RoomStateEnum.BADWON;
+
+        // check if any team won because of cards
+        if (playerCards.filter(c => c.type === CardEnum.GOOD && !c.visible).length === 0)
+            room.state = RoomStateEnum.GOODWON;
+        if (playerCards.filter(c => c.type === CardEnum.BAD && !c.visible).length === 0)
+            room.state = RoomStateEnum.BADWON;
+
+        if (room.state === RoomStateEnum.GOODWON || room.state === RoomStateEnum.BADWON)
+            room.players[playerIndex].inTurn = false;
+
+
+        room.players.forEach(p => ClientConnector.emitToSocket(p.socketId!, SocketServerEvents.ChangeGame, {
+            state: room.state,
+            message: (room.state !== RoomStateEnum.GOODWON && room.state !== RoomStateEnum.BADWON && roundFinished) ? GameMessageEnum.NEXTROUND : undefined,
+            players: GameManagerUtil.hidePlayerData(room.players, p, room.state === RoomStateEnum.GOODWON || room.state === RoomStateEnum.BADWON),
+            cards: room.cards
+        }));
         room.save();
     }
 
@@ -216,9 +266,25 @@ export default class GameManager {
             throw new Error("Game can only be stopped by admins!");
         const room = (await Models.Rooms.findOne({ code }))!;
         room.state = RoomStateEnum.LOBBY;
-        //ToDo more changes depending on game, add validation for number of users, ...
+        room.players = room.players.map(p => {
+            delete p.mind;
+            p.inTurn = false;
+            delete p.cards;
+            return p;
+        })
         room.save();
-        ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, { state: room.state });
+        ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, {
+            state: room.state, cards: [],
+            players: room!.players.map(p => {
+                return {
+                    name: p.name,
+                    avatar: p.avatar,
+                    role: p.role,
+                    connected: p.connected,
+                    inTurn: p.inTurn,
+                };
+            })
+        });
     }
 
 }

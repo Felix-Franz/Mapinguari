@@ -1,21 +1,22 @@
 import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { RouteComponentProps } from "react-router";
+import { toast } from "react-toastify";
+import AlertModal from "../../components/AlertModal";
+import Avatar from "../../components/avatar/Avatar";
+import AvatarConfigurationType from "../../core/types/AvatarConfigurationType";
+import CardType from "../../core/types/CardType";
+import GameMessageEnum from "../../core/types/GameMessageEnum";
+import PlayerMindEnum from "../../core/types/PlayerMindEnum";
+import PlayerRoleEnum from "../../core/types/PlayerRoleEnum";
+import PlayerType from "../../core/types/PlayerType";
 import RoomStateEnum from "../../core/types/RoomStateEnum";
 import { SocketServerEvents } from "../../core/types/SocketEventsEnum";
 import SocketClient from "../../libraries/SocketClient";
 import Join from "./join/Join";
-import { toast } from "react-toastify";
-import { useTranslation } from "react-i18next";
-import PlayerType from "../../core/types/PlayerType";
 import Lobby from "./lobby/Lobby";
-import Tabs from "./tabs/Tabs";
-import PlayerRoleEnum from "../../core/types/PlayerRoleEnum";
 import Table from "./table/Table";
-import Avatar from "../../components/avatar/Avatar";
-import AvatarConfigurationType from "../../core/types/AvatarConfigurationType";
-import GameMessageEnum from "../../core/types/GameMessageEnum";
-import AlertModal from "../../components/AlertModal";
-import PlayerMindEnum from "../../core/types/PlayerMindEnum";
+import Tabs from "./tabs/Tabs";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
@@ -23,6 +24,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const [state, setState] = useState<RoomStateEnum>();
     const [me, setMe] = useState<string>();
     const [players, setPlayers] = useState<PlayerType[]>([]);
+    const [cards, setCards] = useState<CardType[]>([]);
     const [roomName, setRoomName] = useState<string>("");
     const [roomCode, setRoomCode] = useState<string>("");
 
@@ -90,23 +92,31 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 toast.error(t('Game.Toast.LeftError', { name: data.name }));
         });
 
-        SocketClient.on(SocketServerEvents.ChangeGame, (data: { message?: GameMessageEnum, state?: RoomStateEnum, players?: PlayerType[] }) => {
+        SocketClient.on(SocketServerEvents.ChangeGame, (data: { message?: GameMessageEnum, state?: RoomStateEnum, players?: PlayerType[], cards?: CardType[] }) => {
             if (data.players)
                 setPlayers(data.players);
+            if (data.cards)
+                setCards(data.cards);
             if (data.state)
                 setState(data.state);
-            if (data.message !== undefined)
+            if (data.message)
                 switch (data.message) {
                     case GameMessageEnum.START:
                         const good = data.players!.find(p => p.name === me)?.mind === PlayerMindEnum.GOOD;
                         AlertModal.show({
                             header: t("Game.Message.GameStarted.Header"),
-                            message: good ? t("Game.Message.GameStarted.MessageGood"):  t("Game.Message.GameStarted.MessageBad"),
+                            message: good ? t("Game.Message.GameStarted.MessageGood") : t("Game.Message.GameStarted.MessageBad"),
                             buttons: [{
                                 text: t("General.Okay"),
                                 color: good ? "primary" : "secondary"
                             }]
                         })
+                        break;
+                    case GameMessageEnum.SELECTCARDFAILED:
+                        toast.error(t("Game.Toast.SelectCardFailed"));
+                        break;
+                    case GameMessageEnum.NEXTROUND:
+                        toast.error(t("Game.Toast.NextRound"));
                         break;
                 }
         })
@@ -127,8 +137,10 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
         switch (state) {
             case RoomStateEnum.LOBBY:
                 return <Lobby roomName={roomName} roomCode={roomCode} me={me!} players={players} />
-            case RoomStateEnum.TABLE:
-                return <Table me={me!} roomName={roomName} players={players} />
+            case RoomStateEnum.PROGRESS:
+            case RoomStateEnum.GOODWON:
+            case RoomStateEnum.BADWON:
+                return <Table me={me!} roomName={roomName} players={players} cards={cards} state={state} />
             default:
                 const code = props.match.params.code;
                 return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;

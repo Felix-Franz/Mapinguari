@@ -13,8 +13,7 @@ type GameConfigType = {
         [CardEnum.GOOD]: number,
         [CardEnum.BAD]: number
     }[],
-    rounds: number,
-    initalCardsPerPlayer: number
+    rounds: number
 }
 
 const GameConfig: GameConfigType = {
@@ -77,8 +76,7 @@ const GameConfig: GameConfigType = {
             [CardEnum.BAD]: 1,
         }
     ],
-    rounds: 4,
-    initalCardsPerPlayer: 5
+    rounds: 4
 }
 
 export default GameConfig;

@@ -34,13 +34,15 @@
             "PlayerLeft": "{{name}} left the room!",
             "Leave": "Leave Room",
             "Left": "You left the room!",
-            "LeftError": "Unfortunately {{name}} could not leave the room because of a error!"
+            "LeftError": "Unfortunately {{name}} could not leave the room because of a error!",
+            "SelectCardFailed": "Card could not be selected! Please try again!",
+            "NextRound": "New cards are in the game! Talk about your card deck, because the new round starts now!"
         },
         "Message": {
             "GameStarted": {
                 "Header": "Game started",
-                "MessageGood": "The game has been started. As a defender of good, your goal is to uncover all the blue cards! Happy Hunting!",
-                "MessageBad": "The game has been started. As a defender of evil, your goal is to uncover all the blue cards! Happy Hunting!"
+                "MessageGood": "The game has been started. As a defender of good, your goal is to uncover all the blue cards! Talk about your card deck and then: Happy Hunting!",
+                "MessageBad": "The game has been started. As a defender of evil, your goal is to uncover all the blue cards! Talk about your card deck and then: Happy Hunting!"
             }
         },
         "Tabs": {
@@ -87,19 +89,33 @@
             "Start": "Start game",
             "StartFailed": "Could not start game!",
             "StartPlayerDisconnected": "The game can not be started until all players are connected. Wait for {{names}} or kick them to start the game!",
+            "StartWrongPlayerCount": "The game can only be played with {{minPlayers}} to {{maxPlayers}} players! Please check the number of players!",
             "Leave": "Leave Room"
         },
         "Table": {
             "GameProgress": {
-                "Rounds": "Rounds",
-                "Cards": "Cards"
+                "Round": "Round",
+                "Move": "Move",
+                "Over": "All rounds\nover"
             },
             "GamePlayer": {
                 "Player'sTurn": "It's the player's turn!"
             },
             "NotYourTurn": "It's not your turn yet. Wait until it' s your time!",
-            "DontClickOnYourself": "You can't choose your own card! Instead, simply choose a card from your fellow players!"
-        }
+            "DontClickOnYourself": "You can't choose your own card! Instead, simply choose a card from your fellow players!",
+            "CardAlreadyVisible": "The card has already been exposed! Choose another one!",
+            "Cards": "Cards",
+            "CardsDescription": "that were selected in a previouse round",
+            "NoCards": "No cards available yet",
+            "AllDecks": "All decks",
+            "AllDecksDescription": "with all Players",
+            "YourDeck": "Your deck",
+            "YourDeckDescription": "with cards face up"
+        },
+        "GoodWon": "The good team won!",
+        "BadWon": "The evil team won!",
+        "NewMatch": "Start new match",
+        "BackToLobby": "Back to the lobby"
     },
     "Story": {
         "Title": "Story",

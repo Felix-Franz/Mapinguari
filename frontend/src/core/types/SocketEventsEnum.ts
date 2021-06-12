@@ -4,7 +4,8 @@ export enum SocketClientEvents {
     JoinRoom = "JoinRoom",
     LeaveRoom = "LeaveRoom",
     StartGame = "StartGame",
-    StopGame = "StopGame"
+    StopGame = "StopGame",
+    SelectCard = "SelectCard"
 };
 
 export enum SocketServerEvents {

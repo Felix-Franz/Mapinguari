@@ -1,4 +1,4 @@
-import CardEnum from "./CardEnum";
+import CardType from "./CardType";
 import PlayerType from "./PlayerType";
 import RoomStateEnum from "./RoomStateEnum";
 
@@ -7,7 +7,7 @@ type RoomType = {
 	name: string,
 	state: RoomStateEnum
 	players: PlayerType[],
-	cards: CardEnum[],	//Cards that where selected in a previouse round
+	cards: CardType[],	//Cards that where selected in a previouse round
 }
 
 export default RoomType;

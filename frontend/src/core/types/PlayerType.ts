@@ -1,7 +1,7 @@
 import PlayerMindEnum from "./PlayerMindEnum";
 import PlayerRoleEnum from "./PlayerRoleEnum";
 import AvatarConfigurationType from "./AvatarConfigurationType";
-import CardEnum from "./CardEnum";
+import CardType from "./CardType";
 
 type PlayerType = {
 
@@ -11,7 +11,7 @@ type PlayerType = {
 	role: PlayerRoleEnum,
 	connected: boolean,
 	mind?: PlayerMindEnum,
-	cards?: CardEnum[],
+	cards?: CardType[],
 	inTurn: boolean
 }
 

@@ -3,7 +3,7 @@ import GameConfig from "../core/GameConfig";
 import CardEnum from "../core/types/CardEnum";
 import PlayerMindEnum from "../core/types/PlayerMindEnum";
 import PlayerType from "../core/types/PlayerType";
-import Models from "./Models";
+import CardType from "../core/types/CardType";
 
 export default class Generator {
 
@@ -46,7 +46,7 @@ export default class Generator {
      * @param {CardEnum[]} availableCards available non shuffled cards
      * @returns {CardEnum[][]} cards per player
      */
-    public static shuffleCards(playerCount: number, unshuffledCards?: CardEnum[]): CardEnum[][] {
+    public static shuffleCards(playerCount: number, unshuffledCards?: CardEnum[]): CardType[][] {
         const conf = GameConfig.cards.find(p => p.playerCount === playerCount);
         if (!conf) throw new Error(`playerCount ${playerCount} is not supported!`);
 
@@ -61,14 +61,17 @@ export default class Generator {
             });
         }
 
-        const cards: CardEnum[] = [];
+        const cards: CardType[] = [];
         while (availableCards.length > 0) {
             const randomIndex = Math.floor(availableCards.length * Math.random());
-            cards.push(availableCards[randomIndex]);
+            cards.push({
+                type: availableCards[randomIndex],
+                visible: false
+        });
             availableCards = availableCards.filter((m, i) => i !== randomIndex);
         }
 
-        const playerCards: CardEnum[][] = [];
+        const playerCards: CardType[][] = [];
         const playerCardCount = cards.length / playerCount;
         for (let j = 0; j < playerCount; ++j)
             playerCards.push(cards.slice(j * playerCardCount, (j + 1) * playerCardCount));

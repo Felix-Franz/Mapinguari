@@ -4,7 +4,6 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Badge } from "reactstrap";
 import Avatar from "../../../../components/avatar/Avatar";
-import CardEnum from "../../../../core/types/CardEnum";
 import PlayerMindEnum from "../../../../core/types/PlayerMindEnum";
 import PlayerType from "../../../../core/types/PlayerType";
 import GameCard from "../gamecard/GameCard";
@@ -16,8 +15,9 @@ const GamePlayer: FC<{
     className?: string,
     player: PlayerType,
     me: string,
-    onCardClick?: (player: PlayerType, cardIndex: number) => void
-}> = ({ className, me, player, onCardClick }) => {
+    onCardClick?: (player: PlayerType, cardIndex: number) => void,
+    cardsAlwaysVisible?: boolean
+    }> = ({ className, me, player, onCardClick, cardsAlwaysVisible = false}) => {
     const { t } = useTranslation();
     const [expanded, setRawExpanded] = useState<boolean>(false);
 
@@ -54,7 +54,7 @@ const GamePlayer: FC<{
         </div>
         <p className={`mb-2 ${player.inTurn ? "game-player-turn-" : "text-"}${color} ${player.inTurn ? "" : "d-none"}`}>{t("Game.Table.GamePlayer.Player'sTurn")}</p>
         {player.cards!.map((c, i) =>
-            <GameCard flipped={c !== CardEnum.UNKNOWN} onClick={onCardClick && expanded ? () => onCardClick(player, i) : undefined} itemMind={c} size={expanded ? "md" : "sm"} key={i} />
+            <GameCard flipped={cardsAlwaysVisible || c.visible} onClick={onCardClick && expanded ? () => onCardClick(player, i) : undefined} itemMind={c.type} size={expanded ? "md" : "sm"} key={i} />
         )}
     </div>
 }

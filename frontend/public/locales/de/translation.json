@@ -34,13 +34,15 @@
             "PlayerLeft": "{{name}} hat den Raum verlassen!",
             "Leave": "Raum verlassen",
             "Left": "Du hast den Raum verlassen!",
-            "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!"
+            "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!",
+            "SelectCardFailed": "Karte konnte nicht ausgewählt werden! Bitte versuche es erneut!",
+            "NextRound": "Neue Karten sind im Spiel! Tauscht euch über euer Deck aus aus, denn die neue Runde startet jetzt!"
         },
         "Message": {
             "GameStarted": {
                 "Header": "Spiel gestartet",
-                "MessageGood": "Das Spiel wurde gestartet. Als verfechter des Guten ist dein Ziel alle blauen Karten aufzudecken! Happy Hunting!",
-                "MessageBad": "Das Spiel wurde gestartet. Als verfechter des Bösen ist dein Ziel alle roten Karten aufzudecken! Happy Hunting!"
+                "MessageGood": "Das Spiel wurde gestartet. Als verfechter des Guten ist dein Ziel alle blauen Karten aufzudecken! Tauscht euch über die Karten aus und dann: Happy Hunting!",
+                "MessageBad": "Das Spiel wurde gestartet. Als verfechter des Bösen ist dein Ziel alle roten Karten aufzudecken! Tauscht euch über die Karten aus und dann: Happy Hunting!"
             }
         },
         "Tabs": {
@@ -87,19 +89,33 @@
             "Start": "Spiel starten",
             "StartFailed": "Spiel konnte nicht gestartet werden!",
             "StartPlayerDisconnected": "Das Spiel kann erst gestartet werden, wenn alle Spieler verbunden sind. Warte auf {{names}} oder kicke sie, um das Spiel zu starten!",
+            "StartWrongPlayerCount": "Das Spiel kann nur mit {{minPlayers}} bis {{maxPlayers}} gespielt werden! Bitte überprüfe die Anzahl der Spieler!",
             "Leave": "Raum verlassen"
         },
         "Table": {
             "GameProgress": {
-                "Rounds": "Runden",
-                "Cards": "Karten"
+                "Round": "Runde",
+                "Move": "Spielzug",
+                "Over": "Alle Runden\nvorbei"
             },
             "GamePlayer": {
                 "Player'sTurn": "Der Spieler ist an der Reihe!"
             },
             "NotYourTurn": "Du bist noch nicht dran. Warte bis du an der Reihe bist!",
-            "DontClickOnYourself": "Du kannst nicht deine eigene Karte auswählen! Wähle stattdessen einfach eine Karte deiner Mitspieler!"
-        }
+            "DontClickOnYourself": "Du kannst nicht deine eigene Karte auswählen! Wähle stattdessen einfach eine Karte deiner Mitspieler!",
+            "CardAlreadyVisible": "Die Karte wurde bereits aufgedeckt! Wähle eine andere aus!",
+            "Cards": "Karten",
+            "CardsDescription": "die bereits in einer vorherigen Runde aufgedeckt wurden",
+            "NoCards": "Noch keine Karten vorhanden",
+            "AllDecks": "Alle Decks",
+            "AllDecksDescription": "mit allen Spielern",
+            "YourDeck": "Dein Deck",
+            "YourDeckDescription": "mit aufgedeckten Karten"
+        },
+        "GoodWon": "Das gute Team hat gewonnen!",
+        "BadWon": "Das böse Team  hat gewonnen!",
+        "NewMatch": "Neues Spiel starten",
+        "BackToLobby": "Zurück zur Lobby"
     },
     "Story": {
         "Title": "Story",
