@@ -10,6 +10,11 @@ include:
   - template: Security/License-Scanning.gitlab-ci.yml
   - template: Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
+  - template: Security/Container-Scanning.gitlab-ci.yml
+
+variables:
+    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/dev:latest      # required for container scanning
+
 
 
 .npm-build:
