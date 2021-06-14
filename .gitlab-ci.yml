@@ -13,7 +13,7 @@ include:
   - template: Security/Container-Scanning.gitlab-ci.yml
 
 variables:
-    CI_APPLICATION_REPOSITORY: $CI_REGISTRY_IMAGE/dev:latest      # required for container scanning
+    DOCKER_IMAGE: $CI_REGISTRY_IMAGE/dev:latest      # required for container scanning
 
 
 
