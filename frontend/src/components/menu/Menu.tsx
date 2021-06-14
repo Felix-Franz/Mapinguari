@@ -22,7 +22,7 @@ const Menu = () => {
     return (
         <div className="menu-wrapper">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 4" className="menu-svg">
-                <path d="M 0 0 C 1 0 1 1 1 1 C 1 1 1 3 3 3 L 7 3 C 8 3 8 4 8 4 L 8 0 L 0 0"/>
+                <path d="M 0 0 C 1 0 2 0 2 1 C 2 2 3 3 4 3 L 6 3 C 8 3 8 4 8 4 L 8 0 L 0 0"/>
             </svg>
             <div className="menu-content">
                 <UncontrolledDropdown size="sm" className="mt-2">

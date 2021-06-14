@@ -15,8 +15,6 @@ $height: 4em;
   width: $width;
 }
 .menu-svg>path {
-  stroke: get-color("primary-shade");
-  stroke-width: 0.1;
   fill: get-color("primary");
 }
 
