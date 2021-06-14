@@ -11,6 +11,7 @@ include:
   - template: Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Container-Scanning.gitlab-ci.yml
+  - template: Security/Secret-Detection.gitlab-ci.yml
 
 variables:
     DOCKER_IMAGE: $CI_REGISTRY_IMAGE/dev:latest      # required for container scanning
