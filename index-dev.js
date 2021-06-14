@@ -1,8 +1,8 @@
-const { exec } = require('child_process');
+const { spawn } = require('child_process');
 
 const start = [
-    { cwd: "backend", command: "npm start -- -l silly" },
-    { cwd: "frontend", command: "npm start" }
+    { cwd: "backend", command: "npm", arguments: ["start", "--", "-l", "silly"] },
+    { cwd: "frontend", command: "npm", arguments: ["start"] }
 ];
 
 if (process.env["GITPOD_WORKSPACE_URL"]) {
@@ -13,9 +13,9 @@ if (process.env["GITPOD_WORKSPACE_URL"]) {
     process.env["FRONTEND_URL"] = "http://localhost:3000";
 }
 
-start.forEach(({cwd, command}) => {
+start.forEach(({cwd, command, arguments}) => {
 
-    const proc = exec(command, { cwd }, (error, stdout, stderr) => {
+    const proc = spawn(command, arguments, { cwd }, (error, stdout, stderr) => {
         if (error) {
             console.error(`exec error: ${error}`);
             return;
