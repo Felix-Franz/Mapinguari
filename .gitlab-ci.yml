@@ -1,5 +1,6 @@
 stages:
   - test
+  - build
   - build-npm
   - build-docker
   - deploy-image
