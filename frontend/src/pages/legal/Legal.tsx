@@ -39,7 +39,7 @@ const Legal = () => {
                         <a href={`tel:${config.mail}`}>{config.phone}</a>
                     </div>
                     <div className={config.web ? "" : "d-none"}>
-                        <a target="_blank" rel="noreferrer" href={`//${config.web}`}>{config.web}</a>
+                        <a target="_blank noopener" rel="noreferrer" href={`//${config.web}`}>{config.web}</a>
                     </div>
                 </p>
                 <p className="pre-wrap">{t('Legal.About.PostText')}</p>

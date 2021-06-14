@@ -17,7 +17,7 @@ const Home = () => {
                 {/* reactstrap error https://github.com/reactstrap/reactstrap/issues/1833 */}
                 Game is under development! Therefore, gaming may still encounter problems.
                 <br />
-                <a href="https://gitlab.com/FelixFranz/mapinguari" target="_blank" rel="noreferrer">Click here</a> for more information!
+                <a href="https://gitlab.com/FelixFranz/mapinguari" target="_blank noopener" rel="noreferrer">Click here</a> for more information!
             </Alert>
             <Story className="mt-5" />
             <Instructions className="mt-5" />
