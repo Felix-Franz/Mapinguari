@@ -5,10 +5,36 @@ stages:
   - deploy-image
   - deploy-activate
 
+
 include:
   - template: Security/License-Scanning.gitlab-ci.yml
   - template: Dependency-Scanning.gitlab-ci.yml
   - template: Security/SAST.gitlab-ci.yml
+
+eslint-sast:
+  only:
+    - master
+
+gemnasium-dependency_scanning:
+  only:
+    - master
+
+license_scanning:
+  only:
+    - master
+
+nodejs-scan-sast:
+  only:
+    - master
+
+retire-js-dependency_scanning:
+  only:
+    - master
+
+semgrep-sast:
+  only:
+    - master
+
 
 .npm-build:
   script:
