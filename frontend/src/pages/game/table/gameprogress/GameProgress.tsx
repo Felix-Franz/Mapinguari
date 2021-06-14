@@ -14,7 +14,7 @@ const GameProgress: FC<{
 }> = ({ cards, players }) => {
     const { t } = useTranslation();
 
-    const allCards = players.map(p => p.cards!).reduce((prev, c) => prev.concat(c), []).concat(cards)
+    const allCards = players.map(p => p.cards!).reduce((prev, c) => prev.concat(c), []).concat(cards);
     const percent = (allCards.filter(c => c.visible).length) / (0.8 * allCards.length) * 100;
     const round = cards.length / players.length + 1;
     const move = players.map(p => p.cards!).reduce((prev, c) => prev.concat(c), []).filter(c => c.visible).length + 1;

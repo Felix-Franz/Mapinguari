@@ -143,7 +143,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 return <Table me={me!} roomName={roomName} players={players} cards={cards} state={state} />
             default:
                 const code = props.match.params.code;
-                return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} code={code} />;
+                return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} setCards={setCards} code={code} />;
         }
     }
 

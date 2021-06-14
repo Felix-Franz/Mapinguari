@@ -88,6 +88,7 @@ export default class GameManager {
             ClientConnector.emitToRoom(code, SocketServerEvents.PlayerJoined, { name, avatar, role, connected, inTurn });
         } else if (!room.players[playerIndex]?.connected) { //player name exists but is disconnected
             const role = room!.players[playerIndex].role;
+            const cards = room!.players[playerIndex].cards;
             const connected = true;
             const inTurn = false;
             room!.players[playerIndex] = {
@@ -95,10 +96,17 @@ export default class GameManager {
                 name,
                 avatar,
                 role,
+                cards,
                 connected,
                 inTurn
             }
-            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerReconnected, { name, avatar, role, connected, inTurn });
+            ClientConnector.emitToRoom(code, SocketServerEvents.PlayerReconnected, {
+                name, avatar, role, connected, inTurn, cards: cards?.map(c => {
+                    if (!c.visible)
+                        c.type = CardEnum.UNKNOWN;
+                    return c;
+                })
+            });
         } else    //player name exists but is still connected
             throw new Error("Player with this name is already connected!");
 
@@ -108,16 +116,8 @@ export default class GameManager {
             code: room!.code,
             name: room!.name,
             state: room!.state,
-            players: room!.players.map(p => {
-                return {
-                    name: p.name,
-                    avatar: p.avatar,
-                    role: p.role,
-                    connected: p.connected,
-                    inTurn: p.inTurn,
-                };
-            }),
-            cards: []
+            players: GameManagerUtil.hidePlayerData(room.players, playerIndex === -1 ? room!.players[room.players.length - 1] : room!.players[playerIndex]),
+            cards: room!.cards
         };
     }
 
@@ -132,7 +132,12 @@ export default class GameManager {
             r.players[playerIndex].socketId = undefined;
             r.players[playerIndex].connected = false;
             if (r.players.filter(p => p.connected).length > 0) {
-                ClientConnector.emitToRoom(r.code, SocketServerEvents.PlayerDisconnected, { name: r.players[playerIndex].name, avatar: r.players[playerIndex].avatar, role: r.players[playerIndex].role, connnected: false });
+                ClientConnector.emitToRoom(r.code, SocketServerEvents.PlayerDisconnected, { name: r.players[playerIndex].name, avatar: r.players[playerIndex].avatar, role: r.players[playerIndex].role, connnected: false, inTurn: r.players[playerIndex].inTurn, cards: r.players[playerIndex].cards?.map(c => {
+                        if (!c.visible)
+                            c.type = CardEnum.UNKNOWN;
+                        return c;
+                    })
+                });
                 Logger.log(LEVELS.silly, `Dissconnect ${r.players[playerIndex].name} from room ${r.name} with code ${r.code}`);
                 await r.save();
             }
