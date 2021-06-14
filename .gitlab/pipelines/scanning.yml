@@ -4,17 +4,6 @@ include:
   - template: Security/SAST.gitlab-ci.yml
   - template: Security/Container-Scanning.gitlab-ci.yml
   - template: Security/Secret-Detection.gitlab-ci.yml
-  - remote: 'https://raw.githubusercontent.com/dependabot/dependabot-script/main/.gitlab-ci.example.yml'  # https://bobbybouwmann.nl/blog/dependabot-on-gitlab
 
 variables:
     DOCKER_IMAGE: $CI_REGISTRY_IMAGE/dev:latest      # required for container scanning
-
-
-# fixed for dependabot
-
-.dependabot:
-  image: dependabot/dependabot-core:0.152.1
-
-build-image:
-  rules:
-    - if: '"1" != "1"'

@@ -48,8 +48,6 @@ dev-build-npm:
   stage: build-npm
   only:
     - master
-  except:
-    - schedules
   image: node:15-slim
   script:
     - !reference [.npm-build, script]
@@ -64,8 +62,6 @@ dev-build-docker:
   needs: ["dev-build-npm"]
   only:
     - master
-  except:
-    - schedules
   image: docker:stable
   services:
     - docker:dind
@@ -83,8 +79,6 @@ dev-deploy-image:
   needs: ["dev-build-docker"]
   only:
     - master
-  except:
-    - schedules
   image: docker:stable
   services:
     - docker:dind
@@ -101,8 +95,6 @@ dev-deploy-activate:
   needs: ["dev-deploy-image"]
   only:
     - master
-  except:
-    - schedules
   image: dickeyxxx/heroku-cli
   variables:
     GIT_STRATEGY: none
