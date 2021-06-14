@@ -1,4 +1,4 @@
-FROM node:15-slim
+FROM node:16-slim
 MAINTAINER Felix Franz <www.felix-franz.com>
 
 RUN apt-get update \

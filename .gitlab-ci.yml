@@ -1,8 +1,13 @@
 stages:
+  - test
+  - build
   - build-npm
   - build-docker
   - deploy-image
   - deploy-activate
+
+include:
+  - local: ".gitlab/pipelines/scanning.yml"
 
 .npm-build:
   script:
