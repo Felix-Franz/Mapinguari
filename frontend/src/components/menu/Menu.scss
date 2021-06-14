@@ -11,53 +11,18 @@ $height: 4em;
   z-index: 1;
 }
 
-.menu-box1 {
-  position: fixed;
-  background-color: get-color("primary");
-  right: 0;
-  width: $width * 0.75;
-  height: $height * 0.75;
-  border-bottom-left-radius: $height / 2;
+.menu-svg {
+  width: $width;
 }
-
-.menu-box2 {
-  position: fixed;
-  background-color: get-color("primary");
-  right: $width * 0.75;
-  width: $width * 0.25;
-  height: $height * 0.75 / 2;
-}
-
-.menu-box3 {
-  position: fixed;
-  background-color: get-color("dark");
-  right: $width * 0.75;
-  width: $width * 0.25;
-  height: $height * 0.75 / 2;
-  border-top-right-radius: $height * 0.75 / 2;
-}
-
-.menu-box4 {
-  position: fixed;
-  background-color: get-color("primary");
-  top: $height * 0.75;
-  right: 0;
-  width: $width * 0.25;
-  height: $height * 0.25;
-}
-
-.menu-box5 {
-  position: fixed;
-  background-color: get-color("dark");
-  top: $height * 0.75;
-  right: 0;
-  width: $width * 0.25;
-  height: $height * 0.25;
-  border-top-right-radius: $width;
+.menu-svg>path {
+  stroke: get-color("primary-shade");
+  stroke-width: 0.1;
+  fill: get-color("primary");
 }
 
 .menu-content {
-  position: fixed;
+  position: absolute;
+  top: 0;
   right: 0;
   width: $width * 0.75;
   height: $height * 0.75;
