@@ -1,8 +1,12 @@
 stages:
+  - test
   - build-npm
   - build-docker
   - deploy-image
   - deploy-activate
+
+include:
+  - template: Security/License-Scanning.gitlab-ci.yml
 
 .npm-build:
   script:
