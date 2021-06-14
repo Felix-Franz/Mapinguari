@@ -8,3 +8,8 @@ include:
 
 variables:
     DOCKER_IMAGE: $CI_REGISTRY_IMAGE/dev:latest      # required for container scanning
+
+
+build-image:
+  rules:
+    if: 1 != 1
