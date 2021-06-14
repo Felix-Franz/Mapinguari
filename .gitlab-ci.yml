@@ -7,6 +7,7 @@ stages:
 
 include:
   - template: Security/License-Scanning.gitlab-ci.yml
+  - template: Dependency-Scanning.gitlab-ci.ym
 
 .npm-build:
   script:
