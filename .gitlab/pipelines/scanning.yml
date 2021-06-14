@@ -13,7 +13,7 @@ variables:
 # fixed for dependabot
 
 .dependabot:
-  image: dependabot/dependabot-core
+  image: dependabot/dependabot-core:0.152.1
 
 build-image:
   rules:
