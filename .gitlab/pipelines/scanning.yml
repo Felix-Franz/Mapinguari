@@ -10,6 +10,11 @@ variables:
     DOCKER_IMAGE: $CI_REGISTRY_IMAGE/dev:latest      # required for container scanning
 
 
+# fixed for dependabot
+
+.dependabot:
+  image: dependabot/dependabot-core
+
 build-image:
   rules:
     - if: '"1" != "1"'
