@@ -5,7 +5,8 @@ export enum SocketClientEvents {
     LeaveRoom = "LeaveRoom",
     StartGame = "StartGame",
     StopGame = "StopGame",
-    SelectCard = "SelectCard"
+    SelectCard = "SelectCard",
+    ChangeMeeting = "ChangeMeeting"
 };
 
 export enum SocketServerEvents {
@@ -20,5 +21,7 @@ export enum SocketServerEvents {
     PlayerLeft = "PlayerLeft",
     StartGameFailed = "StartGameFailed",
     ChangeGame = "ChangeGame",
-    StopGameFailed = "StopGameFailed"
+    StopGameFailed = "StopGameFailed",
+    MeetingChanged = "MeetingChanged",
+    MeetingChangedFailed = "MeetingChangedFailed"
 };

@@ -52,7 +52,7 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
         });
     }
 
-    return (<div>
+    return (<>
         <Navbar color="secondary" dark expand={true} className="p-0">
             <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
             <Collapse isOpen={isOpen} navbar>
@@ -81,7 +81,7 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
             </Collapse>
         </Navbar>
         {tabPage}
-    </div>);
+    </>);
 };
 
 export default Tabs;

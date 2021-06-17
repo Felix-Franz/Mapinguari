@@ -28,7 +28,7 @@ export default class GameManager {
 
     /**
      * Creates a new room
-     * @param {string} name room name
+     * @param {string} name room nam
      * @returns {string} roomId of the new room
      */
     public static async createRoom(name: string): Promise<string> {
@@ -117,7 +117,8 @@ export default class GameManager {
             name: room!.name,
             state: room!.state,
             players: GameManagerUtil.hidePlayerData(room.players, playerIndex === -1 ? room!.players[room.players.length - 1] : room!.players[playerIndex]),
-            cards: room!.cards
+            cards: room!.cards,
+            meeting: room!.meeting
         };
     }
 
@@ -132,7 +133,8 @@ export default class GameManager {
             r.players[playerIndex].socketId = undefined;
             r.players[playerIndex].connected = false;
             if (r.players.filter(p => p.connected).length > 0) {
-                ClientConnector.emitToRoom(r.code, SocketServerEvents.PlayerDisconnected, { name: r.players[playerIndex].name, avatar: r.players[playerIndex].avatar, role: r.players[playerIndex].role, connnected: false, inTurn: r.players[playerIndex].inTurn, cards: r.players[playerIndex].cards?.map(c => {
+                ClientConnector.emitToRoom(r.code, SocketServerEvents.PlayerDisconnected, {
+                    name: r.players[playerIndex].name, avatar: r.players[playerIndex].avatar, role: r.players[playerIndex].role, connnected: false, inTurn: r.players[playerIndex].inTurn, cards: r.players[playerIndex].cards?.map(c => {
                         if (!c.visible)
                             c.type = CardEnum.UNKNOWN;
                         return c;
@@ -259,6 +261,28 @@ export default class GameManager {
             cards: room.cards
         }));
         room.save();
+    }
+
+    /**
+     * Changes meeting
+     * @param {string} code roomCode
+     * @param {string} sockeId of client
+     * @param {boolean} enableMeeting should meeting be enabled
+     */
+    public static async changeMeeting(code: string, socketId: string, enableMeeting: boolean) {
+        if (!await this.isAdmin(socketId, code))
+            throw new Error("Meeting can only be changed by admins!");
+        const room = (await Models.Rooms.findOne({ code }))!;
+
+        if (enableMeeting) {
+            room!.meeting = Generator.generateMeeting(code);
+        }
+        else {
+            room.meeting = undefined
+        }
+
+        ClientConnector.emitToRoom(code, SocketServerEvents.MeetingChanged, room!.meeting);
+        await room.save()
     }
 
     /**

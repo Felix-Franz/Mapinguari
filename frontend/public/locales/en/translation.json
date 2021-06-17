@@ -36,7 +36,9 @@
             "Left": "You left the room!",
             "LeftError": "Unfortunately {{name}} could not leave the room because of a error!",
             "SelectCardFailed": "Card could not be selected! Please try again!",
-            "NextRound": "New cards are in the game! Talk about your card deck, because the new round starts now!"
+            "NextRound": "New cards are in the game! Talk about your card deck, because the new round starts now!",
+            "MeetingEnabled": "The meeting has been activated. Click on the button on the right to join!",
+            "MeetingDisabled": "The meeting has been disabled!"
         },
         "Message": {
             "GameStarted": {
@@ -61,6 +63,12 @@
                 "Message": "Do you really want to end the game?",
                 "Error": "Game could not be stopped!"
             }
+        },
+        "Meeting": {
+            "Title": "Meeting",
+            "Loading": "Loading meeting...",
+            "Description": "Your game admin wants to start a meeting! Click the button to join!",
+            "Join": "Join meeting"
         },
         "Join": {
             "Header": "Join game",
@@ -90,6 +98,9 @@
             "StartFailed": "Could not start game!",
             "StartPlayerDisconnected": "The game can not be started until all players are connected. Wait for {{names}} or kick them to start the game!",
             "StartWrongPlayerCount": "The game can only be played with {{minPlayers}} to {{maxPlayers}} players! Please check the number of players!",
+            "EnableMeeting": "Enable meeting",
+            "DisableMeeting": "Disable meeting",
+            "MeetingChangedFailed": "Meeting konnte nicht verändert werden!",
             "Leave": "Leave Room"
         },
         "Table": {

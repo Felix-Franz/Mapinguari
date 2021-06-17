@@ -4,6 +4,7 @@ import { Alert, Button, ButtonGroup, Collapse, Container, FormGroup, Input, Spin
 import Avatar, { AvatarConfigurationEditor, AvatarConfigurationOptions } from "../../../components/avatar/Avatar";
 import AvatarConfigurationType from "../../../core/types/AvatarConfigurationType";
 import CardType from "../../../core/types/CardType";
+import MeetingType from "../../../core/types/MeetingType";
 import PlayerType from "../../../core/types/PlayerType";
 import RoomStateEnum from "../../../core/types/RoomStateEnum";
 import RoomType from "../../../core/types/RoomType";
@@ -18,9 +19,10 @@ const Join: FC<{
     setRoomCode: (code: string) => void,
     setMe: (name: string) => void,
     setState: (state: RoomStateEnum) => void,
-    setCards: (cards: CardType[]) => void
+    setCards: (cards: CardType[]) => void,
+    setMeeting: (meeting?: MeetingType) => void,
     code: string
-}> = ({ setPlayers, setRoomName, setRoomCode, setMe, setState, setCards, code }) => {
+}> = ({ setPlayers, setRoomName, setRoomCode, setMe, setState, setCards, setMeeting, code }) => {
     const { t } = useTranslation();
 
     const [exists, setExists] = useState<boolean>(true);
@@ -57,6 +59,7 @@ const Join: FC<{
                 setMe(name);
                 setCards(data.cards);
                 setState(data.state);
+                setMeeting(data.meeting);
                 PlayerStorage.setPlayer({name, avatar});
             } else {
                 setShowError(true);

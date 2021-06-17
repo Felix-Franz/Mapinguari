@@ -54,6 +54,16 @@ export default class Models {
             cards: [cardSchema],
             inTurn: Boolean
         });
+        const meetingSchema = new Schema({
+            roomName: {
+                type: String,
+                required: true
+            },
+            password: {
+                type: String,
+                required: true
+            }
+        });
         const roomSchema = new Schema({
             code: {
                 type: String,
@@ -70,7 +80,11 @@ export default class Models {
                 default: RoomStateEnum.LOBBY
             },
             players: [playerSchema],
-            cards: [cardSchema]
+            cards: [cardSchema],
+            meeting: {
+                type: meetingSchema,
+                reqired: false
+            }
         });
         this.rooms = mongoose.model<RoomType & Document>("Rooms", roomSchema)
 

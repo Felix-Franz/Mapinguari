@@ -4,6 +4,7 @@ import CardEnum from "../core/types/CardEnum";
 import PlayerMindEnum from "../core/types/PlayerMindEnum";
 import PlayerType from "../core/types/PlayerType";
 import CardType from "../core/types/CardType";
+import MeetingType from "../core/types/MeetingType";
 
 export default class Generator {
 
@@ -67,7 +68,7 @@ export default class Generator {
             cards.push({
                 type: availableCards[randomIndex],
                 visible: false
-        });
+            });
             availableCards = availableCards.filter((m, i) => i !== randomIndex);
         }
 
@@ -79,8 +80,40 @@ export default class Generator {
         return playerCards;
     }
 
+    /**
+     * Selects a random player as start player
+     * @param {PlayerType[]} players list of avaliable players
+     * @returns {PlayerType} a start player 
+     */
     public static selectRandomStartPlayer(players: PlayerType[]): PlayerType {
         const inTurn = Math.floor(players.length * Math.random());
         return players[inTurn];
+    }
+
+    /**
+     * Generates a random string
+     * @param {number} length of random string
+     * @param {string} characters possible characters
+     * @returns {stirng} random string
+     */
+    public static generateRandomString(length: number, characters?: string) {
+        var result = '';
+        if (!characters)
+            characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        for (var i = 0; i < length; i++)
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+        return result;
+    }
+
+    /**
+     * Generates meeting credentials
+     * @param {string} code room code
+     * @returns {MeetingType} meeting credentials
+     */
+    public static generateMeeting(code: string): MeetingType {
+        return {
+            roomName: `Mapinguary Meeting ${code}`,
+            password: this.generateRandomString(20)
+        }
     }
 }

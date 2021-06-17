@@ -1,10 +1,11 @@
-import { faClipboard, faPaperPlane, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faClipboard, faPaperPlane, faPhone, faPhoneSlash, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { toast } from "react-toastify";
 import { Alert, Button, ButtonGroup, Container } from "reactstrap";
 import GameConfig from "../../../core/GameConfig";
+import MeetingType from "../../../core/types/MeetingType";
 import PlayerRoleEnum from "../../../core/types/PlayerRoleEnum";
 import PlayerType from "../../../core/types/PlayerType";
 import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
@@ -14,8 +15,9 @@ const Lobby: FC<{
     roomName: string,
     roomCode: string,
     me: string,
-    players: PlayerType[]
-}> = ({ roomName, roomCode, me, players }) => {
+    players: PlayerType[],
+    meeting?: MeetingType
+}> = ({ roomName, roomCode, me, players, meeting }) => {
     const { t } = useTranslation();
     const [loading, setLoading] = useState<boolean>(false);
 
@@ -24,9 +26,13 @@ const Lobby: FC<{
             toast.error(t("Game.Lobby.StartFailed"));
             setLoading(false);
         });
+        SocketClient.on(SocketServerEvents.MeetingChangedFailed, () => {
+            toast.error(t("Game.Lobby.MeetingChangedFailed"));
+        });
 
         return () => {
             SocketClient.off(SocketServerEvents.StartGameFailed);
+            SocketClient.off(SocketServerEvents.MeetingChangedFailed);
         };
     });
 
@@ -88,6 +94,11 @@ const Lobby: FC<{
                 <Button color="primary" onClick={startGame} outline disabled={loading || players.filter(p => !p.connected).length > 0 || players.length < minPlayers || players.length > maxPlayers}>
                     <span className="mr-2">🚀</span>
                     {t("Game.Lobby.Start")}
+                </Button>
+                <br />
+                <Button className="mt-3" color="primary" onClick={() => SocketClient.emit(SocketClientEvents.ChangeMeeting, !meeting)} outline>
+                    <FontAwesomeIcon className="mr-2" icon={meeting ? faPhoneSlash : faPhone} />
+                    {meeting ? t("Game.Lobby.DisableMeeting") : t("Game.Lobby.EnableMeeting")}
                 </Button>
             </div>
             <div className="mt-5">

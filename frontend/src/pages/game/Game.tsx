@@ -13,10 +13,12 @@ import PlayerType from "../../core/types/PlayerType";
 import RoomStateEnum from "../../core/types/RoomStateEnum";
 import { SocketServerEvents } from "../../core/types/SocketEventsEnum";
 import SocketClient from "../../libraries/SocketClient";
+import MeetingSplitter from "./meeting/MeetingSplitter";
 import Join from "./join/Join";
 import Lobby from "./lobby/Lobby";
 import Table from "./table/Table";
 import Tabs from "./tabs/Tabs";
+import MeetingType from "../../core/types/MeetingType";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
@@ -27,6 +29,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const [cards, setCards] = useState<CardType[]>([]);
     const [roomName, setRoomName] = useState<string>("");
     const [roomCode, setRoomCode] = useState<string>("");
+    const [meeting, setMeeting] = useState<MeetingType | undefined>();
 
     useEffect(() => {
         SocketClient.on(SocketServerEvents.PlayerJoined, (player: PlayerType) => {
@@ -121,6 +124,14 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 }
         })
 
+        SocketClient.on(SocketServerEvents.MeetingChanged, (meeting: MeetingType) => {
+            setMeeting(meeting);
+            if (meeting)
+                toast.success(t("Game.Toast.MeetingEnabled"));
+            else
+                toast.error(t("Game.Toast.MeetingDisabled"));
+        });
+
         return () => {
             SocketClient.off(SocketServerEvents.PlayerJoined);
             SocketClient.off(SocketServerEvents.PlayerReconnected);
@@ -129,33 +140,35 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
             SocketClient.off(SocketServerEvents.PlayerLeft);
             SocketClient.off(SocketServerEvents.RoomLeft);
             SocketClient.off(SocketServerEvents.ChangeGame);
+            SocketClient.off(SocketServerEvents.MeetingChanged);
         }
     });
 
-    const getState = () => {
+    const statePage = (() => {
 
         switch (state) {
             case RoomStateEnum.LOBBY:
-                return <Lobby roomName={roomName} roomCode={roomCode} me={me!} players={players} />
+                return <Lobby roomName={roomName} roomCode={roomCode} me={me!} players={players} meeting={meeting} />
             case RoomStateEnum.PROGRESS:
             case RoomStateEnum.GOODWON:
             case RoomStateEnum.BADWON:
                 return <Table me={me!} roomName={roomName} players={players} cards={cards} state={state} />
             default:
                 const code = props.match.params.code;
-                return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} setCards={setCards} code={code} />;
+                return <Join setPlayers={setPlayers} setRoomName={setRoomName} setRoomCode={setRoomCode} setMe={setMe} setState={setState} setCards={setCards} setMeeting={setMeeting} code={code} />;
         }
-    }
+    })();
 
 
-    const statePage = getState();
     const userIsAdmin = players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN;
 
     if (state === undefined)
         return statePage;
     else return <Tabs players={players} me={me!} roomCode={roomCode} allowStop={userIsAdmin && state !== RoomStateEnum.LOBBY}
         allowKick={userIsAdmin && state === RoomStateEnum.LOBBY} >
-        {statePage}
+        <MeetingSplitter me={me} meeting={meeting}>
+            {statePage}
+        </MeetingSplitter>
     </Tabs >
 }
 

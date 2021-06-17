@@ -36,7 +36,9 @@
             "Left": "Du hast den Raum verlassen!",
             "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!",
             "SelectCardFailed": "Karte konnte nicht ausgewählt werden! Bitte versuche es erneut!",
-            "NextRound": "Neue Karten sind im Spiel! Tauscht euch über euer Deck aus aus, denn die neue Runde startet jetzt!"
+            "NextRound": "Neue Karten sind im Spiel! Tauscht euch über euer Deck aus aus, denn die neue Runde startet jetzt!",
+            "MeetingEnabled": "Das Meeting wurde aktiviert. Klicke auf den rechten Button, um teilzunehmen!",
+            "MeetingDisabled": "Das Meeting wurde deaktiviert!"
         },
         "Message": {
             "GameStarted": {
@@ -61,6 +63,12 @@
                 "Message": "Willst du das Spiel wirklich beenden?",
                 "Error": "Spiel konnte nicht beendet werden!"
             }
+        },
+        "Meeting": {
+            "Title": "Meeting",
+            "Loading": "Lade Meeting...",
+            "Description": "Dein Spielleiter möchte, dass du an dem Video-Meeting teilnimmst. Klicke auf den Button, um beitzutreten!",
+            "Join": "Meeting beitreten"
         },
         "Join": {
             "Header": "Spiel beitreten",
@@ -90,6 +98,9 @@
             "StartFailed": "Spiel konnte nicht gestartet werden!",
             "StartPlayerDisconnected": "Das Spiel kann erst gestartet werden, wenn alle Spieler verbunden sind. Warte auf {{names}} oder kicke sie, um das Spiel zu starten!",
             "StartWrongPlayerCount": "Das Spiel kann nur mit {{minPlayers}} bis {{maxPlayers}} gespielt werden! Bitte überprüfe die Anzahl der Spieler!",
+            "EnableMeeting": "Meeting aktivieren",
+            "DisableMeeting": "Meeting deaktivieren",
+            "MeetingChangedFailed": "Meeting konnte nicht verändert werden!",
             "Leave": "Raum verlassen"
         },
         "Table": {
