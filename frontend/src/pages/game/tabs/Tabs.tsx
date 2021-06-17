@@ -1,4 +1,4 @@
-import { faGamepad, faInfo, faPowerOff, faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad, faInfo, faPhone, faPowerOff, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,11 +10,22 @@ import SocketClient from "../../../libraries/SocketClient";
 import TabInfo from "./TabInfo";
 import TabPlayers from "./TabPlayers";
 import { toast } from "react-toastify";
+import MeetingSplitter from "../meeting/MeetingSplitter";
+import MeetingType from "../../../core/types/MeetingType";
+import Meeting from "../meeting/Meeting";
 
-const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomCode: string, allowKick: boolean, allowStop: boolean }> = ({ children, players, me, roomCode, allowKick, allowStop }) => {
+const Tabs: FC<{
+    children: JSX.Element,
+    players: PlayerType[],
+    me: string,
+    roomCode: string,
+    allowKick: boolean,
+    allowStop: boolean,
+    meeting?: MeetingType
+}> = ({ children, players, me, roomCode, allowKick, allowStop, meeting }) => {
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
-    const [tab, setTab] = useState<"game" | "players" | "info">("game");
+    const [tab, setTab] = useState<"game" | "meeting" | "players" | "info">("game");
 
     useEffect(() => {
         SocketClient.on(SocketServerEvents.StopGameFailed, () => toast.error(t("Game.Tabs.Stop.Error")));
@@ -24,18 +35,26 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
         }
     });
 
-    let tabPage;
-    switch (tab) {
-        case "game":
-            tabPage = children;
-            break;
-        case "players":
-            tabPage = <TabPlayers players={players} me={me} roomCode={roomCode} allowKick={allowKick} />;
-            break;
-        case "info":
-            tabPage = <TabInfo />;
-            break;
-    }
+    let tabPage = <>
+        <div className={tab === "game" ? "" : "d-none"}>{children}</div>
+        <Meeting className={tab === "meeting" ? "" : "d-none"} meeting={meeting!} me={me} />
+        <TabPlayers className={tab === "players" ? "" : "d-none"} players={players} me={me} roomCode={roomCode} allowKick={allowKick} />
+        <TabInfo className={tab === "info" ? "" : "d-none"} />
+    </>;
+    // switch (tab) {
+    //     case "game":
+    //         tabPage = children;
+    //         break;
+    //     case "meeting":
+    //         tabPage = <Meeting meeting={meeting!} me={me} />
+    //         break;
+    //     case "players":
+    //         tabPage = <TabPlayers players={players} me={me} roomCode={roomCode} allowKick={allowKick} />;
+    //         break;
+    //     case "info":
+    //         tabPage = <TabInfo />;
+    //         break;
+    // }
 
     const onStopClick = () => {
         AlertModal.show({
@@ -52,7 +71,7 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
         });
     }
 
-    return (<>
+    return (<div>
         <Navbar color="secondary" dark expand={true} className="p-0">
             <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
             <Collapse isOpen={isOpen} navbar>
@@ -60,6 +79,11 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
                     <NavItem className="mx-auto">
                         <NavLink onClick={() => setTab("game")} active={tab === "game"} className="text-center pointer">
                             <FontAwesomeIcon icon={faGamepad} size="2x" />
+                        </NavLink>
+                    </NavItem>
+                    <NavItem className={`mx-auto d-md-none ${meeting ? "" : "d-none"}`}>
+                        <NavLink onClick={() => setTab("meeting")} active={tab === "meeting"} className="text-center pointer">
+                            <FontAwesomeIcon icon={faPhone} size="2x" />
                         </NavLink>
                     </NavItem>
                     <NavItem className="mx-auto">
@@ -80,8 +104,11 @@ const Tabs: FC<{ children: JSX.Element, players: PlayerType[], me: string, roomC
                 </Nav>
             </Collapse>
         </Navbar>
-        {tabPage}
-    </>);
+        <MeetingSplitter meeting={meeting} me={me} className="d-sm-none d-md-flex">
+            <div>{tabPage}</div>
+        </MeetingSplitter>
+        <div className="d-md-none">{tabPage}</div>
+    </div>);
 };
 
 export default Tabs;

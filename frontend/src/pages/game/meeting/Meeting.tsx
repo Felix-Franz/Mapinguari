@@ -1,27 +1,31 @@
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Spinner } from "reactstrap";
 import MeetingType from "../../../core/types/MeetingType";
 
 const JITSI_DOMAIN = "meet.jit.si";
+let scriptSet: boolean = false;
 
 const Meeting: React.FC<{
     meeting: MeetingType,
-    me?: string
-}> = ({ meeting, me }) => {
-    const {t} = useTranslation();
+    me?: string,
+    className?: string
+}> = ({ meeting, me, className }) => {
+    const { t } = useTranslation();
     const [status, setStatus] = useState<"loading" | "splash" | "meeting">("loading");
+    const meet = createRef<HTMLDivElement>();
 
     useEffect(() => {
-        const script = document.createElement("script");
-        script.src = `https://${JITSI_DOMAIN}/external_api.js`;
-        script.async = true;
-        script.onload = () => setStatus("splash");
-        document.body.appendChild(script);
-
-        return () => {
-            document.body.removeChild(script);
+        if (!scriptSet) {
+            scriptSet = true;
+            const script = document.createElement("script");
+            script.src = `https://${JITSI_DOMAIN}/external_api.js`;
+            script.async = true;
+            script.onload = () => setStatus("splash");
+            document.body.appendChild(script);
         }
+        else
+            setStatus("splash");
     }, []);
 
     const startMeeting = () => {
@@ -30,7 +34,7 @@ const Meeting: React.FC<{
             roomName: meeting.roomName,
             width: "100%",
             height: "100%",
-            parentNode: document.querySelector('#meet'),
+            parentNode: meet.current,
             configOverwrite: {
                 prejoinPageEnabled: false,
             },
@@ -52,24 +56,26 @@ const Meeting: React.FC<{
     }
 
     const stopMeeting = () => {
+        const meeting = document.getElementsByClassName("meeting");
+        for (let i = 0; i < meeting.length; ++i)
+            meeting.item(i)!.innerHTML = "";
         setStatus("splash");
-        document.querySelector('#meet')!.innerHTML = "";
     }
 
-    return <div>
-        <div className={status === "loading" ? "text-center mt-5" : "d-none"}>
+    return <div className={className}>
+        <div className={status === "loading" ? "text-center my-5" : "d-none"}>
             <h1>{t("Game.Meeting.Title")}</h1>
             <h3 className="mt-3">
                 <Spinner color="primary" className="mr-2" />
                 📞 {t("Game.Meeting.Loading")}
             </h3>
         </div>
-        <div className={status === "splash" ? "text-center mt-5" : "d-none"}>
+        <div className={status === "splash" ? "text-center my-5" : "d-none"}>
             <h1>{t("Game.Meeting.Title")}</h1>
             <p>{t("Game.Meeting.Description")}</p>
             <Button color="primary" outline onClick={startMeeting}>📞 {t("Game.Meeting.Join")}</Button>
         </div>
-        <div id="meet" className={status === "meeting" ? "" : "d-none"} style={{ width: "100%", height: "calc(100vh - 50px - 4em )" }}></div>
+        <div ref={meet} className={`meeting ${status === "meeting" ? "" : "d-none"}`} style={{ width: "100%", height: "calc(100vh - 50px - 4em )" }}></div>
     </div>
 }
 

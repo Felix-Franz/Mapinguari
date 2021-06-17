@@ -8,15 +8,17 @@ const MeetingSplitter: React.FC<{
     children: JSX.Element,
     meeting?: MeetingType,
     me?: string,
-}> = ({ children, meeting: meeting, me }) => {
+    className?: string
+}> = ({ children, meeting, me, className }) => {
 
-    if (meeting)
-        return <Split className="split">
+    if (!meeting)
+        return children
+    else
+        return <Split className={`split ${className}`}>
             {children}
             <Meeting meeting={meeting} me={me} />
         </Split>
-    else
-    return children;
+
 }
 
 export default MeetingSplitter;

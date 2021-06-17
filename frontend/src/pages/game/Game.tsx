@@ -13,7 +13,6 @@ import PlayerType from "../../core/types/PlayerType";
 import RoomStateEnum from "../../core/types/RoomStateEnum";
 import { SocketServerEvents } from "../../core/types/SocketEventsEnum";
 import SocketClient from "../../libraries/SocketClient";
-import MeetingSplitter from "./meeting/MeetingSplitter";
 import Join from "./join/Join";
 import Lobby from "./lobby/Lobby";
 import Table from "./table/Table";
@@ -165,10 +164,8 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     if (state === undefined)
         return statePage;
     else return <Tabs players={players} me={me!} roomCode={roomCode} allowStop={userIsAdmin && state !== RoomStateEnum.LOBBY}
-        allowKick={userIsAdmin && state === RoomStateEnum.LOBBY} >
-        <MeetingSplitter me={me} meeting={meeting}>
-            {statePage}
-        </MeetingSplitter>
+        allowKick={userIsAdmin && state === RoomStateEnum.LOBBY}  meeting={meeting}>
+        {statePage}
     </Tabs >
 }
 

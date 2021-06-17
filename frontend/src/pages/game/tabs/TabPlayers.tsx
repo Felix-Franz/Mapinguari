@@ -10,7 +10,13 @@ import PlayerType from "../../../core/types/PlayerType";
 import { SocketClientEvents } from "../../../core/types/SocketEventsEnum";
 import SocketClient from "../../../libraries/SocketClient";
 
-const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allowKick: boolean }> = ({ players, me, roomCode, allowKick }) => {
+const TabPlayers: FC<{
+    players: PlayerType[],
+    me: string,
+    roomCode: string,
+    allowKick: boolean,
+    className?: string
+}> = ({ players, me, roomCode, allowKick, className }) => {
     const { t } = useTranslation();
 
     const kick = (player: PlayerType) => {
@@ -24,7 +30,7 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
         })
     }
 
-    return <Container fluid className="text-center my-3">
+    return <Container fluid className={`text-center my-3 ${className || ""}`}>
         <h2>{t("Game.Tabs.Player.Title")}</h2>
         <Alert color="secondary" className={players.filter(p => !p.connected).length > 0 ? "" : "d-none"}>
             {t("Game.Tabs.Player.RejoinAlert", { names: players.filter(p => !p.connected).map(p => p.name).join(","), roomCode, link: window.location.toString() })}
@@ -44,7 +50,7 @@ const TabPlayers: FC<{ players: PlayerType[], me: string, roomCode: string, allo
                                 <Badge className={`ml-2 ${!p.connected ? "" : "d-none"}`} color="secondary">{t("Game.Tabs.Player.Disconnected")}</Badge>
                             </Col>
                             <Col xs="12" sm="3">
-                                                                <Button style={{ fontSize: 15 }} className={`ml-2 py-0 px-1 ${allowKick ? "" : "d-none"}`} onClick={() => kick(p)}>
+                                <Button style={{ fontSize: 15 }} className={`ml-2 py-0 px-1 ${allowKick ? "" : "d-none"}`} onClick={() => kick(p)}>
                                     <FontAwesomeIcon icon={faTrash} className="mr-1" />
                                     {t("Game.Tabs.Player.Kick")}
                                 </Button>
