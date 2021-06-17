@@ -37,7 +37,7 @@
             "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!",
             "SelectCardFailed": "Karte konnte nicht ausgewählt werden! Bitte versuche es erneut!",
             "NextRound": "Neue Karten sind im Spiel! Tauscht euch über euer Deck aus aus, denn die neue Runde startet jetzt!",
-            "MeetingEnabled": "Das Meeting wurde aktiviert. Klicke auf den rechten Button, um teilzunehmen!",
+            "MeetingEnabled": "Das Meeting wurde aktiviert. Nimm jetzt daran teil!",
             "MeetingDisabled": "Das Meeting wurde deaktiviert!"
         },
         "Message": {

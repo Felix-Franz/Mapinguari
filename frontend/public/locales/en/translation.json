@@ -37,7 +37,7 @@
             "LeftError": "Unfortunately {{name}} could not leave the room because of a error!",
             "SelectCardFailed": "Card could not be selected! Please try again!",
             "NextRound": "New cards are in the game! Talk about your card deck, because the new round starts now!",
-            "MeetingEnabled": "The meeting has been activated. Click on the button on the right to join!",
+            "MeetingEnabled": "The meeting has been activated. Take part in it!",
             "MeetingDisabled": "The meeting has been disabled!"
         },
         "Message": {
