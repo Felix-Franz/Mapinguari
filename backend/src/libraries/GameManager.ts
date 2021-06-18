@@ -2,6 +2,7 @@ import { Logger } from "../..";
 import GameConfig from "../core/GameConfig";
 import AvatarConfigurationType from "../core/types/AvatarConfigurationType";
 import CardEnum, { CardEnumArray } from "../core/types/CardEnum";
+import CardType from "../core/types/CardType";
 import GameMessageEnum from "../core/types/GameMessageEnum";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
 import PlayerType from "../core/types/PlayerType";
@@ -101,7 +102,12 @@ export default class GameManager {
                 inTurn
             }
             ClientConnector.emitToRoom(code, SocketServerEvents.PlayerReconnected, {
-                name, avatar, role, connected, inTurn, cards: cards?.map(c => {
+                name,
+                avatar,
+                role,
+                connected,
+                inTurn,
+                cards: (JSON.parse(JSON.stringify(cards)) as CardType[]).map(c => {
                     if (!c.visible)
                         c.type = CardEnum.UNKNOWN;
                     return c;
@@ -134,11 +140,12 @@ export default class GameManager {
             r.players[playerIndex].connected = false;
             if (r.players.filter(p => p.connected).length > 0) {
                 ClientConnector.emitToRoom(r.code, SocketServerEvents.PlayerDisconnected, {
-                    name: r.players[playerIndex].name, avatar: r.players[playerIndex].avatar, role: r.players[playerIndex].role, connnected: false, inTurn: r.players[playerIndex].inTurn, cards: r.players[playerIndex].cards?.map(c => {
-                        if (!c.visible)
-                            c.type = CardEnum.UNKNOWN;
-                        return c;
-                    })
+                    name: r.players[playerIndex].name,
+                    avatar: r.players[playerIndex].avatar,
+                    role: r.players[playerIndex].role,
+                    connnected: false,
+                    inTurn: r.players[playerIndex].inTurn,
+                    cards: GameManagerUtil.hidePlayerData(r.players)
                 });
                 Logger.log(LEVELS.silly, `Dissconnect ${r.players[playerIndex].name} from room ${r.name} with code ${r.code}`);
                 await r.save();

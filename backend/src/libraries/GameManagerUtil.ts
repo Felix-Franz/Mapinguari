@@ -10,8 +10,8 @@ export default class GameManagerUtil {
      * @param {boolean} dontHide player data (e.g. if game is over)
      * @returns {PlayerType[]} hidden players data
      */
-    public static hidePlayerData(players: PlayerType[], player: PlayerType, dontHide: boolean = false): PlayerType[] {
-        return players.map(p => {
+    public static hidePlayerData(players: PlayerType[], player?: PlayerType, dontHide: boolean = false): PlayerType[] {
+        return (JSON.parse(JSON.stringify(players))as PlayerType[]).map(p => {
             return {
                 name: p.name,
                 avatar: p.avatar,
@@ -19,9 +19,9 @@ export default class GameManagerUtil {
                 connected: p.connected,
                 cards: p.cards?.map(c => { return {
                     visible: c.visible,
-                    type: (dontHide || player.name === p.name || c.visible) ? c.type : CardEnum.UNKNOWN
+                    type: (dontHide || (player && player.name) === p.name || c.visible) ? c.type : CardEnum.UNKNOWN
                 }}),
-                mind: (dontHide || player.name === p.name) ? p.mind : undefined,
+                mind: (dontHide || (player && player.name) === p.name) ? p.mind : undefined,
                 inTurn: p.inTurn
             }
         })
