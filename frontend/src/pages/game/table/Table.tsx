@@ -78,9 +78,9 @@ const Table: FC<{
                 {t("Game.Table.NoPreviouseCards")}
             </p>
             <p className="mt-2 mb-0 text-muted">{t("Game.Table.CardsAll")}</p>
-            <span className="text-primary mx-1">{cards.filter(c => c.type === CardEnum.GOOD).length}/{gameConfig?.GOOD}</span>
-            <span className="text-secondary mx-1">{cards.filter(c => c.type === CardEnum.BAD).length}/{gameConfig?.BAD}</span>
-            <span className="text-tertiary mx-1">{cards.filter(c => c.type === CardEnum.NEUTRAL).length}/{gameConfig?.NEUTRAL}</span>
+            <span className="text-primary mx-1">{allCards.filter(c => c.type === CardEnum.GOOD).length}/{gameConfig?.GOOD}</span>
+            <span className="text-secondary mx-1">{allCards.filter(c => c.type === CardEnum.BAD).length}/{gameConfig?.BAD}</span>
+            <span className="text-tertiary mx-1">{allCards.filter(c => c.type === CardEnum.NEUTRAL).length}/{gameConfig?.NEUTRAL}</span>
         </div>
 
         <div className="mt-3">

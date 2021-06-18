@@ -7,7 +7,7 @@ const Splitter: React.FC<{
     className?: string
 }> = ({ children, className }) => {
 
-    return <Split className={`split ${className}`}>
+    return <Split className={`split ${className}`} minSize={200}>
         {children}
     </Split>
 
