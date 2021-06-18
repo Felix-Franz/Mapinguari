@@ -73,7 +73,7 @@ const Tabs: FC<{
                             <FontAwesomeIcon icon={faPhone} size="2x" />
                         </NavLink>
                     </NavItem>
-                    <NavItem className={`mx-auto d-sm-none d-md-flex ${meeting ? "" : "d-none"}`}>
+                    <NavItem className={`mx-auto ${meeting ? "d-sm-none d-md-flex" : "d-none"}`}>
                         <NavLink onClick={() => setMeetingSidebarOpen(!meetingSidebarOpen)} active={tab === "meeting"} className="text-center pointer">
                             <FontAwesomeIcon icon={meetingSidebarOpen ? faPhoneSlash : faPhone} size="2x" />
                         </NavLink>

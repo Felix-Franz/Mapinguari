@@ -1,11 +1,10 @@
 import { FC } from "react";
 import ReactCardFlip from 'react-card-flip';
 import CardEnum from "../../../../core/types/CardEnum";
-import bad from "../../../../resources/bad.svg";
-import empty from "../../../../resources/empty.svg";
-import good from "../../../../resources/good.svg";
+import bad from "../../../../resources/bad.png";
+import good from "../../../../resources/good.png";
 import logo from "../../../../resources/logo.svg";
-import neutral from "../../../../resources/neutral.svg";
+import neutral from "../../../../resources/neutral.png";
 import "./GameCard.scss";
 
 const GameCard: FC<{
@@ -32,7 +31,7 @@ const GameCard: FC<{
             break;
         case CardEnum.UNKNOWN:
         default:
-            image = empty;
+            image = logo;
             color = "tertiary";
             break;
     }
