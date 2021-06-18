@@ -5,7 +5,7 @@ Play online with your friends!
 Just open [mapinguari.rocks](https://mapinguari.rocks) to start the game!
 [![Website status](https://img.shields.io/website?label=Game%20is&url=https%3A%2F%2Fmapinguari.rocks)](https://mapinguari.rocks)
 
-> development has not finished yet!
+> development is not finished yet!
 
 Visit the [wiki](https://gitlab.com/FelixFranz/mapinguari/-/wikis) or the [Gitlab development page](https://gitlab.com/FelixFranz/mapinguari) for information about mapinguari.
 

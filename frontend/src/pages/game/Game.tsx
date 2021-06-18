@@ -164,7 +164,7 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     if (state === undefined)
         return statePage;
     else return <Tabs players={players} me={me!} roomCode={roomCode} allowStop={userIsAdmin && state !== RoomStateEnum.LOBBY}
-        allowKick={userIsAdmin && state === RoomStateEnum.LOBBY}  meeting={meeting}>
+        allowKick={userIsAdmin && state === RoomStateEnum.LOBBY} meeting={meeting}>
         {statePage}
     </Tabs >
 }

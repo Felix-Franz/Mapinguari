@@ -1,4 +1,4 @@
-import { faGamepad, faInfo, faPhone, faPowerOff, faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faGamepad, faInfo, faPhone, faPhoneSlash, faPowerOff, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,9 +10,9 @@ import SocketClient from "../../../libraries/SocketClient";
 import TabInfo from "./TabInfo";
 import TabPlayers from "./TabPlayers";
 import { toast } from "react-toastify";
-import MeetingSplitter from "../meeting/MeetingSplitter";
 import MeetingType from "../../../core/types/MeetingType";
 import Meeting from "../meeting/Meeting";
+import Splitter from "../../../components/splitter/Splitter";
 
 const Tabs: FC<{
     children: JSX.Element,
@@ -26,6 +26,7 @@ const Tabs: FC<{
     const { t } = useTranslation();
     const [isOpen, setIsOpen] = useState(false);
     const [tab, setTab] = useState<"game" | "meeting" | "players" | "info">("game");
+    const [meetingSidebarOpen, setMeetingSidebarOpen] = useState<boolean>(true);
 
     useEffect(() => {
         SocketClient.on(SocketServerEvents.StopGameFailed, () => toast.error(t("Game.Tabs.Stop.Error")));
@@ -37,24 +38,10 @@ const Tabs: FC<{
 
     let tabPage = <>
         <div className={tab === "game" ? "" : "d-none"}>{children}</div>
-        <Meeting className={tab === "meeting" ? "" : "d-none"} meeting={meeting!} me={me} />
+        <div className={tab === "meeting" ? "" : "d-none"}><Meeting meeting={meeting!} me={me} /></div>
         <TabPlayers className={tab === "players" ? "" : "d-none"} players={players} me={me} roomCode={roomCode} allowKick={allowKick} />
         <TabInfo className={tab === "info" ? "" : "d-none"} />
     </>;
-    // switch (tab) {
-    //     case "game":
-    //         tabPage = children;
-    //         break;
-    //     case "meeting":
-    //         tabPage = <Meeting meeting={meeting!} me={me} />
-    //         break;
-    //     case "players":
-    //         tabPage = <TabPlayers players={players} me={me} roomCode={roomCode} allowKick={allowKick} />;
-    //         break;
-    //     case "info":
-    //         tabPage = <TabInfo />;
-    //         break;
-    // }
 
     const onStopClick = () => {
         AlertModal.show({
@@ -86,6 +73,11 @@ const Tabs: FC<{
                             <FontAwesomeIcon icon={faPhone} size="2x" />
                         </NavLink>
                     </NavItem>
+                    <NavItem className={`mx-auto d-sm-none d-md-flex ${meeting ? "" : "d-none"}`}>
+                        <NavLink onClick={() => setMeetingSidebarOpen(!meetingSidebarOpen)} active={tab === "meeting"} className="text-center pointer">
+                            <FontAwesomeIcon icon={meetingSidebarOpen ? faPhoneSlash : faPhone} size="2x" />
+                        </NavLink>
+                    </NavItem>
                     <NavItem className="mx-auto">
                         <NavLink onClick={() => setTab("players")} active={tab === "players"} className="text-center pointer">
                             <FontAwesomeIcon icon={faUserFriends} size="2x" />
@@ -104,10 +96,17 @@ const Tabs: FC<{
                 </Nav>
             </Collapse>
         </Navbar>
-        <MeetingSplitter meeting={meeting} me={me} className="d-sm-none d-md-flex">
+        {meeting && meetingSidebarOpen ?
+            <div>
+                <Splitter className="d-sm-none d-md-flex">
+                    <div>{tabPage}</div>
+                    <Meeting meeting={meeting!} me={me} />
+                </Splitter>
+                <div className="d-md-none">{tabPage}</div>
+            </div>
+            :
             <div>{tabPage}</div>
-        </MeetingSplitter>
-        <div className="d-md-none">{tabPage}</div>
+        }
     </div>);
 };
 

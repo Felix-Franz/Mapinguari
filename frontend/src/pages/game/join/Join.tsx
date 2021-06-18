@@ -58,8 +58,8 @@ const Join: FC<{
                 setRoomCode(data.code);
                 setMe(name);
                 setCards(data.cards);
-                setState(data.state);
                 setMeeting(data.meeting);
+                setState(data.state);
                 PlayerStorage.setPlayer({name, avatar});
             } else {
                 setShowError(true);

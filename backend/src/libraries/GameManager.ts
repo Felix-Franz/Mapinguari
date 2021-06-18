@@ -298,12 +298,14 @@ export default class GameManager {
         room.players = room.players.map(p => {
             delete p.mind;
             p.inTurn = false;
-            delete p.cards;
+            p.cards = [];
             return p;
-        })
+        });
+        room.cards = [];
         room.save();
         ClientConnector.emitToRoom(code, SocketServerEvents.ChangeGame, {
-            state: room.state, cards: [],
+            state: room.state,
+            cards: room!.cards,
             players: room!.players.map(p => {
                 return {
                     name: p.name,
@@ -311,6 +313,7 @@ export default class GameManager {
                     role: p.role,
                     connected: p.connected,
                     inTurn: p.inTurn,
+                    cards: p.cards
                 };
             })
         });
