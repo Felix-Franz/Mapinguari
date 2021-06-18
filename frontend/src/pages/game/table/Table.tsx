@@ -11,6 +11,8 @@ import CardType from "../../../core/types/CardType";
 import RoomStateEnum from "../../../core/types/RoomStateEnum";
 import PlayerRoleEnum from "../../../core/types/PlayerRoleEnum";
 import GameCard from "./gamecard/GameCard";
+import CardEnum from "../../../core/types/CardEnum";
+import GameConfig from "../../../core/GameConfig";
 
 const Table: FC<{
     roomName: string,
@@ -36,6 +38,10 @@ const Table: FC<{
         }
         SocketClient.emit(SocketClientEvents.SelectCard, { player, cardIndex });
     }
+
+    const allCards = players.map(p => p.cards!).reduce((prev, c) => prev.concat(c), []).concat(cards);
+    const gameConfig = GameConfig.cards.find(p => p.playerCount === players.length);
+
     return <Container fluid className="my-3 text-center">
         <h2>{roomName}</h2>
         <GameProgress cards={cards} players={players} />
@@ -63,14 +69,18 @@ const Table: FC<{
 
         <div className="mt-1">
             <h3 className="my-0">{t("Game.Table.Cards")}</h3>
-            <p className="mt-0 mb-0 text-muted">{t("Game.Table.CardsDescription")}</p>
+            <p className="mt-0 mb-0 text-muted">{t("Game.Table.CardsPreviouse")}</p>
             {cards.map((c, i) =>
                 <GameCard key={i} size="sm" flipped={true} itemMind={c.type} />
             )}
-            <p style={{display: cards.length === 0 ? undefined : "none"}}>
+            <p className="mb-0" style={{ display: cards.length === 0 ? undefined : "none" }}>
                 <span className="mr-2">🚫</span>
-                {t("Game.Table.NoCards")}
-                </p>
+                {t("Game.Table.NoPreviouseCards")}
+            </p>
+            <p className="mt-2 mb-0 text-muted">{t("Game.Table.CardsAll")}</p>
+            <span className="text-primary mx-1">{cards.filter(c => c.type === CardEnum.GOOD).length}/{gameConfig?.GOOD}</span>
+            <span className="text-secondary mx-1">{cards.filter(c => c.type === CardEnum.BAD).length}/{gameConfig?.BAD}</span>
+            <span className="text-tertiary mx-1">{cards.filter(c => c.type === CardEnum.NEUTRAL).length}/{gameConfig?.NEUTRAL}</span>
         </div>
 
         <div className="mt-3">
