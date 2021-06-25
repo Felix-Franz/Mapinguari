@@ -40,14 +40,14 @@ const GameCard: FC<{
     if (size)
         sizeClass = `card-${size}`
 
-    return (<div className={`text-center ${className || ""}`} style={{ display: "inline-block" }}>
+    return (<div className={`text-center no-user-select ${className || ""}`} style={{ display: "inline-block" }}>
         <ReactCardFlip isFlipped={flipped}>
             <div className={`card ${sizeClass}`} style={{ cursor: onClick ? "pointer" : undefined }} onClick={onClick ? () => onClick(flipped) : undefined}>
-                <img src={logo} alt="logo" className="mx-auto" style={{ width: "90%", marginTop: "5%" }} />
+                <img src={logo} draggable="false" alt="logo" className="mx-auto" style={{ width: "90%", marginTop: "5%" }} />
                 <p className={sizeClass}  style={{ marginTop: "10%" }}>Mapinguari</p>
             </div>
             <div className={`card ${sizeClass}`} style={{ cursor: onClick ? "pointer" : undefined, borderColor: `var(--${color})` }} onClick={onClick ? () => onClick(flipped) : undefined}>
-                <img src={image} alt="logo" className="mx-auto" style={{ width: "90%", marginTop: "5%" }} />
+                <img src={image} draggable="false" alt="logo" className="mx-auto" style={{ width: "90%", marginTop: "5%" }} />
                 <p className={sizeClass} style={{ marginTop: "10%" }}>Mapinguari</p>
             </div>
         </ReactCardFlip>

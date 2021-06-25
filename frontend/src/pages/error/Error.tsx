@@ -15,7 +15,7 @@ const Error = () => {
 
     return (
         <Container fluid className="text-center my-3">
-            <img className="mt-3" src={logo} alt="logo" />
+            <img className="mt-3" src={logo} alt="logo" draggable="false" />
             <h1 className="mt-3">{t('Error.Title')}</h1>
             <p>{t('Error.Text')}</p>
             <Button color="primary" onClick={back}>

@@ -43,7 +43,7 @@ const GamePlayer: FC<{
             break;
     }
 
-    return <div className={`${className || ""} game-player ${expanded ? "" : "pointer"} ${player.inTurn ? "game-player-turn-" : "border-"}${color}`} onClick={() => setExpand(true)}>       
+    return <div className={`${className || ""} game-player no-user-select ${expanded ? "" : "pointer"} ${player.inTurn ? "game-player-turn-" : "border-"}${color}`} onClick={() => setExpand(true)}>       
      <FontAwesomeIcon icon={expanded ? faChevronUp : faChevronDown} className="pointer m-1 float-right" onClick={() => setExpand(!expanded)} />
         <div className="mb-2">
             <Avatar configuration={player.avatar} mind={player.mind} style={{ maxWidth: "4em" }} className="d-inline-block" />

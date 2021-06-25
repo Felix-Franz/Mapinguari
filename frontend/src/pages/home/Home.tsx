@@ -9,7 +9,7 @@ const Home = () => {
     const { t } = useTranslation();
     return (
         <Container fluid className="text-center my-3">
-            <img className="mt-3" src={logo} alt="logo" />
+            <img className="mt-3" src={logo} alt="logo" draggable="false" />
             <h1 className="mt-3">{t('Home.Title')}</h1>
             <h3>{t('Home.Subtitle')}</h3>
             <StartGame />
