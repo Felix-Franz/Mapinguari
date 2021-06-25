@@ -59,7 +59,7 @@ const Tabs: FC<{
     }
 
     return (<div>
-        <Navbar color="secondary" dark expand={true} className="p-0">
+        <Navbar color="secondary" dark expand={true} className="p-0 sticky-top" fixed="true">
             <NavbarToggler onClick={() => setIsOpen(!isOpen)} />
             <Collapse isOpen={isOpen} navbar>
                 <Nav className="w-100" style={{ marginRight: "8em" }} navbar>
