@@ -24,35 +24,35 @@ const GameProgress: FC<{
             <ProgressBar percent={percent} filledBackground="linear-gradient(to right, var(--primary), var(--secondary))">
                 <Step transition="scale">
                     {({ accomplished, index }) =>
-                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--primary" : "--secondary"})` }}>
+                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--secondary" : "--primary"})` }}>
                             <div>{index + 1}</div>
                         </div>
                     }
                 </Step>
                 <Step transition="scale">
                     {({ accomplished, index }) =>
-                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--primary" : "--secondary"})` }}>
+                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--secondary" : "--primary"})` }}>
                             <div>{index + 1}</div>
                         </div>
                     }
                 </Step>
                 <Step transition="scale">
                     {({ accomplished, index }) =>
-                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--primary" : "--secondary"})` }}>
+                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--secondary" : "--primary"})` }}>
                             <div>{index + 1}</div>
                         </div>
                     }
                 </Step>
                 <Step transition="scale">
                     {({ accomplished, index }) =>
-                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--primary" : "--secondary"})` }}>
+                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--secondary" : "--primary"})` }}>
                             <div>{index + 1}</div>
                         </div>
                     }
                 </Step>
                 <Step transition="scale">
                     {({ accomplished }) =>
-                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--primary" : "--secondary"})` }}>
+                        <div className="gameprogress-step" style={{ backgroundColor: `var(${accomplished ? "--secondary" : "--primary"})` }}>
                             <div>⚡</div>
                         </div>
                     }

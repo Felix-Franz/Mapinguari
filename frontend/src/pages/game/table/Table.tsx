@@ -39,7 +39,7 @@ const Table: FC<{
         SocketClient.emit(SocketClientEvents.SelectCard, { player, cardIndex });
     }
 
-    const allCards = players.map(p => p.cards!).reduce((prev, c) => prev.concat(c), []).concat(cards);
+    const visibleCards = players.map(p => p.cards!.filter(c => c.visible)).reduce((prev, c) => prev.concat(c), []).concat(cards);
     const gameConfig = GameConfig.cards.find(p => p.playerCount === players.length);
 
     return <Container fluid className="my-3 text-center">
@@ -47,14 +47,18 @@ const Table: FC<{
         <GameProgress cards={cards} players={players} />
 
         <div className="mt-4 mb-4" style={{ display: [RoomStateEnum.GOODWON, RoomStateEnum.BADWON].includes(state) ? undefined : "none" }}>
-            <Alert style={{ display: state === RoomStateEnum.GOODWON ? undefined : "none" }} color="primary" className="mt-2">
-                <span className="mr-2">🎉</span>
-                {t("Game.GoodWon")}
-            </Alert>
-            <Alert style={{ display: state === RoomStateEnum.BADWON ? undefined : "none" }} color="secondary" className="mt-2">
-                <span className="mr-2">🎉</span>
-                {t("Game.BadWon")}
-            </Alert>
+            <h1>
+                <Alert style={{ display: state === RoomStateEnum.GOODWON ? undefined : "none" }} color="primary" className="mt-2">
+                    <span className="mr-2">🎉</span>
+                    {t("Game.GoodWon")}
+                </Alert>
+            </h1>
+            <h1>
+                <Alert style={{ display: state === RoomStateEnum.BADWON ? undefined : "none" }} color="secondary" className="mt-2">
+                    <span className="mr-2">🎉</span>
+                    {t("Game.BadWon")}
+                </Alert>
+            </h1>
             <ButtonGroup style={{ display: players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN ? undefined : "none" }}>
                 <Button color="primary" outline onClick={() => SocketClient.emit(SocketClientEvents.StopGame)}>
                     <span className="mr-2">🛑</span>
@@ -78,9 +82,9 @@ const Table: FC<{
                 {t("Game.Table.NoPreviouseCards")}
             </p>
             <p className="mt-2 mb-0 text-muted">{t("Game.Table.CardsAll")}</p>
-            <span className="text-primary mx-1">{allCards.filter(c => c.type === CardEnum.GOOD).length}/{gameConfig?.GOOD}</span>
-            <span className="text-secondary mx-1">{allCards.filter(c => c.type === CardEnum.BAD).length}/{gameConfig?.BAD}</span>
-            <span className="text-tertiary mx-1">{allCards.filter(c => c.type === CardEnum.NEUTRAL).length}/{gameConfig?.NEUTRAL}</span>
+            <span className="text-primary mx-1">{visibleCards.filter(c => c.type === CardEnum.GOOD).length}/{gameConfig?.GOOD}</span>
+            <span className="text-secondary mx-1">{visibleCards.filter(c => c.type === CardEnum.BAD).length}/{gameConfig?.BAD}</span>
+            <span className="text-tertiary mx-1">{visibleCards.filter(c => c.type === CardEnum.NEUTRAL).length}/{gameConfig?.NEUTRAL}</span>
         </div>
 
         <div className="mt-3">
