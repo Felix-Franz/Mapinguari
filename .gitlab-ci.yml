@@ -120,7 +120,7 @@ stable-build-npm:
   artifacts: !reference [.npm-build, artifacts]
 
 stable-build-docker:
-  stage: build-docker
+  stage: build
   needs: ["stable-build-npm"]
   only:
     - tags
