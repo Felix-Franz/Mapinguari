@@ -1,8 +1,7 @@
 stages:
   - test
-  - build
   - build-npm
-  - build-docker
+  - build
   - deploy-image
   - deploy-activate
 
@@ -53,13 +52,13 @@ dev-build-npm:
   script:
     - !reference [.npm-build, script]
     - export NAME="@mapinguari\/dev"
-    - export NPM_TAG="0.0.0-$(date +"%Y-%m-%d_%H-%M-%S")-$CI_COMMIT_SHA"
+    - export NPM_TAG="0.0.0-$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHA"
     - !reference [.npm-set-names, script]
     - !reference [.upload-gitlab-npm-registry, script]
   artifacts: !reference [.npm-build, artifacts]
 
 dev-build-docker:
-  stage: build-docker
+  stage: build
   needs: ["dev-build-npm"]
   only:
     - master
@@ -70,7 +69,7 @@ dev-build-docker:
   #   - !reference [.docker-build, before_script]
   script:
     - !reference [.docker-build, script]
-    - export IMAGE_TAG="$CI_REGISTRY_IMAGE/dev:$(date +"%Y-%m-%d_%H-%M-%S")-$CI_COMMIT_SHA"
+    - export IMAGE_TAG="$CI_REGISTRY_IMAGE/dev:$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHA"
     - !reference [.upload-gitlab-docker-registry, script]
     - export IMAGE_TAG=$CI_REGISTRY_IMAGE/dev:latest
     - !reference [.upload-gitlab-docker-registry, script]
