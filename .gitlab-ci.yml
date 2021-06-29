@@ -46,6 +46,7 @@ include:
 
 dev-build-npm:
   stage: build-npm
+  needs: []
   only:
     - master
   image: node:15-slim
