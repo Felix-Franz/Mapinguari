@@ -22,6 +22,12 @@ const args = yargs(hideBin(process.argv))
         default: "info",
         choices: Object.keys(LEVELS)
     })
+    .option("jitsi", {
+        alias: "j",
+        type: "string",
+        description: "Custom jitsi domain",
+        default: "meet.jit.si"
+    })
     .option("legal", {
         type: 'boolean',
         description: "Enable legal page",
@@ -60,6 +66,7 @@ try {
 }
 
 try {
+    Config.jitsi = args.jitsi;
     if (args.legal)
         Config.legal = {
             enabled: args.legal,

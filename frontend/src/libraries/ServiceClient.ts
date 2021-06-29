@@ -24,6 +24,14 @@ export default class ServiceClient {
         });
     }
 
+    public static async getMeeting(): Promise<string>{
+        return this.call({
+            method: 'GET',
+            url: ServiceEnum.Meeting
+        });
+
+    }
+
     public static async getLegal(): Promise<LegalType>{
         return this.call({
             method: 'GET',

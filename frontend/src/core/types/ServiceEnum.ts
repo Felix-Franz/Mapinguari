@@ -1,4 +1,5 @@
 enum ServiceEnum {
+    Meeting = "/meeting",
     Legal = "/legal"
 };
 

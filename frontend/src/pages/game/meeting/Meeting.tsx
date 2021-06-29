@@ -2,8 +2,8 @@ import { createRef, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button, Spinner } from "reactstrap";
 import MeetingType from "../../../core/types/MeetingType";
+import ServiceClient from "../../../libraries/ServiceClient";
 
-const JITSI_DOMAIN = "meet.jit.si";
 let scriptSet: boolean = false;
 
 const Meeting: React.FC<{
@@ -13,20 +13,29 @@ const Meeting: React.FC<{
 }> = ({ meeting, me, className }) => {
     const { t } = useTranslation();
     const [status, setStatus] = useState<"loading" | "splash" | "meeting">("loading");
+    const [jitsiUrl, setjitsiUrl] = useState<string>();
     const meet = createRef<HTMLDivElement>();
 
     useEffect(() => {
+        ServiceClient.getMeeting()
+            .then(jitsiURL => setjitsiUrl(jitsiURL));
+    }, []);
+
+
+    useEffect(() => {
+        if (!jitsiUrl)
+            return;
         if (!scriptSet) {
             scriptSet = true;
             const script = document.createElement("script");
-            script.src = `https://${JITSI_DOMAIN}/external_api.js`;
+            script.src = `https://${jitsiUrl}/external_api.js`;
             script.async = true;
             script.onload = () => setStatus("splash");
             document.body.appendChild(script);
         }
         else
             setStatus("splash");
-    }, []);
+    }, [jitsiUrl]);
 
     const startMeeting = () => {
         setStatus("loading");
@@ -43,7 +52,7 @@ const Meeting: React.FC<{
             }
         };
         // @ts-ignore
-        const api = new window.JitsiMeetExternalAPI(JITSI_DOMAIN, options);
+        const api = new window.JitsiMeetExternalAPI(jitsiUrl, options);
         api.addEventListener('videoConferenceJoined', () => {
             api.executeCommand('displayName', me);
             api.executeCommand('password', meeting.password);

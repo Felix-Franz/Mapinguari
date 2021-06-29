@@ -112,7 +112,7 @@ export default class Generator {
      */
     public static generateMeeting(code: string): MeetingType {
         return {
-            roomName: `Mapinguary Meeting ${code}`,
+            roomName: `Mapinguari Meeting ${code}`,
             password: this.generateRandomString(20)
         }
     }
