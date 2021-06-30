@@ -43,11 +43,8 @@ include:
     - docker push $IMAGE_TAG
 
 .snap-build:
-  before_script:
-    - apt update
-    - apt install curl -y
   script:
-    - 'sed -i "s/version: .*/version: $SNAP_VERSION/g" snapcraft.yaml'
+    - 'sed -i "s/^version: .*/version: $SNAP_VERSION/g" snapcraft.yaml'
     - snapcraft
     - export SNAP_FILE=$(ls *.snap)
 
@@ -89,8 +86,6 @@ dev-build-snapcraft:
   only:
     - master
   image: snapcore/snapcraft
-  before_script:
-   - !reference [.snap-build, before_script]
   script:
   script:
     - export SNAP_VERSION="$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHORT_SHA"
