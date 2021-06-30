@@ -13,6 +13,10 @@ base: core20
 #confinement: strict    --> is not possible because mongodb needs to access /sys/block
 confinement: classic
 
+architectures:
+  - build-on: amd64
+    run-on: all
+
 parts:
   mongodb:
     plugin: dump
