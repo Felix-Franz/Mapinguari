@@ -24,6 +24,10 @@ Docker:
 [![docker pulls](https://img.shields.io/docker/pulls/felixfranz/mapinguari)](https://hub.docker.com/r/felixfranz/mapinguari)
 [![docker layers](https://img.shields.io/microbadger/layers/felixfranz/mapinguari)](https://hub.docker.com/r/felixfranz/mapinguari)
 
+Snapcraft:
+
+[![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/mapinguari)
+
 NPM:
 [![npm version](https://img.shields.io/npm/v/mapinguari?label=version)](https://www.npmjs.com/package/mapinguari)
 [![license](https://img.shields.io/npm/l/mapinguari)](https://www.npmjs.com/package/mapinguari)
@@ -38,6 +42,9 @@ Pipeline:
 
 Docker:
 [![docker image](https://shields.io/badge/docker-image-blue)](https://gitlab.com/FelixFranz/mapinguari/container_registry/1823779)
+
+Snapcraft:
+[![snap file](https://img.shields.io/badge/snap-file-green)](https://gitlab.com/FelixFranz/mapinguari/-/packages?type=generic&search%5B%5D=dev)
 
 NPM:
 [![npm version](https://img.shields.io/npm/v/@mapinguari/dev?registry_uri=https%3A%2F%2Fgitlab.com%2Fapi%2Fv4%2Fprojects%2F25292530%2Fpackages%2Fnpm&label=version)](https://gitlab.com/FelixFranz/mapinguari/-/packages)
