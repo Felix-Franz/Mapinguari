@@ -1,0 +1,35 @@
+name: mapinguari
+title: Mapinguari
+version: 0.0.0
+summary: Online game to play with your friends
+description: |
+  Try help:
+    $ mapinguari -h
+  Visit https://gitlab.com/FelixFranz/mapinguari/-/wikis/configuration for more information!
+  Also checkout the source on https://gitlab.com/FelixFranz/mapinguari
+# icon: ToDo
+
+base: core20
+#confinement: strict    --> is not possible because mongodb needs to access /sys/block
+confinement: classic
+
+parts:
+  mongodb:
+    plugin: dump
+    source: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-4.0.14.tgz
+  mapinguari:
+    plugin: npm
+    source: .
+    npm-node-version: "14.17.1"
+    build-environment:
+      - npm_config_unsafe_perm: "true"
+      - MONGOMS_DISABLE_POSTINSTALL: "1"
+apps:
+  mapinguari:
+    command: bin/mapinguari
+    plugs:
+      - network
+      - network-bind
+#      - hardware-observe     --> mongodb needs to access /sys/block, becaus there is no automount we neet to use confinement: classic
+    environment:
+      MONGOMS_SYSTEM_BINARY: $SNAP/bin/mongod

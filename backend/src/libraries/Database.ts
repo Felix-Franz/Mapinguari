@@ -10,6 +10,7 @@ export default class Database {
     public static async start() {
         this.database = new MongoMemoryServer({
             binary: {
+                version: '4.0.14'
             }
         });
         Logger.log(LEVELS.silly, "Database started!");

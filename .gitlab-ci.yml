@@ -42,6 +42,12 @@ include:
     - docker tag image_tag $IMAGE_TAG
     - docker push $IMAGE_TAG
 
+.snap-build:
+  script:
+    - 'sed -i "s/version: .*/version: $SNAP_VERSION/g" snapcraft.yaml'
+    - snapcraft
+    - export SNAP_FILE=$(ls *.snap)
+
 
 dev-build-npm:
   stage: build-npm
@@ -73,6 +79,17 @@ dev-build-docker:
     - !reference [.upload-gitlab-docker-registry, script]
     - export IMAGE_TAG=$CI_REGISTRY_IMAGE/dev:latest
     - !reference [.upload-gitlab-docker-registry, script]
+
+dev-snapcraft-build:
+  stage: build
+  needs: ["dev-build-npm"]
+  only:
+    - master
+  image: snapcore/snapcraft
+  script:
+    - export SNAP_VERSION="$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHA"
+    - !reference [.snap-build, script]
+    - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $SNAP_FILE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/dev/$SNAP_VERSION/$SNAP_FILE"'
 
 dev-deploy-image:
   stage: deploy-image
