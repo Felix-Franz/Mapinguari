@@ -7,6 +7,7 @@ description: |
     $ mapinguari -h
   Visit https://gitlab.com/FelixFranz/mapinguari/-/wikis/configuration for more information!
   Also checkout the source on https://gitlab.com/FelixFranz/mapinguari
+license: MIT
 # icon: ToDo
 
 base: core20
