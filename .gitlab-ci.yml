@@ -58,7 +58,7 @@ dev-build-npm:
   script:
     - !reference [.npm-build, script]
     - export NAME="@mapinguari\/dev"
-    - export NPM_TAG="0.0.0-$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHA"
+    - export NPM_TAG="0.0.0-$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHORT_SHA"
     - !reference [.npm-set-names, script]
     - !reference [.upload-gitlab-npm-registry, script]
   artifacts: !reference [.npm-build, artifacts]
@@ -75,7 +75,7 @@ dev-build-docker:
   #   - !reference [.docker-build, before_script]
   script:
     - !reference [.docker-build, script]
-    - export IMAGE_TAG="$CI_REGISTRY_IMAGE/dev:$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHA"
+    - export IMAGE_TAG="$CI_REGISTRY_IMAGE/dev:$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHORT_SHA"
     - !reference [.upload-gitlab-docker-registry, script]
     - export IMAGE_TAG=$CI_REGISTRY_IMAGE/dev:latest
     - !reference [.upload-gitlab-docker-registry, script]
@@ -87,7 +87,7 @@ dev-snapcraft-build:
     - master
   image: snapcore/snapcraft
   script:
-    - export SNAP_VERSION="$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHA"
+    - export SNAP_VERSION="$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHORT_SHA"
     - !reference [.snap-build, script]
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $SNAP_FILE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/dev/$SNAP_VERSION/$SNAP_FILE"'
 
