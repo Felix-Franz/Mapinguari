@@ -80,7 +80,7 @@ dev-build-docker:
     - export IMAGE_TAG=$CI_REGISTRY_IMAGE/dev:latest
     - !reference [.upload-gitlab-docker-registry, script]
 
-dev-snapcraft-build:
+dev-build-snapcraft:
   stage: build
   needs: ["dev-build-npm"]
   only:
