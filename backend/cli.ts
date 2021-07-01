@@ -10,6 +10,7 @@ import Server from "./src/libraries/Server";
 const args = yargs(hideBin(process.argv))
     .env()
     .help("help").alias("help", "h")
+    .alias("version", "v")
     .option('port', {
         alias: 'p',
         type: 'number',
@@ -27,11 +28,6 @@ const args = yargs(hideBin(process.argv))
         type: "string",
         description: "Custom jitsi domain",
         default: "meet.jit.si"
-    })
-    .option("privacy-policy", {
-        type: 'boolean',
-        description: "Enable privacy policy",
-        default: false
     })
     .option("imprint-name", {
         type: 'string',
@@ -51,7 +47,12 @@ const args = yargs(hideBin(process.argv))
     })
     .option("imprint-web", {
         type: 'string',
-        description: "Web site on imprint page",
+        description: "Web site on imprint page e.g. example.com",
+    })
+    .option("privacy-policy", {
+        type: 'boolean',
+        description: "Enable privacy policy",
+        default: false
     })
     .example("$0", "Starts the mapinguari server")
     .example("$0 -p 80", "Starts server on port 80")
