@@ -1,5 +1,4 @@
-type LegalType = {
-    enabled: boolean,
+type ImprintType = {
     name?: string,
     address?: string,
     mail?: string,
@@ -7,4 +6,4 @@ type LegalType = {
     web?: string
 }
 
-export default LegalType;
+export default ImprintType;

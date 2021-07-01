@@ -7,6 +7,9 @@ export default class Legal implements ServiceInterface {
     path = ServiceEnum.Legal;
 
     handleGet(req: Request, res: Response) {
-        res.send(Config.legal);
+        res.send({
+            imprint: Config.imprint,
+            privacyPolicy: Config.privacyPolicy
+        });
     }
 }

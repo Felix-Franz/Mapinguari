@@ -7,11 +7,13 @@ import { faGitlab } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
     const { t } = useTranslation();
-    const [enableLegal, setEnableLegal] = useState<boolean>(false);
+    const [enableImprint, setEnableImprint] = useState<boolean>(false);
+    const [enablePrivacyPolicy, setEnablePrivacyPolicy] = useState<boolean>(false);
     useEffect(() => {
         ServiceClient.getLegal()
             .then(config => {
-                setEnableLegal(config.enabled);
+                setEnableImprint(!!config.imprint);
+                setEnablePrivacyPolicy(config.privacyPolicy);
             });
     });
 
@@ -20,8 +22,9 @@ const Footer = () => {
             <span>{t("Footer.Made", {love: "❤️"})} </span>
             <a target="_blank" rel="noreferrer noopener" href={`https://www.felix-franz.com`}>Felix</a>
             <br />
-            <span><a target="_blank noopener" rel="noreferrer" href="https://gitlab.com/FelixFranz/mapinguari"><FontAwesomeIcon icon={faGitlab} className="mr-1" />{t("Footer.Source")}</a></span>
-            <span className={(enableLegal ? "" : "d-none")}> | <a target="_blank noopener" rel="noreferrer" href={`${process.env.PUBLIC_URL}/legal`}>{t("Footer.Legal")}</a></span>
+            <span><a target="_blank" rel="noopener noreferrer" href="https://gitlab.com/FelixFranz/mapinguari"><FontAwesomeIcon icon={faGitlab} className="mr-1" />{t("Footer.Source")}</a></span>
+            <span className={(enableImprint ? "" : "d-none")}> | <a target="_blank" rel="noopener noreferrer" href={`${process.env.PUBLIC_URL}/imprint`}>{t("Footer.Imprint")}</a></span>
+            <span className={(enablePrivacyPolicy ? "" : "d-none")}> | <a target="_blank" rel="noopener noreferrer" href={`${process.env.PUBLIC_URL}/privacy-policy`}>{t("Footer.PrivacyPolicy")}</a></span>
         </footer>
     );
 }

@@ -28,30 +28,30 @@ const args = yargs(hideBin(process.argv))
         description: "Custom jitsi domain",
         default: "meet.jit.si"
     })
-    .option("legal", {
+    .option("privacy-policy", {
         type: 'boolean',
-        description: "Enable legal page",
+        description: "Enable privacy policy",
         default: false
     })
-    .option("legal-name", {
+    .option("imprint-name", {
         type: 'string',
-        description: "Name on legal page",
+        description: "Name on imprint page",
     })
-    .option("legal-address", {
+    .option("imprint-address", {
         type: 'string',
-        description: "Address on legal page",
+        description: "Address on imprint page",
     })
-    .option("legal-mail", {
+    .option("imprint-mail", {
         type: 'string',
-        description: "Mail on legal page",
+        description: "Mail on imprint page",
     })
-    .option("legal-phone", {
+    .option("imprint-phone", {
         type: 'string',
-        description: "Phone number on legal page",
+        description: "Phone number on imprint page",
     })
-    .option("legal-web", {
+    .option("imprint-web", {
         type: 'string',
-        description: "Web site on legal page",
+        description: "Web site on imprint page",
     })
     .example("$0", "Starts the mapinguari server")
     .example("$0 -p 80", "Starts server on port 80")
@@ -67,17 +67,18 @@ try {
 
 try {
     Config.jitsi = args.jitsi;
-    if (args.legal)
-        Config.legal = {
-            enabled: args.legal,
-            name: args["legal-name"],
-            address: args["legal-address"],
-            mail: args["legal-mail"],
-            phone: args["legal-phone"],
-            web: args["legal-web"]
+    if (args["imprint-name"] || args["imprint-address"] || args["imprint-mail"] || args["imprint-phone"] || args["imprint-web"])
+        Config.imprint = {
+            name: args["imprint-name"],
+            address: args["imprint-address"],
+            mail: args["imprint-mail"],
+            phone: args["imprint-phone"],
+            web: args["imprint-web"]
         }
-    else
-        Config.legal.enabled = args.legal
+    if(args["privacy-policy"])
+        Config.privacyPolicy = true;
+        else
+        Config.privacyPolicy = false;
 
     Server.start({
         port: args.port
