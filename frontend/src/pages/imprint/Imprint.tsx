@@ -35,7 +35,7 @@ const Imprint = () => {
                         <a href={`tel:${config.mail}`}>{config.phone}</a>
                     </div>
                     <div className={config.web ? "" : "d-none"}>
-                        <a target="_blank" rel="noopener noreferrer" href={config.web}>{config.web}</a>
+                        <a target="_blank" rel="noopener noreferrer" href={`//${config.web}`}>{config.web}</a>
                     </div>
                     <p className="pre-wrap mt-3">{t('Imprint.PostText')}</p>
                 </>

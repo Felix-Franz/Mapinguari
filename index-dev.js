@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 
 const start = [
-    { cwd: "backend", command: "npm", arguments: ["start", "--", "-l", "silly", "--privacy-policy", "--imprint-name", "Test Name", "--imprint-address", "Test Address", "--imprint-mail", "test@example.com", "--imprint-phone", "+49 1234 567890", "--imprint-web", "https://example.com"] },
+    { cwd: "backend", command: "npm", arguments: ["start", "--", "-l", "silly", "--privacy-policy", "--imprint-name", "Test Name", "--imprint-address", "Test Address", "--imprint-mail", "test@example.com", "--imprint-phone", "+49 1234 567890", "--imprint-web", "example.com"] },
     { cwd: "frontend", command: "npm", arguments: ["start"] }
 ];
 
