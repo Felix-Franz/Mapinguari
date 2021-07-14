@@ -3,7 +3,8 @@
         "Yes": "Ja",
         "No": "Nein",
         "Okay": "Okay",
-        "Back": "Zurück"
+        "Back": "Zurück",
+        "Loading": "Warte auf die Antwort aus dem Urwald..."
     },
     "Footer": {
         "Made": "Mit {{love}} erstellt von",

@@ -8,16 +8,23 @@ export default class SocketClient {
      * Connects to socket server
      * @param {string} host url 
      */
-    public static createConnection(host?: string) {
-        if (!!this.io)
-            throw new Error("Connection is already established!");
+    public static createConnection(host?: string): Promise<void> {
+        return new Promise((resolve, reject) => {
 
-        if (host)
-            this.io = ioClient(host);
-        else
-            this.io = ioClient();
+            if (!!this.io)
+                throw new Error("Connection is already established!");
 
-        this.io.on("message", data => console.log(`[Socket] ${data}`));
+            if (host)
+                this.io = ioClient(host);
+            else
+                this.io = ioClient();
+
+            this.io.on("message", data => {
+                console.log(`[Socket] ${data}`)
+                resolve();
+            });
+
+        });
     }
 
     /**

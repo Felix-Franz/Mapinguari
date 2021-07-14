@@ -14,6 +14,10 @@ const Footer = () => {
             .then(config => {
                 setEnableImprint(!!config.imprint);
                 setEnablePrivacyPolicy(config.privacyPolicy);
+            })
+            .catch(() => {
+                setEnableImprint(false);
+                setEnablePrivacyPolicy(false);
             });
     });
 
