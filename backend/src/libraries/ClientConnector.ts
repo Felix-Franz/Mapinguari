@@ -100,8 +100,7 @@ export default class ClientConnector {
         let fs = require("fs");
         let result = fs.readdirSync(path).filter((r: string) => (r.endsWith(".ts") || r.endsWith(".js")) && !r.endsWith(".d.ts"));
         for (let i = 0; i < result.length; ++i) {
-            console.log(result[i])
-            result[i] = path + "/" + result[i]
+            result[i] = path + "/" + result[i];
             if (fs.lstatSync(result[i]).isDirectory()) {
                 result[i] = this.findFiles(result[i]);
             }
