@@ -3,7 +3,7 @@ import ReactCardFlip from 'react-card-flip';
 import CardEnum from "../../../../core/types/CardEnum";
 import bad from "../../../../resources/bad.png";
 import good from "../../../../resources/good.png";
-import logo from "../../../../resources/logo.svg";
+import logo from "../../../../resources/logo.png";
 import neutral from "../../../../resources/neutral.png";
 import "./GameCard.scss";
 

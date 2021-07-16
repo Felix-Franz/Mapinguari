@@ -3,15 +3,15 @@ import { Alert, Container } from "reactstrap";
 import Instructions from "../../components/Instructions";
 import Story from "../../components/Story";
 import GameConfig from "../../core/GameConfig";
-import logo from "../../resources/logo.svg";
+import logo from "../../resources/logo.png";
 import StartGame from "./StartGame";
 
 const Home = () => {
     const { t } = useTranslation();
     return (
         <Container fluid className="text-center my-3">
-            <img className="mt-3" src={logo} alt="logo" draggable="false" />
-            <h1 className="mt-3">{t('Home.Title')}</h1>
+            <img className="w-25" src={logo} alt="logo" draggable="false" />
+            <h1 className="mt-1">{t('Home.Title')}</h1>
             <h3>{t('Home.Subtitle', {minPlayers: GameConfig.minPlayers, maxPlayers: GameConfig.maxPlayers})}</h3>
             <StartGame />
             <Alert className="mt-4 mx-auto w-fit" color="danger" style={{ width: "fit-content" }}>

@@ -25,7 +25,8 @@ export default function App() {
           <LoadingModal show={!socketConnected} />
         </>
         :
-        <Loader />}
+        <Loader />
+      }
     </Suspense>
   );
 }
