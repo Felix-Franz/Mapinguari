@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Mapinguari - Play online with your friends!",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "install-dev": "cd backend && npm install && cd ../frontend && npm install",
