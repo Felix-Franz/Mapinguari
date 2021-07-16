@@ -60,9 +60,6 @@ const Lobby: FC<{
         SocketClient.emit(SocketClientEvents.LeaveRoom, me)
     }
 
-    const maxPlayers = GameConfig.cards.map(c => c.playerCount).reduce((prev, curr) => (prev < curr) ? curr : prev, -1);
-    const minPlayers = GameConfig.cards.map(c => c.playerCount).reduce((prev, curr) => (prev > curr) ? curr : prev, Number.MAX_SAFE_INTEGER);
-
     return <Container fluid className="my-3 text-center">
         <h2>{roomName}</h2>
         <h5>{t("Game.Lobby.Waiting")}</h5>
@@ -88,10 +85,10 @@ const Lobby: FC<{
                 <Alert color="danger" isOpen={players.filter(p => !p.connected).length > 0}>
                     {t("Game.Lobby.StartPlayerDisconnected", { names: players.filter(p => !p.connected).map(p => p.name).join(", ") })}
                 </Alert>
-                <Alert color="danger" isOpen={players.length < minPlayers || players.length > maxPlayers}>
-                    {t("Game.Lobby.StartWrongPlayerCount", { minPlayers, maxPlayers })}
+                <Alert color="danger" isOpen={players.length < GameConfig.minPlayers || players.length > GameConfig.maxPlayers}>
+                    {t("Game.Lobby.StartWrongPlayerCount", { minPlayers: GameConfig.minPlayers, maxPlayers: GameConfig.maxPlayers })}
                 </Alert>
-                <Button color="primary" onClick={startGame} outline disabled={loading || players.filter(p => !p.connected).length > 0 || players.length < minPlayers || players.length > maxPlayers}>
+                <Button color="primary" onClick={startGame} outline disabled={loading || players.filter(p => !p.connected).length > 0 || players.length < GameConfig.minPlayers || players.length > GameConfig.maxPlayers}>
                     <span className="mr-2">🚀</span>
                     {t("Game.Lobby.Start")}
                 </Button>

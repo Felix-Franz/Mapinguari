@@ -14,7 +14,7 @@
     },
     "Home": {
         "Title": "Willkommen bei Mapinguari!",
-        "Subtitle": "Spiele online gegen deine Freunde!",
+        "Subtitle": "Spiele online gegen deine Freunde! ({{minPlayers}}-{{maxPlayers}} Spieler)",
         "StartGame": {
             "Ready": "Kann es losgehen?",
             "Create": "Raum erstellen",

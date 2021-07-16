@@ -13,7 +13,9 @@ type GameConfigType = {
         [CardEnum.GOOD]: number,
         [CardEnum.BAD]: number
     }[],
-    rounds: number
+    rounds: number,
+    minPlayers: number,
+    maxPlayers: number,
 }
 
 const GameConfig: GameConfigType = {
@@ -76,7 +78,13 @@ const GameConfig: GameConfigType = {
             [CardEnum.BAD]: 1,
         }
     ],
-    rounds: 4
+    rounds: 4,
+    get minPlayers(): number {
+        return Math.min.apply(this, GameConfig.players.map(p => p.playerCount));
+    },
+    get maxPlayers(): number {
+        return Math.max.apply(this, GameConfig.players.map(p => p.playerCount));
+    }
 }
 
 export default GameConfig;
