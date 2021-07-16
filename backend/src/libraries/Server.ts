@@ -18,22 +18,4 @@ export default class Server {
 
         Logger.log(LEVELS.success, `Mapinguari startet on http://localhost:${config.port}`);
     }
-
-    /**
-     * Recursive helper function to get all files of the jobPath folder.
-     * @param path
-     * @returns {*[]} config files
-     */
-    private static findJobs(path: string) {
-        let fs = require("fs");
-        let result = fs.readdirSync(path);
-        for (let i = 0; i < result.length; ++i) {
-            result[i] = path + "/" + result[i]
-            if (fs.lstatSync(result[i]).isDirectory()) {
-                result[i] = this.findJobs(result[i]);
-            }
-        }
-        return [].concat.apply([], result);
-    }
-
 }
