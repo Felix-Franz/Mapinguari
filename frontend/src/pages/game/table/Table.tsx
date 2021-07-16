@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Alert, Button, ButtonGroup, Container } from "reactstrap";
+import { Alert, Button, ButtonGroup, Container, Row } from "reactstrap";
 import { toast } from "react-toastify";
 import PlayerType from "../../../core/types/PlayerType";
 import GamePlayer from "./gameplayer/GamePlayer";
@@ -90,9 +90,11 @@ const Table: FC<{
         <div className="mt-3">
             <h3 className="my-0">{t("Game.Table.AllDecks")}</h3>
             <p className="mt-0 mb-0 text-muted">{t("Game.Table.AllDecksDescription")}</p>
-            {players.map((p, i) =>
-                <GamePlayer me={me} className="mt-1" player={p} onCardClick={onCardClick} key={i} cardsAlwaysVisible={[RoomStateEnum.GOODWON, RoomStateEnum.BADWON].includes(state)} />
-            )}
+            <Row>
+                {players.map((p, i) =>
+                    <GamePlayer me={me} className="fit-content m-1 mx-auto" player={p} onCardClick={onCardClick} key={i} cardsAlwaysVisible={[RoomStateEnum.GOODWON, RoomStateEnum.BADWON].includes(state)} />
+                )}
+            </Row>
         </div>
 
         <div className="mt-3" style={{ display: [RoomStateEnum.GOODWON, RoomStateEnum.BADWON].includes(state) ? "none" : undefined }}>
