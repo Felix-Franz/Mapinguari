@@ -19,7 +19,7 @@ const Footer = () => {
                 setEnableImprint(false);
                 setEnablePrivacyPolicy(false);
             });
-    });
+    }, []);
 
     return (
         <footer className="footer box-shadow">
