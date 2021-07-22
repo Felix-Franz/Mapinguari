@@ -10,7 +10,7 @@ import Imprint from "./imprint/Imprint";
 import PrivacyPolicy from "./privacypolicy/PrivacyPolicy";
 
 const Router = () => (<>
-    <div style={{ minHeight: "calc( 100vh - 4em )", display: "flow-root", marginBottom: "3em", position: "relative"}}>
+    <div style={{ minHeight: "calc( 100vh - 4em )", display: "flow-root", marginBottom: "3em", position: "relative"}} className="no-user-select">
 
         <Toast/>
         <Menu />

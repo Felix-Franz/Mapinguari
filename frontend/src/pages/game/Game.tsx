@@ -7,6 +7,7 @@ import Avatar from "../../components/avatar/Avatar";
 import AvatarConfigurationType from "../../core/types/AvatarConfigurationType";
 import CardType from "../../core/types/CardType";
 import GameMessageEnum from "../../core/types/GameMessageEnum";
+import MeetingType from "../../core/types/MeetingType";
 import PlayerMindEnum from "../../core/types/PlayerMindEnum";
 import PlayerRoleEnum from "../../core/types/PlayerRoleEnum";
 import PlayerType from "../../core/types/PlayerType";
@@ -17,7 +18,6 @@ import Join from "./join/Join";
 import Lobby from "./lobby/Lobby";
 import Table from "./table/Table";
 import Tabs from "./tabs/Tabs";
-import MeetingType from "../../core/types/MeetingType";
 
 const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
     const { t } = useTranslation();
@@ -94,33 +94,61 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 toast.error(t('Game.Toast.LeftError', { name: data.name }));
         });
 
-        SocketClient.on(SocketServerEvents.ChangeGame, (data: { message?: GameMessageEnum, state?: RoomStateEnum, players?: PlayerType[], cards?: CardType[] }) => {
+        SocketClient.on(SocketServerEvents.ChangeGame, (data: { messages?: GameMessageEnum[], state?: RoomStateEnum, players?: PlayerType[], cards?: CardType[] }) => {
             if (data.players)
                 setPlayers(data.players);
             if (data.cards)
                 setCards(data.cards);
             if (data.state)
                 setState(data.state);
-            if (data.message)
-                switch (data.message) {
-                    case GameMessageEnum.START:
-                        const good = data.players!.find(p => p.name === me)?.mind === PlayerMindEnum.GOOD;
-                        AlertModal.show({
-                            header: t("Game.Message.GameStarted.Header"),
-                            message: good ? t("Game.Message.GameStarted.MessageGood") : t("Game.Message.GameStarted.MessageBad"),
-                            buttons: [{
-                                text: t("General.Okay"),
-                                color: good ? "primary" : "secondary"
-                            }]
-                        })
-                        break;
-                    case GameMessageEnum.SELECTCARDFAILED:
-                        toast.error(t("Game.Toast.SelectCardFailed"));
-                        break;
-                    case GameMessageEnum.NEXTROUND:
-                        toast.error(t("Game.Toast.NextRound"));
-                        break;
-                }
+            console.log(data.messages)
+            if (data.messages)
+                data.messages.forEach(message => {
+                    switch (message) {
+                        case GameMessageEnum.START:
+                            const good = data.players!.find(p => p.name === me)?.mind === PlayerMindEnum.GOOD;
+                            AlertModal.show({
+                                header: t("Game.Message.GameStarted.Header"),
+                                message: good ? t("Game.Message.GameStarted.MessageGood") : t("Game.Message.GameStarted.MessageBad"),
+                                buttons: [{
+                                    text: t("General.Okay"),
+                                    color: good ? "primary" : "secondary"
+                                }]
+                            })
+                            break;
+                        case GameMessageEnum.SELECTEDGOOD: {
+                            const translations = t("Game.Toast.SelectedGood", { returnObjects: true });
+                            toast.info(translations[Math.floor(translations.length * Math.random())]);
+                            break;
+                        }
+                        case GameMessageEnum.SELECTEDBAD:
+                            toast.error(t("Game.Toast.SelectedBad"));
+                            break;
+                        case GameMessageEnum.SELECTEDNEUTRAL: {
+                            const translations = t("Game.Toast.SelectedNeutral", { returnObjects: true });
+                            toast.warn(translations[Math.floor(translations.length * Math.random())]);
+                            break;
+                        }
+                        case GameMessageEnum.SELECTCARDFAILED:
+                            toast.error(t("Game.Toast.SelectCardFailed"));
+                            break;
+                        case GameMessageEnum.DAY1OVER:
+                            toast.success(t("Game.Toast.Day1Over"));
+                            break;
+                        case GameMessageEnum.DAY2OVER:
+                            toast.success(t("Game.Toast.Day2Over"));
+                            break;
+                        case GameMessageEnum.DAY3OVER:
+                            toast.success(t("Game.Toast.Day3Over"));
+                            break;
+                    }
+                });
+            if (data.state) {
+                if (data.state === RoomStateEnum.GOODWON)
+                    toast.info(t("Game.GoodWon.Short"));
+                if (data.state === RoomStateEnum.BADWON)
+                    toast.error(t("Game.BadWon.Short"));
+            }
         })
 
         SocketClient.on(SocketServerEvents.MeetingChanged, (meeting: MeetingType) => {

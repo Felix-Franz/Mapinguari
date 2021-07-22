@@ -37,8 +37,23 @@
             "Leave": "Leave Room",
             "Left": "You left the room!",
             "LeftError": "Unfortunately {{name}} could not leave the room because of a error!",
+            "SelectedGood": [
+                "ToDo"
+            ],
+            "SelectedBad": "ToDo",
+            "SelectedNeutral": [
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo"
+            ],
             "SelectCardFailed": "Card could not be selected! Please try again!",
-            "NextRound": "New cards are in the game! Talk about your card deck, because the new round starts now!",
+            "Day1Over": "ToDo",
+            "Day2Over": "ToDo",
+            "Day3Over": "ToDo",
             "MeetingEnabled": "The meeting has been activated. Take part in it!",
             "MeetingDisabled": "The meeting has been disabled!"
         },
@@ -107,9 +122,9 @@
         },
         "Table": {
             "GameProgress": {
-                "Round": "Round",
-                "Move": "Move",
-                "Over": "All rounds\nover"
+                "Round": "Day",
+                "Move": "Try",
+                "Over": "All Days\nover"
             },
             "GamePlayer": {
                 "Player'sTurn": "It's the player's turn!"
@@ -118,7 +133,7 @@
             "DontClickOnYourself": "You can't choose your own card! Instead, simply choose a card from your fellow players!",
             "CardAlreadyVisible": "The card has already been exposed! Choose another one!",
             "Cards": "Cards",
-            "CardsPreviouse": "that were drawn in a previouse round",
+            "CardsPreviouse": "drawn in a previouse round",
             "NoPreviouseCards": "No cards available yet",
             "CardsAll": "Cards drawn and cards in the game per type",
             "AllDecks": "All decks",
@@ -126,14 +141,20 @@
             "YourDeck": "Your deck",
             "YourDeckDescription": "with cards face up"
         },
-        "GoodWon": "The good team won!",
-        "BadWon": "The evil team won!",
+        "GoodWon": {
+            "Story": "ToDo",
+            "Short": "ToDo"
+        },
+        "BadWon":  {
+            "Story": "ToDo",
+            "Short": "ToDo"
+        },
         "NewMatch": "Start new match",
         "BackToLobby": "Back to the lobby"
     },
     "Story": {
-        "Title": "Story",
-        "Content": "ToDo!"
+        "Title": "ToDo",
+        "Content": "ToDo"
     },
     "Instructions": {
         "Title": "ToDo",

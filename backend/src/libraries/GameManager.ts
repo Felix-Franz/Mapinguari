@@ -1,7 +1,7 @@
 import { Logger } from "../..";
 import GameConfig from "../core/GameConfig";
 import AvatarConfigurationType from "../core/types/AvatarConfigurationType";
-import CardEnum, { CardEnumArray } from "../core/types/CardEnum";
+import CardEnum from "../core/types/CardEnum";
 import CardType from "../core/types/CardType";
 import GameMessageEnum from "../core/types/GameMessageEnum";
 import PlayerRoleEnum from "../core/types/PlayerRoleEnum";
@@ -207,7 +207,7 @@ export default class GameManager {
         room.players.forEach(p => p.inTurn = p.name === playerInTurn.name);
 
         room.players.forEach(p => ClientConnector.emitToSocket(p.socketId!, SocketServerEvents.ChangeGame, {
-            message: GameMessageEnum.START,
+            messages: [GameMessageEnum.START],
             state: room.state,
             players: GameManagerUtil.hidePlayerData(room.players, p),
             cards: room.cards
@@ -223,6 +223,7 @@ export default class GameManager {
      * @param {number} cardIndex index of selected card
      */
     public static async selectCard(code: string, socketId: string, player: PlayerType, cardIndex: number) {
+        const messages: GameMessageEnum[] = [];
         const room = (await Models.Rooms.findOne({ code }))!;
         const selectingPlayerIndex = room.players.findIndex(p => p.socketId === socketId && p.inTurn === true);
         if (selectingPlayerIndex === -1)
@@ -234,18 +235,22 @@ export default class GameManager {
         room.players[playerIndex].cards![cardIndex].visible = true;
         room.players[selectingPlayerIndex].inTurn = false;
         room.players[playerIndex].inTurn = true;
+        switch (room.players[playerIndex].cards![cardIndex].type) {
+            case CardEnum.GOOD:
+                messages.push(GameMessageEnum.SELECTEDGOOD);
+                break;
+            case CardEnum.BAD:
+                messages.push(GameMessageEnum.SELECTEDBAD);
+                break;
+            case CardEnum.NEUTRAL:
+                messages.push(GameMessageEnum.SELECTEDNEUTRAL);
+                break;
+        }
 
-        // shuffle cards if round is over
+        // get player cards
         const playerCards = room.players
             .map(p => p.cards)
             .reduce((prev, c) => prev!.concat(c!), [])!;
-        const roundFinished = playerCards
-            .filter(c => c.visible === true)
-            .length >= room.players.length;
-        if (roundFinished) {
-            room.cards = room.cards.concat(playerCards.filter(c => c.visible === true));
-            Generator.shuffleCards(room.players.length, playerCards.filter(c => c.visible === false).map(c => c.type)).forEach((c, i) => room.players[i].cards = c);
-        }
 
         // check if bad won because of time
         if (room.cards.length >= room.players.length * GameConfig.rounds)
@@ -257,13 +262,35 @@ export default class GameManager {
         if (playerCards.filter(c => c.type === CardEnum.BAD && !c.visible).length === 0)
             room.state = RoomStateEnum.BADWON;
 
+        // no one is in turn if game is over
         if (room.state === RoomStateEnum.GOODWON || room.state === RoomStateEnum.BADWON)
             room.players[playerIndex].inTurn = false;
 
+        // shuffle cards if round is over
+        if (room.state !== RoomStateEnum.GOODWON && room.state !== RoomStateEnum.BADWON) {
+            const roundFinished = playerCards
+                .filter(c => c.visible === true)
+                .length >= room.players.length;
+            if (roundFinished) {
+                room.cards = room.cards.concat(playerCards.filter(c => c.visible === true));
+                Generator.shuffleCards(room.players.length, playerCards.filter(c => c.visible === false).map(c => c.type)).forEach((c, i) => room.players[i].cards = c);
+                switch (room.cards.length / room.players.length) {
+                    case 0:
+                        messages.push(GameMessageEnum.DAY1OVER);
+                        break;
+                    case 1:
+                        messages.push(GameMessageEnum.DAY2OVER);
+                        break;
+                    case 2:
+                        messages.push(GameMessageEnum.DAY3OVER);
+                        break;
+                }
+            }
+        }
 
         room.players.forEach(p => ClientConnector.emitToSocket(p.socketId!, SocketServerEvents.ChangeGame, {
             state: room.state,
-            message: (room.state !== RoomStateEnum.GOODWON && room.state !== RoomStateEnum.BADWON && roundFinished) ? GameMessageEnum.NEXTROUND : undefined,
+            messages,
             players: GameManagerUtil.hidePlayerData(room.players, p, room.state === RoomStateEnum.GOODWON || room.state === RoomStateEnum.BADWON),
             cards: room.cards
         }));

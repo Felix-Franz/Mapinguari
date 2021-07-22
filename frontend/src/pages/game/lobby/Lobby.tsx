@@ -10,6 +10,7 @@ import PlayerRoleEnum from "../../../core/types/PlayerRoleEnum";
 import PlayerType from "../../../core/types/PlayerType";
 import { SocketClientEvents, SocketServerEvents } from "../../../core/types/SocketEventsEnum";
 import SocketClient from "../../../libraries/SocketClient";
+import Story from "../../../components/Story";
 
 const Lobby: FC<{
     roomName: string,
@@ -67,19 +68,19 @@ const Lobby: FC<{
             <h6>{t("Game.Lobby.Join")}</h6>
             <div>
                 {t("Game.Lobby.Link")}
-                <var className="text-primary ml-1 pre-wrap">{window.location.toString()}</var>
+                <var className="text-primary ml-1 pre-wrap user-select-all">{window.location.toString()}</var>
                 {getCopyAndShare(window.location.toString())}
             </div>
             <div>
                 {t("Game.Lobby.Code")}
-                <var className="text-primary ml-1 pre-wrap">{roomCode}</var>
+                <var className="text-primary ml-1 pre-wrap user-select-all">{roomCode}</var>
                 {getCopyAndShare(roomCode)}
             </div>
             <div className="mt-3">
                 {t("Game.Lobby.Welcome Message")}
                 {getCopyAndShare(t("Game.Lobby.Welcome Message Text", { link: window.location.toString() }))}
                 <br />
-                <var className="text-primary pre-wrap">{t("Game.Lobby.Welcome Message Text", { link: window.location.toString() })}</var>
+                <var className="text-primary pre-wrap user-select-all">{t("Game.Lobby.Welcome Message Text", { link: window.location.toString() })}</var>
             </div  >
             <div className={players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN ? "mt-5" : "d-none"}>
                 <Alert color="danger" isOpen={players.filter(p => !p.connected).length > 0}>
@@ -104,6 +105,7 @@ const Lobby: FC<{
                     {t("Game.Lobby.Leave")}
                 </Button>
             </div>
+            <Story className="mt-5 mt-5 border border-primary rounded w-75 mx-auto p-2" />
         </div>
     </Container >
 }

@@ -37,8 +37,23 @@
             "Leave": "Raum verlassen",
             "Left": "Du hast den Raum verlassen!",
             "LeftError": "Leider konnte {{name}} den Raum wegen eines Fehlers nicht verlassen!",
+            "SelectedGood": [
+                "Ihr habt die Zutat gefunden. Endlich."
+            ],
+            "SelectedBad": "Oh nein! Der Mapinguari!",
+            "SelectedNeutral": [
+                "Erst nach mehreren Stunden fällt euch auf das ihr im Kreis gegangen seit. Dabei habt ihr wertvolle Zeit verloren.",
+                "Ihr müsst feststellen, dass die Brücke, welche ihr nutzen wolltet, zerstört ist . Der Umweg kostet euch wertvolle Zeit.",
+                "Als ihr endlich den Ort erreicht, wo ihr die Zutat vermutet müsst ihr feststellen das ein Tier euch zuvor gekommen ist. Keine Pflanze ist mehr unversehrt.",
+                "Heftiger regen hindert euch am vorankommen. Als der Schauer endlich vorüber ist habt ihr viel Zeit verloren.",
+                "Euer Kompass spielt verrückt und es dauert lange bis ihr euch erneut Orientieren könnt.",
+                "Ihr habt den falschen Pfad gewählt und müsst den ganzen weg zurücklaufen.",
+                "Ihr seid in eine Sackgasse gelaufen."
+            ],
             "SelectCardFailed": "Karte konnte nicht ausgewählt werden! Bitte versuche es erneut!",
-            "NextRound": "Neue Karten sind im Spiel! Tauscht euch über euer Deck aus aus, denn die neue Runde startet jetzt!",
+            "Day1Over": "Die Nacht wird von einem fürchterlichen schrei durchzogen. Mapinguari scheint seine jagt begonnen zu haben und alles ist seine Beute, besonders ihr die seine ruhe gestört haben.",
+            "Day2Over": "Erneut durchstreift Mapinguari den nächtlichen Urwald. Die ängstlichen und panischen Schreie seiner Beute klingen nachts an eure Ohren und euch ist klar ihr müsst ihn aufhalten.",
+            "Day3Over": "Des nachts hört ihr schwere schritte ganz in der nähe eures Lagers. Mapinquari ist nahe und ihr habt nur noch einen Tag ihn aufzuhalten. Das ist eure letzte Chance.",
             "MeetingEnabled": "Das Meeting wurde aktiviert. Nimm jetzt daran teil!",
             "MeetingDisabled": "Das Meeting wurde deaktiviert!"
         },
@@ -107,9 +122,9 @@
         },
         "Table": {
             "GameProgress": {
-                "Round": "Runde",
-                "Move": "Spielzug",
-                "Over": "Alle Runden\nvorbei"
+                "Round": "Tag",
+                "Move": "Versuch",
+                "Over": "Alle Tage\nvorbei"
             },
             "GamePlayer": {
                 "Player'sTurn": "Der Spieler ist an der Reihe!"
@@ -118,7 +133,7 @@
             "DontClickOnYourself": "Du kannst nicht deine eigene Karte auswählen! Wähle stattdessen einfach eine Karte deiner Mitspieler!",
             "CardAlreadyVisible": "Die Karte wurde bereits aufgedeckt! Wähle eine andere aus!",
             "Cards": "Karten",
-            "CardsPreviouse": "die bereits in einer vorherigen Runde aufgedeckt wurden",
+            "CardsPreviouse": "Aus einer vorherigen Runde aufgedeckt wurden",
             "NoPreviouseCards": "Noch keine Karten vorhanden",
             "CardsAll": "Gezogene Karten und Karten im Spiel nach Typ",
             "AllDecks": "Alle Decks",
@@ -126,14 +141,20 @@
             "YourDeck": "Dein Deck",
             "YourDeckDescription": "mit aufgedeckten Karten"
         },
-        "GoodWon": "Das gute Team hat gewonnen!",
-        "BadWon": "Das böse Team  hat gewonnen!",
+        "GoodWon": {
+            "Story": "Endlich sind alle Zutaten zusammen. Als der Trank gebraut ist bezieht ihr Position und wartet bis die Nacht hereinbricht. Da ein Schatten! Zwischen den Bäumen schiebt sich Mapinguari hervor. E wirkt noch größer als in euren Erinnerungen. Er türmt auf euch zu doch bevor euch erreicht schleudert ihr das Gefäß mit dem Trank. Es trifft , zerbricht und hüllt Mapinguari in einen violetten Nebel. Ein paar Sekunden passiert gar nichts. Doch als die stille fast nicht mehr auszuhalten ist schallt ein gewaltiges gähnen über die Lichtung. Der violette Nebel verflüchtigt sich und ihr seht wie sich Mapinguari müde das Auge reibt. Langsam trottet er in den Dschungel zurück um sich eine Höhle für sein Schläfchen zu suchen. Bis es erneut jemand wagt ihn zu wecken. Ihr habt es geschafft. DIESESMAL.",
+            "Short": "Alle Zutaten wurden gefunden! Die Abendteuerer haben gewonnen!"
+        },
+        "BadWon": {
+            "Story": "Ihr bewegt euch in einen kleinen Höhle, wo sich eine Zutat befinden soll. Doch als eure Augen sich eure Augen an die Dunkelheit gewöhnt haben seht ihr Mapinguari vor euch. Im selben Moment hört ihr ein Poltern hinter euch. Der Eingang zur höhle ist eingestürzt, der Fluchtweg abgeschnitten. Höhnisch hört ihr die Verräter draußen lachen. Während sich Mapinguari vor euch auf aufbaut. DAS IST DAS ENDE!",
+            "Short": "Mapinguari hat euch gefasst! Die Verräter haben gewonnen!"
+        },
         "NewMatch": "Neues Spiel starten",
         "BackToLobby": "Zurück zur Lobby"
     },
     "Story": {
-        "Title": "Story",
-        "Content": "ToDo!"
+        "Title": "Prolog",
+        "Content": "Als Mitglieder einer Expedition habt ihr euch tief in den Amazonas gewagt. Dort seit ihr auf eine gigantische Höhle gestoßen. Nichtsahnen habt ihr sie betreten und dabei Mapinguari geweckt. Eine gigantische Bestie mit langen Klauen zotteligem Fell und einem riesigen Maul, welches seinen kompletten Bauch bedeckt. Sein eines großes Auge schaut euch wütend an. Sofort beginnt ihr auf diese monströse Monster zu schießen, doch kugeln scheinen ihm nichts anzuhaben, also ergreift ihr die Flucht.\n\nEin ältester der Cario-Indianer erzählt euch später das Mapinguari nicht zu töten ist, es gibt jedoch einen Trank, welcher in der Lage ist die Bestie zurück in den schlaf  zu versetzen. Doch dieser Trank wirkt nur bis zur 4. Nacht nach Mapinguaris erwachen.\n\nIhr wisst ihr müsst die notwendigen Zutaten finden bevor es zu spät ist und Mapinguari nicht mehr aufzuhalten ist.\n\nDoch im Dschungel gibt es viele Spuren und nicht alle Führen zu den erhoffen zutaten. Außerdem ist nicht jeder von euch der Meinung das der Mapinguai wieder in den schlaf versetzt werden sollte."
     },
     "Instructions": {
         "Title": "Spielanleitung",

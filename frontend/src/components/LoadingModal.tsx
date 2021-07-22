@@ -5,7 +5,7 @@ const LoadingModal: React.FC<{ show: boolean }> = ({ show }) => {
 const {t} = useTranslation();
 
     return (
-        <Modal isOpen={show} style={{ top: "40%", width: "max-content" }} className="mx-auto">
+        <Modal isOpen={show} style={{ top: "40%", width: "max-content" }} className="mx-auto no-user-select">
             <div className="m-2 rounded">
                 <Spinner color="primary" className="align-middle mr-3" />
                 <span>{t("General.Loading")}</span>

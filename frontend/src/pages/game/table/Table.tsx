@@ -47,18 +47,20 @@ const Table: FC<{
         <GameProgress cards={cards} players={players} />
 
         <div className="mt-4 mb-4" style={{ display: [RoomStateEnum.GOODWON, RoomStateEnum.BADWON].includes(state) ? undefined : "none" }}>
-            <h1>
-                <Alert style={{ display: state === RoomStateEnum.GOODWON ? undefined : "none" }} color="primary" className="mt-2">
+            <Alert style={{ display: state === RoomStateEnum.GOODWON ? undefined : "none" }} color="primary" className="mt-2">
+                <p>{t("Game.GoodWon.Story")}</p>
+                <h2>
                     <span className="mr-2">🎉</span>
-                    {t("Game.GoodWon")}
-                </Alert>
-            </h1>
-            <h1>
-                <Alert style={{ display: state === RoomStateEnum.BADWON ? undefined : "none" }} color="secondary" className="mt-2">
+                    {t("Game.GoodWon.Short")}
+                </h2>
+            </Alert>
+            <Alert style={{ display: state === RoomStateEnum.BADWON ? undefined : "none" }} color="secondary" className="mt-2">
+                <p>{t("Game.BadWon.Story")}</p>
+                <h2>
                     <span className="mr-2">🎉</span>
-                    {t("Game.BadWon")}
-                </Alert>
-            </h1>
+                    {t("Game.BadWon.Short")}
+                </h2>
+            </Alert>
             <ButtonGroup style={{ display: players.find(p => p.name === me)?.role === PlayerRoleEnum.ADMIN ? undefined : "none" }}>
                 <Button color="primary" outline onClick={() => SocketClient.emit(SocketClientEvents.StopGame)}>
                     <span className="mr-2">🛑</span>
