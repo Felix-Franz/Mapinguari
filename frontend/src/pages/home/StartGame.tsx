@@ -30,10 +30,7 @@ const StartGame = () => {
     }
 
     return (
-        <div className="w-75 mx-auto mt-4" style={{
-            border: "1px solid var(--primary)",
-            borderRadius: "1em",
-            padding: "1em",
+        <div className="w-75 mx-auto mt-4 border border-primary rounded p-3" style={{
             minHeight: "12em"
         }}>
             <h3>{t("Home.StartGame.Ready")}</h3>

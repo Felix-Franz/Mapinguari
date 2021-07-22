@@ -136,8 +136,41 @@
         "Content": "ToDo!"
     },
     "Instructions": {
-        "Title": "Instructions",
-        "Content": "ToDo!"
+        "Title": "ToDo",
+        "Teams": {
+            "Title": "ToDo",
+            "General": "ToDo",
+            "Good": "ToDo",
+            "Bad": "ToDo"
+        },
+        "Rounds": {
+            "Title": "ToDo",
+            "Content": [
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo"
+            ]
+        },
+        "HintsGood": {
+            "Title": "ToDo",
+            "Content": [
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo",
+                "ToDo"
+            ]
+        },
+        "HintsBad": {
+            "Title": "ToDo",
+            "Content": [
+                "ToDo",
+                "ToDo",
+                "ToDo"
+            ]
+        }
     },
     "AvatarEditor": {
         "TopType": "Top type",

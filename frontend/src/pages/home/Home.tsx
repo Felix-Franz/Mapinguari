@@ -20,8 +20,8 @@ const Home = () => {
                 <br />
                 <a href="https://gitlab.com/FelixFranz/mapinguari" target="_blank noopener" rel="noreferrer">Click here</a> for more information!
             </Alert>
-            <Story className="mt-5" />
-            <Instructions className="mt-5" />
+            <Story className="mt-5 mt-5 border border-primary rounded w-75 mx-auto p-2" />
+            <Instructions className="mt-5 border border-primary rounded w-75 mx-auto p-2" />
         </Container>
     );
 }

@@ -137,7 +137,40 @@
     },
     "Instructions": {
         "Title": "Spielanleitung",
-        "Content": "ToDo!"
+        "Teams": {
+            "Title": "Die zwei Teams",
+            "General": "In Mapinguari treten zwei Teams gegen einander an. Wichtig ist hierbei, dass nur ihr selbst wisst in welchem Team ihr seit.",
+            "Good": "Das Blaue Team (die Abenteurer) versucht Mapinguari zurück in den Schlaf zu versetzen und alle notwendigen Zutaten (blaue Karten) zu sammeln bevor der 4. Tag endet.",
+            "Bad": "Das rote Team (die Verräter) versucht die Abenteurer zu behindern. Sie gewinnen, wenn nach dem 4. Tag nicht alle Zutaten gefunden wurden, oder die Mapinguari-Falle(rote Karten) aufgedeckt wurde."
+        },
+        "Rounds": {
+            "Title": "Ablauf einer Runde (Tag)",
+            "Content": [
+                "Zu Beginn einer Runde werden alle Spuren, welche zuvor nicht ausgewählt wurden neu unter den Spielern verteil. Die bereits erkundeten Spuren werden beiseite gelegt. Zutaten welche bereits gefunden wurden können/müssen nicht erneut entdeckt werden.",
+                "Der Aktuelle Expeditionsleiter ist am Zug. Zunächst gilt es herauszufinden welche Spieler die Spuren zu den Zutaten hat. Dies erreicht ihr in dem ihr in die Runde fragt, wer wie viele Spuren zu Zutaten hat. Es gibt immer so viele Zutaten wie Spieler im Spiel. Jeder Spieler kann auf diese Frage Antworten muss aber nicht. ACHTUNG! Gerade die Verräter werden bezüglich der Anzahl ihrer Spuren zu Zutaten lügen. Um zu verhindern das Spuren zu Zutaten aufgedeckt werden. Ihr könnt natürlich keine eurer eigenen Spuren wählen.",
+                "Natürlich darf anschließend wild diskutiert werden. Die Entscheidung welcher Spur nachgegangen wird liegt jedoch ganz beim Expeditionsleiter. Vergesst jedoch nicht ihr dürft niemals sagen, welche eurer Spuren zu einer Zutaten führt (ganz links/ die in der Mitte).",
+                "Nachdem der Expeditionsleiter eine Karte eines andern Spielers ausgewählt hat, wird diese aufgedeckt und der Besitzer der Karte wird neuer Expeditionsleiter.",
+                "Dieser Vorgang wird genau so oft wiederholt wie Spieler teilnehmen. Danach endet der Tag."
+            ]
+        },
+        "HintsGood": {
+            "Title": "Tipps für Abenteurer",
+            "Content": [
+                "Lügt nicht. Wer einmal lügt dem glaubt man nicht, auch wenn er stehts die Wahrheit spricht. Ihr macht euch nur gegenüber den Anderen in eurem Team nur unnötig verdächtig.",
+                "Wenn ihr die Spur zur Falle habt verhindert das bei euch Karten aufgedeckt werden, da das Spiel sonst sehr schnell endet. Notfalls indem ihr lügt.",
+                "Verfolge im Zweifel eine Spur dessen, der die meisten Zutaten Spuren angesagt hat. Es ist wahrscheinlicher hier die Richtige karte zu finden oder du entlarvst gegeben falls einen Lügner.",
+                "Wählt niemals eine Spur eines Mitspielers von dem ihr euch sicher seit das es ein  Verräter ist. Er könnte die Chance nutzen um zu versuchen die Mapinguari-Falle aufzudecken.",
+                "Spielt fair und habt viel Spaß."
+            ]
+        },
+        "HintsBad": {
+            "Title": "Tipps für Verräter",
+            "Content": [
+                "Sagt bewusst die Wahrheit und verhelft ihnen gegeben falls zu einer Zutat um das vertrauen zu gewinnen. Wenn ihr beim Lügen erwischt werdet könnt ihr die Abenteurer nicht mehr so gut in die irre führen da du deine Glaubwürdigkeit verloren hast.",
+                "Wenn es einen weiteren Verräter gibt und die ihn erkannt hast, spielt euch die Expeditionsleiterrolle hin und her und verhindert hiermit das die Abenteurer einer erfolgversprechenden Spur nachgehen können.",
+                "Spielt fair und habt viel Spaß."
+            ]
+        }
     },
     "AvatarEditor": {
         "TopType": "Kopf",
