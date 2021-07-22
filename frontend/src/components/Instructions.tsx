@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 const Instructions = (props: { className?: string }) => {
     const { t } = useTranslation();
     return (
-        <div className={props.className}>
+        <div className={`text-center ${props.className}`}>
             <h2>{t("Instructions.Title")}</h2>
 
             <h3>{t("Instructions.Teams.Title")}</h3>
