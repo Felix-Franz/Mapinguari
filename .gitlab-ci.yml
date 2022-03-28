@@ -76,6 +76,7 @@ dev-build-docker:
   # before_script:
   #   - !reference [.docker-build, before_script]
   script:
+    - ls
     - !reference [.docker-build, script]
     - export IMAGE_TAG="$CI_REGISTRY_IMAGE/dev:$(date +"%Y-%m-%d-%H-%M-%S")--$CI_COMMIT_SHORT_SHA"
     - !reference [.upload-gitlab-docker-registry, script]
