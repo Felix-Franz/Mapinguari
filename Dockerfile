@@ -7,7 +7,7 @@ RUN apt-get update \
 
 COPY ./ /app
 WORKDIR /app
-RUN npm ci --production
+RUN npm ci
 
 EXPOSE 8080
 CMD npm start
