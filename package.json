@@ -26,7 +26,7 @@
     "web"
   ],
   "author": "Felix Franz",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "bugs": {
     "url": "https://gitlab.com/FelixFranz/mapinguari/issues"
   },
