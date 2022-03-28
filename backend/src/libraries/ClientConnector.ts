@@ -73,7 +73,7 @@ export default class ClientConnector {
             try {
                 Logger.log(LEVELS.debug, `Successfully connected to socket!`, { socketId: socket.id })
                 socket.send("Successfully connected socket to the server!");
-            } catch (e) {
+            } catch (e : any) {
                 Logger.log(LEVELS.error, e.message);
             }
 
@@ -82,7 +82,7 @@ export default class ClientConnector {
                     //@ts-ignore
                     const c = new callback();
                     socket.on(c.eventName, (data: any) => c.handleSocket(socket, data))
-                } catch (e) {
+                } catch (e: any) {
                     Logger.log(LEVELS.error, e.message);
                 }
             });

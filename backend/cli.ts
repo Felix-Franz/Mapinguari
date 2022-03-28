@@ -50,9 +50,8 @@ const args = yargs(hideBin(process.argv))
         description: "Web site on imprint page e.g. example.com",
     })
     .option("privacy-policy", {
-        type: 'boolean',
-        description: "Enable privacy policy",
-        default: false
+        type: 'string',
+        description: "Privacy policy folder with privacy statements inside (e.g. privacy-policy_en.html for english or privacy-policy_de.html for german). Enable privacy policy page."
     })
     .example("$0", "Starts the mapinguari server")
     .example("$0 -p 80", "Starts server on port 80")
@@ -76,14 +75,17 @@ try {
             phone: args["imprint-phone"],
             web: args["imprint-web"]
         }
-    if(args["privacy-policy"])
-        Config.privacyPolicy = true;
-        else
-        Config.privacyPolicy = false;
+    
+    let privacyPolicy = args["privacy-policy"];
+    if (privacyPolicy && privacyPolicy.charAt(privacyPolicy.length -1) !== "/")
+        privacyPolicy = privacyPolicy + "/";
+    if (process.env.NODE_ENV !== "production")
+        privacyPolicy = "../" + privacyPolicy;
+    Config.privacyPolicy = privacyPolicy;
 
     Server.start({
         port: args.port
     });
-} catch (e) {
+} catch (e: any) {
     Logger.log(LEVELS.error, e.message, e);
 }

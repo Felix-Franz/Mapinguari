@@ -10,13 +10,18 @@ const Footer = () => {
     const [enableImprint, setEnableImprint] = useState<boolean>(false);
     const [enablePrivacyPolicy, setEnablePrivacyPolicy] = useState<boolean>(false);
     useEffect(() => {
-        ServiceClient.getLegal()
-            .then(config => {
-                setEnableImprint(!!config.imprint);
-                setEnablePrivacyPolicy(config.privacyPolicy);
+        ServiceClient.getImprint()
+            .then(imprint => {
+                setEnableImprint(!!imprint);
             })
             .catch(() => {
                 setEnableImprint(false);
+            });
+        ServiceClient.getPrivacyPolicy()
+            .then(privacyPolicy => {
+                setEnablePrivacyPolicy(!!privacyPolicy);
+            })
+            .catch(() => {
                 setEnablePrivacyPolicy(false);
             });
     }, []);

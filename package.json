@@ -9,10 +9,10 @@
     "install-dev": "cd backend && npm install && cd ../frontend && npm install",
     "start-dev": "node index-dev",
     "build": "rm -Rf dist/ && cd backend && npm run build && cd ../frontend && npm run build",
-    "start": "node dist/cli.js"
+    "start": "NODE_ENV=production node dist/cli.js"
   },
   "bin": {
-    "mapinguari": "dist/cli.js"
+    "mapinguari": "NODE_ENV=production dist/cli.js"
   },
   "repository": {
     "type": "git",

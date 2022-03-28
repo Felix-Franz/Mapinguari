@@ -29,18 +29,20 @@ export default class ServiceClient {
             method: 'GET',
             url: ServiceEnum.Meeting
         });
-
     }
 
-    public static async getLegal(): Promise<{
-        imprint: ImprintType,
-        privacyPolicy: boolean
-    }> {
+    public static async getImprint(): Promise<ImprintType> {
         return this.call({
             method: 'GET',
-            url: ServiceEnum.Legal
+            url: ServiceEnum.Imprint
         });
+    }
 
+    public static async getPrivacyPolicy(language?: string): Promise<string> {
+        return this.call({
+            method: 'GET',
+            url: ServiceEnum.PrivacyPolicy + (language ? `?language=${language}` : "")
+        });
     }
 
 }

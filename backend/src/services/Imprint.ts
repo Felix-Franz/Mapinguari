@@ -4,12 +4,9 @@ import Config from "../libraries/Config";
 import ServiceEnum from "../core/types/ServiceEnum";
 
 export default class Legal implements ServiceInterface {
-    path = ServiceEnum.Legal;
+    path = ServiceEnum.Imprint;
 
     handleGet(req: Request, res: Response) {
-        res.send({
-            imprint: Config.imprint,
-            privacyPolicy: Config.privacyPolicy
-        });
+        res.send(Config.imprint);
     }
 }

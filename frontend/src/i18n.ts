@@ -1,5 +1,6 @@
 import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
+import lang from './core/Languages';
 
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
@@ -30,4 +31,4 @@ i18n
 
 export default i18n;
 
-export const Languages = ["en", "de"]
+export const Languages = lang

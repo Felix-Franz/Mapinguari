@@ -101,7 +101,6 @@ const Game: FC<RouteComponentProps<{ code: string }>> = (props) => {
                 setCards(data.cards);
             if (data.state)
                 setState(data.state);
-            console.log(data.messages)
             if (data.messages)
                 data.messages.forEach(message => {
                     switch (message) {

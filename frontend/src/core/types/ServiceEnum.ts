@@ -1,6 +1,7 @@
 enum ServiceEnum {
     Meeting = "/meeting",
-    Legal = "/legal"
+    Imprint = "/imprint",
+    PrivacyPolicy = "/privacy-policy"
 };
 
 export default ServiceEnum;
