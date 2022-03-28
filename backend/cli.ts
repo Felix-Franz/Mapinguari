@@ -51,7 +51,7 @@ const args = yargs(hideBin(process.argv))
     })
     .option("privacy-policy", {
         type: 'string',
-        description: "Privacy policy folder with privacy statements inside (e.g. privacy-policy_en.html for english or privacy-policy_de.html for german). Enable privacy policy page."
+        description: "Path to privacy policy folder including privacy statements (e.g. privacy-policy_en.html for english or privacy-policy_de.html for german). Enable privacy policy page."
     })
     .example("$0", "Starts the mapinguari server")
     .example("$0 -p 80", "Starts server on port 80")
