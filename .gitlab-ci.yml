@@ -17,6 +17,8 @@ include:
       - dist
       - README.md
       - package.json
+      - package-lock.json
+      - sample**
 
 .npm-set-names:
   script:
