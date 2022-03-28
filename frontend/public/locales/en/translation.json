@@ -38,22 +38,22 @@
             "Left": "You left the room!",
             "LeftError": "Unfortunately {{name}} could not leave the room because of a error!",
             "SelectedGood": [
-                "ToDo"
+                "You have found the ingredient. Finally."
             ],
-            "SelectedBad": "ToDo",
+            "SelectedBad": "Oh no! The Mapinguari!",
             "SelectedNeutral": [
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo"
+                "After several hours you realize that you have been walking in circles. You have lost valuable time.",
+                "You realize that the bridge you wanted to use is destroyed. The detour will cost you valuable time.",
+                "When you finally reach the place where you expect to find the ingredient, you realize that an animal has beaten you to it. No plant is intact anymore.",
+                "Heavy rain prevents you from moving forward. When the rain is finally over, you have lost a lot of time.",
+                "Your compass goes crazy and it takes a long time until you can orientate yourself again.",
+                "You have chosen the wrong path and have to walk all the way back.",
+                "You've run into a dead end."
             ],
             "SelectCardFailed": "Card could not be selected! Please try again!",
-            "Day1Over": "ToDo",
-            "Day2Over": "ToDo",
-            "Day3Over": "ToDo",
+            "Day1Over": "The night is crossed by a terrible scream. Mapinguari seems to have started his hunt and everything is his prey, especially you who have disturbed his silence.",
+            "Day2Over": "Once again Mapinguari roams the jungle at night. The fearful and panicked cries of his victims are ringing in your ears at night and you know you must stop him.",
+            "Day3Over": "At night, you hear heavy footsteps very close to your camp. Mapinquari is near and you have only one day to stop him. This is your last chance.",
             "MeetingEnabled": "The meeting has been activated. Take part in it!",
             "MeetingDisabled": "The meeting has been disabled!"
         },
@@ -142,54 +142,54 @@
             "YourDeckDescription": "with cards face up"
         },
         "GoodWon": {
-            "Story": "ToDo",
-            "Short": "ToDo"
+            "Story": "Finally, all the ingredients are together. When the potion is brewed, you take position and wait until night falls. There is a shadow! Mapinguari slips out from between the trees. He seems even bigger than in your memories. He rushes toward you, but before he reaches you, you hurl the jar with the potion. It hits, breaks, and envelops Mapinguari in a purple mist. For a few seconds nothing happens. But when the silence is almost unbearable, a huge yawn resounds across the clearing. The purple mist dissipates and you see Mapinguari rubbing his eye tiredly. Slowly he trots back into the jungle to find a cave for his nap. Until someone dares to wake him again. You have done it. THIS TIME.",
+            "Short": "All ingredients have been found! The adventurers have won!"
         },
         "BadWon":  {
-            "Story": "ToDo",
-            "Short": "ToDo"
+            "Story": "You move into a small cave where an ingredient is supposed to be. But as your eyes adjust to the darkness, you see Mapinguari in front of you. At the same moment you hear a rumbling behind you. The entrance to the cave has collapsed, the escape route cut off. You can hear the traitors laughing mockingly outside, while Mapinguari rears up in front of you. THIS IS THE END!",
+            "Short": "Mapinguari has caught you! The traitors have won!"
         },
         "NewMatch": "Start new match",
         "BackToLobby": "Back to the lobby"
     },
     "Story": {
-        "Title": "ToDo",
-        "Content": "ToDo"
+        "Title": "Prologue",
+        "Content": "As members of an expedition, you have ventured deep into the Amazon. There you came across a gigantic cave. You entered it unaware and awakened Mapinguari. A gigantic beast with long claws, shaggy fur and a huge mouth that covers its entire belly. His one big eye looks at you angrily. Immediately you begin to shoot at this monstrous monster, but bullets do not seem to harm him, so you take flight.\n\nAn elder of the Cario Indians later tells you that Mapinguari can not be killed, but there is a potion that is able to put the beast back to sleep. However, this potion only works until the 4th night after Mapinguari's awakening.\n\nYou know you have to find the necessary ingredients before it's too late and Mapinguari is unstoppable.\n\nBut there are many tracks in the jungle and not all of them lead to the hoped-for ingredients. Besides, not all of you think that the Mapinguai should be put back to sleep."
     },
     "Instructions": {
-        "Title": "ToDo",
+        "Title": "Game instructions",
         "Teams": {
-            "Title": "ToDo",
-            "General": "ToDo",
-            "Good": "ToDo",
-            "Bad": "ToDo"
+            "Title": "The two teams",
+            "General": "In Mapinguari, two teams compete against each other. Only you know which team you are on.",
+            "Good": "The Blue Team (the adventurers) tries to put Mapinguari back to sleep and collect all the necessary ingredients (blue cards) before the 4th day ends.",
+            "Bad": "The red team (the traitors) tries to hinder the adventurers. They win if after the 4th day not all ingredients have been found, or the Mapinguari trap (red cards) has been revealed."
         },
         "Rounds": {
-            "Title": "ToDo",
+            "Title": "Course of a round (day)",
             "Content": [
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo"
+                "At the beginning of a round, all tracks that were not previously selected are redistributed among the players. The tracks that have already been explored are put aside. Ingredients that have already been found cannot/must not be discovered again.",
+                "It is the current expedition leader's turn. First you have to find out which player has the tracks to the ingredients. You can do this by asking who has how many tracks to ingredients. There are always as many ingredients as there are players in the game. Each player can answer this question but does not have to. CAUTION: Traitors will lie about the number of ingredient tracks they have to prevent ingredient tracks from being revealed. Of course you can't choose any of your own tracks.",
+                "Of course, there can be wild discussions afterwards. However, the decision which track to follow is entirely up to the expedition leader. But don't forget: You must never say which of your tracks leads to an ingredient (the one on the far left/the one in the middle).",
+                "After the expedition leader selects a card from another player, the card is revealed and the owner of the card becomes the new expedition leader.",
+                "This process is repeated exactly as many times as players participate. After that the day ends."
             ]
         },
         "HintsGood": {
-            "Title": "ToDo",
+            "Title": "Tips for adventurers",
             "Content": [
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo",
-                "ToDo"
+                "Do not lie. If you lie once, you won't be believed, even if you always speak the truth. You only make yourselves unnecessarily suspicious to the others in your team.",
+                "If you have the lead to the trap, prevent the cards from being revealed, otherwise the game will end very quickly. If necessary by lying.",
+                "If in doubt, follow a track of the person who has announced the most ingredients tracks. It is more likely to find the right card here, or you may expose a liar.",
+                "Never choose a lead from a player you are sure is a traitor. He might use the chance to try to uncover the Mapinguari trap.",
+                "Play fair and have fun."
             ]
         },
         "HintsBad": {
-            "Title": "ToDo",
+            "Title": "Tips for traitors",
             "Content": [
-                "ToDo",
-                "ToDo",
-                "ToDo"
+                "Deliberately tell the truth and, if necessary, help them get an ingredient to gain trust. If you are caught lying, you will not be able to mislead the adventurers as well, since you will have lost your credibility.",
+                "If there is another traitor and you have spotted him, play the expedition leader role back and forth, thereby preventing the adventurers from following up on a promising lead.",
+                "Play fair and have fun."
             ]
         }
     },
