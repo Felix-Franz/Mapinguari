@@ -2,8 +2,7 @@ stages:
   - test
   - build-npm
   - build
-  - deploy-image
-  - deploy-activate
+  - deploy
 
 include:
   - local: ".gitlab/pipelines/scanning.yml"
@@ -92,33 +91,25 @@ dev-build-snapcraft:
     - !reference [.snap-build, script]
     - 'curl --header "JOB-TOKEN: $CI_JOB_TOKEN" --upload-file $SNAP_FILE "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/dev/$SNAP_VERSION/$SNAP_FILE"'
 
-dev-deploy-image:
-  stage: deploy-image
-  needs: ["dev-build-docker"]
+dev-deploy:
+  stage: deploy
+  needs: ["dev-build-npm"]
   only:
     - master
-  image: docker:stable
-  services:
-    - docker:dind
+  environment:
+    name: Mapinguari
+    url: https://mapinguari.rocks/
+  image: woahbase/alpine-ssh
   variables:
     GIT_STRATEGY: none
+  before_script:
+    - mkdir ~/.ssh/
+    - echo $UBERSPACE_HOST_KEYS > ~/.ssh/known_hosts
+    - echo -e $UBERSPACE_FFELIX_SSH_PRIVATE > ~/.ssh/id_rsa
+    - chmod 700 ~/.ssh/id_rsa
   script:
-    - docker pull $CI_REGISTRY_IMAGE/dev
-    - docker tag $CI_REGISTRY_IMAGE/dev registry.heroku.com/mapinguari/web
-    - docker login -u $heroku_user -p $heroku_token registry.heroku.com
-    - docker push registry.heroku.com/mapinguari/web
+    - ssh $UBERSPACE_HOST_SSH "supervisorctl restart mapinguari"
 
-dev-deploy-activate:
-  stage: deploy-activate
-  needs: ["dev-deploy-image"]
-  only:
-    - master
-  image: dickeyxxx/heroku-cli
-  variables:
-    GIT_STRATEGY: none
-  script:
-    - echo -e "machine api.heroku.com\n  login $heroku_user\n  password $heroku_token\nmachine git.heroku.com\n  login $heroku_user\n  password $heroku_token" > ~/.netrc
-    - heroku container:release --app mapinguari web
 
 stable-build-npm:
   stage: build-npm
