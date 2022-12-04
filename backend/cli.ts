@@ -79,8 +79,8 @@ try {
     let privacyPolicy = args["privacy-policy"];
     if (privacyPolicy && privacyPolicy.charAt(privacyPolicy.length -1) !== "/")
         privacyPolicy = privacyPolicy + "/";
-    if (process.env.NODE_ENV !== "production")
-        privacyPolicy = "../" + privacyPolicy;
+//    if (process.env.NODE_ENV !== "production")
+//        privacyPolicy = "../" + privacyPolicy;
     Config.privacyPolicy = privacyPolicy;
 
     Server.start({
