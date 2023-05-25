@@ -8,9 +8,10 @@ export default class Database {
     private static database: MongoMemoryServer;
 
     public static async start() {
-        this.database = new MongoMemoryServer({
+        this.database = await MongoMemoryServer.create({
             binary: {
-                version: '4.0.14'
+                version: '6.0.4',
+                downloadDir: "node_modules/.cache/mongodb-binaries"
             }
         });
         Logger.log(LEVELS.silly, "Database started!");
@@ -25,14 +26,17 @@ export default class Database {
         }
         await Mongoose.connect(await this.database.getUri(), mongooseConfig);
 
+        Logger.log(LEVELS.debug, `Use this url to login to the mongodb database: ${(this.database.getUri()).toString()}`);
+
         Models.initialize();
-
         Logger.log(LEVELS.debug, "Database initialized!");
-
-        Logger.log(LEVELS.debug, `Use this url to login to the mongodb database: ${(await this.database.getUri()).toString()}`);
     }
 
     public static get instance() {
         return this.database;
+    }
+
+    public static async stop(){
+        await this.database.stop({doCleanup: true})
     }
 }

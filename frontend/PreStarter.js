@@ -62,6 +62,8 @@ const faviconConfiguration = {
     }
 }
 
+console.log("Generating favicon (this might take some time)...")
 execSync(`real-favicon -- generate <(echo '${JSON.stringify(faviconConfiguration)}') favicon.json public/favicon`, { stdio: "inherit", shell: "/bin/bash" });
 execSync("real-favicon -- inject favicon.json public index.html", { stdio: "inherit", shell: "/bin/bash" });
 unlinkSync("favicon.json");
+console.log("Generating favicon finished")
