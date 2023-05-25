@@ -53,7 +53,7 @@ export default class ClientConnector {
         Logger.log(LEVELS.debug, "Added services");
 
 
-        this.app.all("*", (req, res) => res.status(404).sendFile(path.resolve(`${__dirname}/../../public/index.html`)));
+        this.app.all("*", (req, res) => res.sendFile(path.resolve(`${__dirname}/../../public/index.html`)));
         this.httpServer = http.createServer(this.app);
         this.io = new IOServer(this.httpServer, {
             cors: {
